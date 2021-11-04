@@ -1,0 +1,42 @@
+/*==========SOBRE==============*/
+.sobre {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  width:100%;
+  height:800px;
+}
+.sobre-centro {
+  width: 940px;
+  justify-content: center;
+}
+.sobre-foodfy h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+}
+.sobre-foodfy h3 {
+  padding-top: 20px;
+  color: #444444;
+  font-size: 18px;
+  font-weight: normal;
+}
+.como-comecou h2 {
+  padding-top: 40px;
+  font-size: 20px;
+}
+.como-comecou h3 {
+  padding-top: 20px;
+  font-size: 18px;
+  color:#444444;
+  font-weight: normal;
+}
+.nossas-receitas h2 {
+  padding-top:40px;
+  font-size: 20px;
+}
+.nossas-receitas h3 {
+  padding-top: 20px;
+  font-size: 18px;
+  font-weight: normal;
+  color:#444;
+}

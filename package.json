@@ -1,0 +1,21 @@
+{
+  "name": "foodfy",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm-run-all -p nodemon browsersync",
+    "nodemon": "nodemon server.js",
+    "browsersync": "browser-sync start --proxy http://localhost:3333 --files 'public,views'"
+  },
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "nunjucks": "^3.2.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "npm-run-all": "^4.1.5"
+  }
+}

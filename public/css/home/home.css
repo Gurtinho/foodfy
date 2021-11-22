@@ -38,27 +38,27 @@
 
 /*===========MAIS ACESSADAS=============*/
 .div-mais-acessadas {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100px;
   width: 100%;
-}
-.div-mais-acessadas div {
-  display: flex;
   align-items: center;
-  justify-content: flex-start;
+}
+.sub-acessadas {
+  display: flex;
   width: 940px;
   height: 100%;
+  align-items: center;
 }
 .mais-acessadas {
+  display: flex;
+  margin-left: 0;
   font-size: 20px;
   font-weight: bold;
 }
 .acessadas {
   display: grid;
   justify-content: center;
-  height:500px;
+  height: auto;
+  margin-bottom: 70px;
 }
 .acess-content {
   display: grid;
@@ -69,13 +69,19 @@
 .comida {
   width: 100%;
   height: auto;
+  margin-bottom: 20px;
+}
+.comida a {
+  text-decoration: none;
+  color: #111;
 }
 .img {
   cursor:pointer;
-  height: 50%;
+  height: auto;
   width: 100%;
   border-radius: 15px;
   margin-bottom: 10px;
+  background-size: cover;
 }
 .comidatitle {
   cursor: pointer;

@@ -1,0 +1,26 @@
+{% extends 'templates/layouts/layout-recipes.njk' %}
+
+{% block content %}
+    <section class="create">
+        <div class="create-recipe">
+            <p>Gerenciar receitas</p>
+            <div class="save-recipe-index">
+                <a href="/admin/recipes/create"><button class="btn" type="submit">Criar nova receita</button></a>
+            </div>
+        </div>
+    </section>
+    <section class="fields-list">
+        <div class="fields-grid">
+        {% for recipe in recipes %}
+            <div class="fields-item">
+                <img class="fields-img" src="{{ recipe.image }}">
+                <div class="fields-info">
+                    <h2>{{ recipe.title }}</h2>
+                    <p>{{ recipe.author }}</p>
+                    <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}

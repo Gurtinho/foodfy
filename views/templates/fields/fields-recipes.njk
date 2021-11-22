@@ -1,0 +1,58 @@
+<section class="fields-creation">
+    <div class="div-fields-creation">
+        <div>
+            <p class="title">Imagem da receita</p>
+            <input type="url" name="image" value="{{ recipe.image }}" placeholder="Url da imagem">
+        </div>
+
+        <div>
+            <p class="title">Nome da receita</p>
+            <input type="text" name="title" value="{{ recipe.title }}" placeholder="Nome da receita">
+        </div>
+
+        <div>
+            <p class="title">Ingredientes</p>
+            <div class="ingredients">
+                {% for ingredient in recipe.ingredients %}
+                    <div class="div-ingredients">
+                        <input type="text" name="ingredients[]" value="{{ ingredient }}" placeholder="Adicione um ingrediente">
+                    </div>
+                {% else %}
+                    <div class="div-ingredients">
+                        <input type="text" name="ingredients[]" value="{{ ingredient }}" placeholder="Adicione um ingrediente">
+                    </div>
+                {% endfor %}
+            </div>
+            <p class="remove-p">Apague o conteúdo antes</p>
+            <div class="div-add-remove">
+                <a class="add-ingredient">Adicionar novo ingrediente</a>
+                <a class="remove-ingredient">Remover ingrediente</a>
+            </div>
+        </div>
+
+        <div>
+            <p class="title">Modo de preparo</p>
+            <div class="preparation">
+                {% for prep in recipe.preparation %}
+                    <div class="div-preparation">
+                        <input type="text" name="preparation[]" value="{{ prep }}" placeholder="Adicione um passo">
+                    </div>
+                {% else %}
+                    <div class="div-preparation">
+                        <input type="text" name="preparation[]" value="{{ prep }}" placeholder="Adicione um passo">
+                    </div>
+                {% endfor %}
+            </div>
+            <p class="remove-p">Apague o conteúdo antes</p>
+            <div class="div-add-remove">
+                <a class="add-preparation">Adicionar novo passo</a>
+                <a class="remove-preparation">Remover passo</a>
+            </div>
+        </div>
+
+        <div>
+            <p class="title">Informações adicionais</p>
+            <textarea name="information" cols="30" rows="10" placeholder="Opcional">{{ recipe.information }}</textarea>
+        </div>
+    </div>
+</section>

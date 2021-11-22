@@ -5,53 +5,42 @@
     font-family: 'Roboto', sans-serif;
 }
 /*===========CABEÇALHO===========*/
-body {
+.header-home {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-header {
-    display: flex;
-    justify-content: center;
+    width: 100%;
     height:80px;
-    text-align: center;
     font-family: 'Roboto', sans-serif;
 }
-header div {
+.div-header {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    height: 100%;
     width: 940px;
 }
-header .linkhome {
-    display: flex;
-    font-size: 20px;
+.linkhome {
+    margin: 0;
 }
 .links {
     display: flex;
-    justify-content: space-between;
     margin-left: 120px;
     width: 150px;
 }
-header a {
+.links a {
     text-decoration: none;
     color: rgb(48, 48, 48);
     font-size: 16px;
 }
 
 /*==========FOOTER==========*/
-body footer {
+footer {
+    bottom: 0;
     display: flex;
-    z-index: 2000;
-    justify-content: center;
     align-items: center;
     background-color: #EEEEEE;
     width:100%;
     height:62px;
-    bottom: 0;
-    margin: auto;
 }
-body footer p {
+footer p {
     font-size: 14px;
     color:#999;
     text-align: center;

@@ -1,7 +1,7 @@
-{% extends "layout.njk" %}
+{% extends "templates/layouts/layout-home.njk" %}
 
 {% block head %}
-    <title>{{item.title}}</title>
+    <title>{{ recipe.title }}</title>
 {% endblock %}
 
 
@@ -15,20 +15,12 @@
             <img src="./img/chef.png">
         </div>
     </section>
+
     <section class="div-mais-acessadas">
-        <div>
+        <div class="sub-acessadas">
             <p class="mais-acessadas">Mais acessadas</p>
         </div>
     </section>
-    <section class="acessadas">
-        <div class="acess-content">
-            {% for item in items %}
-                <div class="comida">
-                    <img class="img" src="{{item.image}}">
-                    <h2 class="comidatitle">{{item.title}}</h2>
-                    <h3 class="comidaautor">{{item.author}}</h3>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
+
+    {% include 'templates/fields/field-home.njk' %}
 {% endblock %}

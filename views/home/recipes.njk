@@ -1,0 +1,10 @@
+{% extends "templates/layouts/layout-home.njk" %}
+
+
+{% block head %}
+    <title>{{ recipe.title }}</title>
+{% endblock %}
+
+{% block content %}
+    {% include 'templates/fields/field-home.njk' %}
+{% endblock %}

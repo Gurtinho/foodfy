@@ -1,0 +1,20 @@
+{% extends 'templates/layouts/layout-recipes.njk' %}
+
+{% block content %}
+    <form method="POST" action="/admin/recipes">
+        <section class="create">
+            <div class="create-recipe">
+                <p>Criando receita</p>
+                <div class="save-recipe-create">
+                    <a href="/admin/recipes/index"><button type="button" class="btn-cancel">Cancelar</button></a>
+                    <button class="btn" type="submit">Salvar receita</button>
+                </div>
+            </div>
+        </section>
+        
+        {% include 'templates/fields/fields-recipes.njk' %}
+        <input type="hidden" name="id" value="id">
+    </form>
+
+{% endblock %}
+

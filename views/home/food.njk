@@ -1,16 +1,16 @@
-{% extends "layout.njk" %}
+{% extends "templates/layouts/layout-home.njk" %}
 
 {% block head %}
-    <title>{{item.title}}</title>
+    <title>{{ recipe.title }}</title>
 {% endblock %}
 
 {% block content %}
     <section class="accessfood">
         <div class="receitas-content-food">
             <div class="food">
-                <img class="food-img" src="{{item.image}}">
-                <h2 class="food-title">{{item.title}}</h2>
-                <h3 class="food-author">Por {{item.author}}</h3>
+                <img class="food-img" src="{{ recipe.image }}">
+                <h2 class="food-title">{{ recipe.title }}</h2>
+                <h3 class="food-author">Por {{ recipe.author }}</h3>
             </div>
         </div>
 
@@ -20,8 +20,8 @@
                     <h1>Ingredientes</h1>
                     <p class="mostrar">Mostrar</p>
                     <ul class="content">
-                        {% for item in item.ingredients %}
-                        <li class="li">{{item + ';'}}</li>
+                        {% for ingredient in recipe.ingredients %}
+                        <li class="li">{{ ingredient + ';'}}</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -32,8 +32,8 @@
                     <h1>Modo de preparo</h1>
                     <p class="mostrar">Mostrar</p>  
                     <ul class="content">
-                        {% for item in item.preparation %}
-                        <li class="li">{{item}}</li>
+                        {% for preparation in recipe.preparation %}
+                        <li class="li">{{ preparation + '.'}}</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -44,7 +44,13 @@
                     <h1>Informações adicionais</h1>
                     <p class="mostrar">Mostrar</p>
                     <ul class="content">
-                        <li class="li">{{item.information}}</li>
+                        <li class="li"> 
+                            {% if recipe.information != ''%}
+                            {{ recipe.information + '.' }}
+                            {% else %}
+                            Sem informações adicionais.
+                            {% endif %}
+                            </li>
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,73 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+body {
+    height: 100%;
+}
+.create {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.create div {
+    display: flex;
+    width: 940px;
+    align-items: flex-end;
+}
+.create p {
+    font-size: 24px;
+    color: #111111;
+    width: 100%;
+}
+.save-recipe-create {
+    width: auto;
+    margin-left: 44%;
+    right: 0;
+}
+.save-recipe-edit {
+    width: auto;
+    margin-left: 22%;
+}
+.save-recipe-index {
+    width: auto;
+    margin-left: 48%;
+}
+.save-recipe-index a {
+    margin-right: 0;
+    right: 0;
+}
+.btn:last-child {
+    border: none;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    background-color: #6558C3;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-right: 0;
+    right: 0;
+    cursor: pointer;
+}
+form .btn-red {
+    border: none;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    background-color: #DC4747;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.btn-cancel {
+        border: none;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    background-color: #777777;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+

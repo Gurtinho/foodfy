@@ -3,44 +3,33 @@
   margin: 0;
   padding: 0;
 }
-.containererror {
-  position: relative;
+body {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  bottom: 0;
-  width: 100%;
-  background-color: red;
+  height: 100%;
+}
+.container-error {
+  display: flex;
+  flex: 1 0 auto;
+  height: 485px;
+}
+.textos-caixa-error {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  padding: 30px;
+  height: 200px;
+  width:940px;
+  background-color: #FBDFDB;
+  border-radius: 30px;
 }
 .errortitle {
   font-size: 40px;
-  font-family: 'Roboto', sans-serif;
 }
 .naoencontrado {
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
 }
 .errordesc {
   margin-top: 30px;
   font-size: 20px;
-  font-family: 'Roboto', sans-serif;
-}
-.load {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 10px;
-}
-.load img {
-  width: 200px;
-  height: 200px;
-  animation: spin 4s linear infinite;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-footer {
-  bottom: 0;
 }

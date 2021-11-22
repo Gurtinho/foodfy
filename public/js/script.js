@@ -1,5 +1,5 @@
-import openFood from "./modules/openfood.js";
-openFood()
-
-import showDesc from "./modules/showdesc.js";
+import { showDesc } from "./modules/showdesc.js";
 showDesc()
+
+import { addInfo } from "./modules/addnew.js";
+addInfo()

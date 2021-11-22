@@ -1,0 +1,67 @@
+{% extends "templates/layouts/layout-recipes.njk" %}
+
+{% block head %}
+    <title>{{ recipe.name }}</title>
+{% endblock %}
+
+{% block content %}
+    <section class="create">
+        <div>
+            <div class="create-recipe">
+                <p>Receita: {{ recipe.title }}</p>
+            </div>
+            <div class="save-recipe">
+                <a class="btn" type="submit" href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="accessfood">
+        <div class="receitas-content-food">
+            <div class="food">
+                <img class="food-img" src="{{ recipe.image }}">
+                <h2 class="food-title">{{ recipe.title }}</h2>
+                <h3 class="food-author">{{ recipe.author }}</h3>
+            </div>
+        </div>
+
+        <section class="descricao">
+            <div class="ingredientes">
+                <div class="inf">
+                    <h1>Ingredientes</h1>
+                    <ul class="content">
+                        {% for ingredient in recipe.ingredients %}
+                        <li class="li">{{ ingredient + '.' }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="preparo">
+                <div class="inf">
+                    <h1>Modo de preparo</h1>
+                    <ul class="content">
+                        {% for prepar in recipe.preparation %}
+                        <li class="li">{{ prepar + '.'}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="adicionais">
+                <div class="inf">
+                    <h1>Informações adicionais</h1>
+                    <ul class="content">
+                        <li class="li">
+                            {% if recipe.information != '' %}
+                                {{ recipe.information }}
+                            {% else %}
+                                Sem informações adicionais.
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}

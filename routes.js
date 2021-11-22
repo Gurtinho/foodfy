@@ -1,32 +1,27 @@
 //servindo as rotas
 const express = require('express')
-const foods = require('./data')
+const home = require('./controllers/home')
+const recipes = require('./controllers/recipes')
 const routes = express.Router()
 
-//routes
-routes.get("/", (req, res) => {
-    return res.render("home", { items: foods })
-})
+// home
+routes.get("/", home.home)
+routes.get("/about", home.about)
+routes.get("/recipes", home.recipes)
+routes.get("/food/:id", home.id)
 
-routes.get("/about", (req, res) => {
-    return res.render("about")
-})
-
-routes.get("/recipes", (req, res) => {
-    return res.render("recipes", { items: foods })
-})
-
-//rota - pagina de receitas
-routes.get("/food/:index", function(req, res){
-    const food = [ ...foods ]
-    const foodIndex = req.params.index
-    const foodall = (food[ foodIndex ])
-    return res.render("food", { item:foodall })
-})
+// recipes
+routes.get('/admin/recipes/index', recipes.index)
+routes.get('/admin/recipes/create', recipes.create)
+routes.get('/admin/recipes/:id', recipes.show)
+routes.get('/admin/recipes/:id/edit', recipes.edit)
+routes.post('/admin/recipes', recipes.post)
+routes.put('/admin/recipes', recipes.put)
+routes.delete('/admin/recipes', recipes.delete)
 
 //server error
-routes.use(function(req, res) {
-    res.status(404).render("not-found")
+routes.use((req, res) => {
+    res.status(404).render("error/not-found")
 })
 
 module.exports = routes

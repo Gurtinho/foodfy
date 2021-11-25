@@ -14,11 +14,11 @@ server.use(routes)
 
 // html nunjucks
 server.set("view engine", "njk")
-nunjucks.configure("views", {
+nunjucks.configure("src/app/views", {
     express: server,
     autoescape: false,
     noCache: true
 })
 
 // listening
-server.listen(port, () => {})
+server.listen(port)

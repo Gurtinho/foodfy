@@ -1,7 +1,7 @@
 //servindo as rotas
 const express = require('express')
-const home = require('./controllers/home')
-const recipes = require('./controllers/recipes')
+const home = require('./app/controllers/home')
+const recipes = require('./app/controllers/recipes')
 const routes = express.Router()
 
 // home

@@ -12,17 +12,17 @@ export function addInfo() {
 
     // ADD NEW FIELDS
     // mais funcional
-    const addNewFields = container => {
-        const newField = container.lastElementChild
+    const addNewFields = field => {
+        const newField = field.lastElementChild
         if (newField.lastElementChild.value == '') {
             return false
         }
         const fieldClone = newField.cloneNode(true)
-        container.appendChild(fieldClone)
+        field.appendChild(fieldClone)
         fieldClone.lastElementChild.value = ''
-        container.nextElementSibling.classList.remove('ativo')
+        field.nextElementSibling.classList.remove('ativo')
         newField.lastElementChild.style.borderColor = '#ddd'
-        fieldClone.lastElementChild.style.borderColor = '#ddd'
+        field.lastElementChild.style.borderColor = '#ddd'
     }
     buttonIngredient.addEventListener('click', () => { addNewFields( ingredients ) })
     buttonPreparation.addEventListener('click', () => { addNewFields( preparation ) })
@@ -38,7 +38,7 @@ export function addInfo() {
         }
         if (lastField.lastElementChild.value != '') {
             field.nextElementSibling.classList.add('ativo')
-            lastField.lastElementChild.style.borderColor = 'red'
+            lastField.lastElementChild.style.borderColor = '#e61f4a'
         }
     }
     buttonRemoveIngredient.addEventListener('click', () => { removeNewFields( ingredients ) })

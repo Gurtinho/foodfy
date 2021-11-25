@@ -154,26 +154,6 @@
         "ferva tudo até ficar consistente"
       ],
       "information": "pode decorar como quiser <3"
-    },
-    {
-      "id": 8,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/pizza.png",
-      "title": "pizza",
-      "author": "",
-      "ingredients": [
-        "massa",
-        "queijo",
-        "molho",
-        "calabresa",
-        "orégano"
-      ],
-      "preparation": [
-        "estique a massa",
-        "coloque o molho por cima da massa",
-        "rale o queijo e adicione em cima do molho",
-        "coloque as calabresas em rodelas com orégano salpicado por cima"
-      ],
-      "information": "delicinha pra ter uma diarreia logo em seguida"
     }
   ]
 }

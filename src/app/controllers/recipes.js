@@ -1,7 +1,11 @@
+const recipe = require('../models/recipe')
+const Recipe = require('../models/recipe')
 
 module.exports = {
     index(req, res) {
-        return res.render('admin/recipes/index')
+        Recipe.all(( recipes ) => {
+            return res.render('admin/recipes/index', { recipes })
+        })
     },
 
     create(req, res) {
@@ -17,27 +21,50 @@ module.exports = {
             }
         }
 
-        // let id = 1
-        // const lastRecipe = data.recipes[data.recipes.length - 1]
-        // if (lastRecipe) {
-        //     id = lastRecipe.id + 1
-        // }
+        Recipe.create(req.body, ( recipe ) => {
+            return res.redirect(`/admin/recipes/${recipe.id}`)
+        })
+        
     },
     
     show(req, res) {
-        return
+        Recipe.find(req.params.id, ( recipe ) => {
+            if ( !recipe ) {
+                return res.send('recipe not found')
+            }
+
+            return res.render('admin/recipes/show', { recipe })
+        })
     },
 
     edit(req, res) {
-        return
+        Recipe.find(req.params.id, ( recipe ) => {
+            if ( !recipe ) {
+                return res.send('recipe not found')
+            }
+
+            return res.render('admin/recipes/edit', { recipe })
+        })
     },
 
     put(req, res) {
-        return
+        const keys = Object.keys(req.body)
+
+        for ( let key of keys ) {
+            if (req.body[key] == '') {
+                return res.send('Preencha todos os campos')
+            }
+        }
+
+        Recipe.update(req.body, () => {
+            return res.redirect(`/admin/recipes/${req.body.id}`)
+        })
     },
 
     delete(req, res) {
-        return
+        Recipe.delete(req.body.id, () => {
+            return res.redirect(`/admin/recipes/index`)
+        })
     },
 }
 

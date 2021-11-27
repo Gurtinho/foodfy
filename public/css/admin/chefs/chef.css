@@ -7,16 +7,26 @@
   height:100%;
 }
 .food-img {
-  width:100%;
-  height:100%;
-  border-radius: 15px;
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.food-img img {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   object-fit: cover;
+  border-radius: 50%;
+
 }
 .food-title {
   font-family: "Roboto", regular;
   font-size:36px;
   color:#111111;
-  margin-top:40px;
+  margin-top:25px;
 }
 .food-author {
   font-family: "Roboto", regular;
@@ -30,39 +40,9 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height:100%;
-}
-.descricao {
-  margin-top:40px;
-  margin-bottom: 40px;
-  width:940px;
-  height: 100%;
-  margin-bottom: 70px;
-}
-.inf {
-  height: auto;
-  margin-bottom: 30px;
-}
-.ingredientes h1,
-.preparo h1,
-.adicionais h1 {
-  display: inline-block;
-  color:#111111;
-  font-size: 24px;
-  font-family: "Roboto", bold;
-}
-.mostrar {
-  display: inline-block;
-  align-items: center;
-  cursor: pointer;
-  color:#525252;
-  font-size: 12px;
-  font-weight: bold;
-  font-family: "Roboto", bold;
-  margin-left: 10px;
+  margin-bottom: 100px;
 }
 .content {
-  display: none;
   color:#5e5e5e;
   height: 100%;
   align-items: center;
@@ -73,7 +53,5 @@
 }
 .content li {
   margin-bottom: 5px;
-}
-.ativo {
-  display: block;
+  font-weight: normal;
 }

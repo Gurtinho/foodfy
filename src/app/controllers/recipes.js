@@ -1,4 +1,3 @@
-const recipe = require('../models/recipe')
 const Recipe = require('../models/recipe')
 
 module.exports = {

@@ -5,40 +5,40 @@
 body {
     height: 100%;
 }
-.create {
+.show {
     display: flex;
     height: 100px;
     width: 100%;
     margin-bottom: 20px;
 }
-.create div {
+.show div {
     display: flex;
     width: 940px;
     align-items: flex-end;
 }
-.create p {
+.show p {
     font-size: 24px;
     color: #111111;
     width: 100%;
 }
-.save-recipe-create {
+.save-chefs-create {
     width: auto;
     margin-left: 44%;
     right: 0;
 }
-.save-recipe-edit {
+.save-chefs-edit {
     width: auto;
     margin-left: 22%;
 }
-.save-recipe-index {
+.save-chefs-index {
     width: auto;
     margin-left: 48%;
 }
-.save-recipe-show {
+.save-chefs-show {
     width: auto;
     margin-left: 50%;
 }
-.save-recipe-index a {
+.save-chefs-index a {
     margin-right: 0;
     right: 0;
 }
@@ -65,7 +65,7 @@ form .btn-red {
     cursor: pointer;
 }
 .btn-cancel {
-        border: none;
+    border: none;
     font-size: 16px;
     color: white;
     text-decoration: none;

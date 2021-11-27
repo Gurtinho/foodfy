@@ -6,5 +6,17 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'templates/fields/field-home.njk' %}
+    <section class="acessadas">
+        <div class="acess-content">
+            {% for recipe in recipes %}
+                <div class="comida">
+                    <a type="hidden" href="/food/{{ recipe.id }}">
+                        <img class="img" src="{{ recipe.image }}">
+                        <h2 class="comidatitle">{{ recipe.title }}</h2>
+                        <h3 class="comidaautor">{{ recipe.author }}</h3>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

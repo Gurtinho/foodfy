@@ -1,0 +1,40 @@
+{% extends "templates/layouts/layout-home.njk" %}
+
+{% block head %}
+    <title>{{ chef.name }}</title>
+{% endblock %}
+
+{% block content %}
+    <section class="accessfood">
+        <div class="receitas-content-food">
+            <div class="food">
+                <div class="food-img">
+                    <img src="{{ chef.avatar_url }}">
+                </div>
+                <h2 class="food-title">{{ chef.name }}</h2>
+                <p class="food-author">{{ recipe.lenght }} receitas</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="div-mais-acessadas">
+        <div class="sub-acessadas">
+            <p class="mais-acessadas">Receitas</p>
+        </div>
+    </section>
+
+    <section class="fields-list">
+        <div class="fields-grid">
+        {% for recipe in recipes %}
+            <div class="fields-item">
+                <img class="fields-img" src="{{ recipe.image }}">
+                <div class="fields-info">
+                    <h2>{{ recipe.title }}</h2>
+                    <p>{{ recipe.author }}</p>
+                    <a href="/food/{{ recipe.id }}">visualizar</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}

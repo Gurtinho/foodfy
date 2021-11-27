@@ -1,0 +1,19 @@
+{% extends 'templates/layouts/layout-home.njk' %}
+
+{% block content %}
+    <section class="fields-list-chefs">
+        <div class="fields-grid-chefs">
+        {% for chef in chefs %}
+            <div class="fields-item-chefs">
+                <a class="fields-item-chefs-a" type="hidden" href="/chefs/{{ chef.id }}">
+                    <img class="fields-img-chefs" src="{{ chef.avatar_url }}">
+                    <div class="fields-info-chefs">
+                        <h2>{{ chef.name }}</h2>
+                        <p>{{ chef.lenght }} receitas</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}

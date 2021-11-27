@@ -1,0 +1,23 @@
+{% extends 'templates/layouts/layout.njk' %}
+
+{% block content %}
+    <form method="POST" action="/admin/chefs?_method=PUT">
+        <section class="create">
+            <div class="create-recipe">
+                <p>Editando receita</p>
+                <div class="save-recipe-edit">
+                    <a href="/admin/chefs/index"><button type="button" class="btn-cancel">Cancelar</button></a>
+                    <button class="btn-red" type="submit" form="form-delete">Deletar</button>
+
+                    <input type="hidden" name="id" value="{{ chef.id }}">
+                    <button class="btn" type="submit">Salvar chef</button>
+                </div>
+            </div>
+        </section>
+        {% include 'templates/fields/fields-chefs.njk' %}
+    </form>
+
+    <form id="form-delete" action="/admin/chefs?_method=DELETE" method="POST">
+        <input type="hidden" name="id" value="{{ chef.id }}">
+    </form>
+{% endblock %}

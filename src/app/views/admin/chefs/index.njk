@@ -1,0 +1,25 @@
+{% extends 'templates/layouts/layout.njk' %}
+
+{% block content %}
+    <section class="create">
+        <div class="create-recipe">
+            <p>Gerenciar chefs</p>
+            <div class="save-recipe-index">
+                <a href="/admin/chefs/create"><button class="btn" type="submit">Criar novo chef</button></a>
+            </div>
+        </div>
+    </section>
+    <section class="fields-list-chefs">
+        <div class="fields-grid-chefs">
+        {% for chef in chefs %}
+            <div class="fields-item-chefs">
+                <img class="fields-img-chefs" src="{{ chef.avatar_url }}">
+                <div class="fields-info-chefs">
+                    <h2>{{ chef.name }}</h2>
+                    <a href="/admin/chefs/{{ chef.id }}">visualizar</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}

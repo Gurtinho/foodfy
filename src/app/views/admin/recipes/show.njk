@@ -1,4 +1,4 @@
-{% extends "templates/layouts/layout-recipes.njk" %}
+{% extends "templates/layouts/layout.njk" %}
 
 {% block head %}
     <title>{{ recipe.name }}</title>
@@ -10,7 +10,8 @@
             <div class="create-recipe">
                 <p>Receita: {{ recipe.title }}</p>
             </div>
-            <div class="save-recipe">
+            <div class="save-recipe-show">
+                <a class="btn btn-cancel" type="submit" href="/admin/recipes/index">Voltar</a>
                 <a class="btn" type="submit" href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
             </div>
         </div>

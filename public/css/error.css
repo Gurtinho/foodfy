@@ -5,21 +5,29 @@
 }
 body {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  height: 100%;
 }
 .container-error {
   display: flex;
   flex: 1 0 auto;
-  height: 485px;
+  height: auto;
+}
+.caixa-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:940px;
 }
 .textos-caixa-error {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  margin-top: 100px;
   padding: 30px;
   height: 200px;
-  width:940px;
+  width: 100%;
   background-color: #FBDFDB;
   border-radius: 30px;
 }

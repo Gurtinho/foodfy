@@ -1,11 +1,11 @@
+/* home */
+@import 'home/geral.css';
+@import 'home/mobile.css';
+
+/* error */
 @import 'error.css';
 
-/* css home */
-@import 'home/geral.css';
-@import 'home/about.css';
-@import 'home/home.css';
-@import 'home/foodpage.css';
-@import 'home/mobile.css';
-@import 'home/chef.css';
-@import 'home/index.css';
+.active {
+  font-weight: bold;
+}
 

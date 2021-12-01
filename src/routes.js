@@ -1,6 +1,4 @@
-//servindo as rotas
 const express = require('express')
-
 const home = require('./app/controllers/home')
 const recipes = require('./app/controllers/recipes')
 const chefs = require('./app/controllers/chefs')
@@ -13,7 +11,8 @@ routes.get("/about", home.about)
 routes.get("/recipes", home.recipes)
 routes.get('/chefs', home.chefs)
 routes.get("/chefs/:id", home.show)
-routes.get("/food/:id", home.id)
+routes.get("/recipes/food/:id", home.id)
+routes.get('/search', home.search)
 
 // recipes
 routes.get('/admin/recipes/index', recipes.index)

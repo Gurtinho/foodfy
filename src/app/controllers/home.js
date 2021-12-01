@@ -1,5 +1,6 @@
 const Recipe = require('../models/recipe')
 const Chef = require('../models/chef')
+const Search = require('../models/search')
 
 module.exports = {
     about(req, res) {
@@ -29,8 +30,9 @@ module.exports = {
             if ( !chef ) {
                 return res.send('chef not found')
             }
-
-            return res.render('home/show', { chef })
+            Recipe.recipeFind(req.params.id, ( recipe ) => {
+                return res.render('home/show', { chef, recipes: recipe })
+            })
         })
     },
 
@@ -39,8 +41,24 @@ module.exports = {
             if ( !recipe ) {
                 return res.send('recipe not found')
             }
-
             return res.render('home/food', { recipe })
         })
     },
+
+    search(req, res) {
+        // pesquisa as receitas e os chefs
+        const { search } = req.query
+        if ( search ) {
+            Search.findRecipe(search, ( recipes ) => {
+                Search.findChef(search, (chefs) => {
+                    if (chefs && recipes == '') {
+                        return res.render('home/search', { search, chefs, recipes })
+                    }
+                    return res.render('home/search', { search, chefs, recipes })
+                })
+            })
+        } else {
+            return res.redirect('/')
+        }
+    }
 }

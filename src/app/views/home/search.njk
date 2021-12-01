@@ -1,0 +1,64 @@
+{% extends "templates/layouts/layout-home.njk" %}
+
+
+{% block head %}
+    <title>{{ search }}</title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="search-parameter">
+        <p>Buscando por "{{ search }}"</p>
+    </div>
+
+    <div class="search-chefs">
+        <p>Chefs</p>
+    </div>
+
+    <section class="fields-list-chefs">
+        <div class="fields-grid-chefs">
+        {% for chef in chefs %}
+            <div class="fields-item-chefs">
+                <a class="fields-item-chefs-a" type="hidden" href="/chefs/{{ chef.id }}">
+                    <img class="fields-img-chefs" src="{{ chef.avatar_url }}">
+                    <div class="fields-info-chefs">
+                        <h2>{{ chef.name }}</h2>
+                        {% if chef.total_recipes != 0 %}
+                            <p>{{ chef.total_recipes }} receitas</p>
+                        {% else %}
+                            <p>Nenhuma receita</p>
+                        {% endif %}
+                        
+                    </div>
+                </a>
+            </div>
+        {% else %}
+            <div class="comida">
+                <p>Desculpe. Não encontramos nenhum chef com o nome "{{ search }}"</p>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+
+    <div class="search-recipes">
+        <p>Receitas</p>
+    </div>
+
+    <section class="acessadas">
+        <div class="acess-content">
+            {% for recipe in recipes %}
+                <div class="comida">
+                    <a type="hidden" href="/recipes/food/{{ recipe.id }}">
+                        <img class="img" src="{{ recipe.image }}">
+                        <h2 class="comidatitle">{{ recipe.title }}</h2>
+                        <h3 class="comidaautor">{{ recipe.chefs_name }}</h3>
+                    </a>
+                </div>
+            {% else %}
+                <div class="comida">
+                    <p>Desculpe. Não encontramos nenhuma receita com o nome "{{ search }}"</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

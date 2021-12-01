@@ -21,8 +21,8 @@ export function addInfo() {
         field.appendChild(fieldClone)
         fieldClone.lastElementChild.value = ''
         field.nextElementSibling.classList.remove('ativo')
+        fieldClone.lastElementChild.style.borderColor = '#ddd'
         newField.lastElementChild.style.borderColor = '#ddd'
-        field.lastElementChild.style.borderColor = '#ddd'
     }
     buttonIngredient.addEventListener('click', () => { addNewFields( ingredients ) })
     buttonPreparation.addEventListener('click', () => { addNewFields( preparation ) })
@@ -40,7 +40,12 @@ export function addInfo() {
             field.nextElementSibling.classList.add('ativo')
             lastField.lastElementChild.style.borderColor = '#e61f4a'
         }
+        // auto remove warnings
+        setTimeout(() => {
+            field.nextElementSibling.classList.remove('ativo')
+            lastField.lastElementChild.style.borderColor = '#ddd'
+        }, 2000)
     }
     buttonRemoveIngredient.addEventListener('click', () => { removeNewFields( ingredients ) })
-    buttonRemovePreparation.addEventListener('click', () => { removeNewFields( preparation ) })
+    buttonRemovePreparation.addEventListener('click', () => { removeNewFields(preparation) })
 }

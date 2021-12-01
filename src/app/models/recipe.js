@@ -3,7 +3,10 @@ const { date } = require('../../libs/utils')
 
 module.exports = {
     all(callback) {
-        const select = `SELECT * FROM recipes`
+        const select = `SELECT recipes.*, chefs.name AS chefs_name 
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            ORDER BY id DESC`
         db.query(select, ( err, results ) => {
             if (err) {
                 throw `Database Error ${err}`
@@ -26,7 +29,7 @@ module.exports = {
             RETURNING id`
         
         const values = [
-            0,
+            data.chef,
             data.image,
             data.title,
             data.ingredients,
@@ -44,7 +47,10 @@ module.exports = {
     },
     
     find(id, callback) {
-        const select = `SELECT * FROM recipes WHERE id = $1`
+        const select = `SELECT recipes.*, chefs.name AS chefs_name 
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id) 
+            WHERE recipes.id = $1`
         db.query(select, [id], ( err, results ) => {
             if (err) {
                 throw `Database Error ${err}`
@@ -65,7 +71,7 @@ module.exports = {
             WHERE id = $7
         `
         const values = [
-            0,
+            data.chef,
             data.image,
             data.title,
             data.ingredients,
@@ -88,6 +94,29 @@ module.exports = {
                 throw `Database Error ${err}`
             }
             return callback()
+        })
+    },
+
+    chefFindOption(callback) {
+        const chef = `SELECT name, id FROM chefs`
+        db.query(chef, (err, results) => {
+            if (err) {
+                throw `database error ${err}`
+            }
+            callback(results.rows)
+        })
+    },
+
+    recipeFind(id, callback) {
+        const recipe = `
+            SELECT recipes.* FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id) 
+            WHERE chefs.id = $1`
+        db.query(recipe, [id], ( err, results ) => {
+            if (err) {
+                throw `database error ${err}`
+            }
+            callback(results.rows)
         })
     }
 }

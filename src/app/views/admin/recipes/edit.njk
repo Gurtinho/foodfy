@@ -6,7 +6,8 @@
             <div class="create-recipe">
                 <p>Editando receita</p>
                 <div class="save-recipe-edit">
-                    <a href="/admin/recipes/index"><button type="button" class="btn-cancel">Cancelar</button></a>
+                    <a href="/admin/recipes/{{ recipe.id }}"><button type="button" class="btn-cancel">Cancelar</button></a>
+                    
                     <button class="btn-red" type="submit" form="form-delete">Deletar</button>
 
                     <input type="hidden" name="id" value="{{ recipe.id }}">
@@ -17,7 +18,7 @@
         {% include 'templates/fields/fields-recipes.njk' %}
     </form>
 
-    <form id="form-delete" action="/admin/recipes?_method=DELETE" method="POST">
+    <form class="form-delete" id="form-delete" action="/admin/recipes?_method=DELETE" method="POST">
         <input type="hidden" name="id" value="{{ recipe.id }}">
     </form>
 {% endblock %}

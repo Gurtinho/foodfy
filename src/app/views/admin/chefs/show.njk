@@ -24,7 +24,13 @@
                     <img src="{{ chef.avatar_url }}">
                 </div>
                 <h2 class="food-title">{{ chef.name }}</h2>
-                <p class="food-author">{{ recipe.lenght }}testando</p>
+                {% if chef.total_recipes != 0 %}
+                    <p class="food-author">
+                        {{ chef.total_recipes }} {% if chef.total_recipes > 1 %}receitas{% else %} receita{% endif %}
+                    </p>
+                {% else %}
+                    <p class="food-author">Nenhuma receita</p>
+                {% endif %}
             </div>
         </div>
     </section>
@@ -36,15 +42,18 @@
     </section>
 
     <section class="fields-list">
-        <div class="fields-grid">
+        <div class="fields-grid-show-chef">
         {% for recipe in recipes %}
-            <div class="fields-item">
-                <img class="fields-img" src="{{ recipe.image }}">
-                <div class="fields-info">
+            <div class="fields-item-show-chef">
+                <img class="fields-img-show-chef" src="{{ recipe.image }}">
+                <div class="fields-info-show-chef">
                     <h2>{{ recipe.title }}</h2>
-                    <p>{{ recipe.author }}</p>
                     <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
                 </div>
+            </div>
+        {% else %}
+            <div class="fields-item-show-chef-p">
+                <p>Esse chef ainda não possui receitas</p>
             </div>
         {% endfor %}
         </div>

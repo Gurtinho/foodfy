@@ -1,4 +1,5 @@
 const Chef = require('../models/chef')
+const Recipe = require('../models/recipe')
 
 module.exports = {
     index(req, res) {
@@ -26,12 +27,14 @@ module.exports = {
     },
 
     show(req, res) {
-        Chef.find(req.params.id, ( chef ) => {
+        const id = req.params.id
+        Chef.find(id, ( chef ) => {
             if ( !chef ) {
                 return res.send('chef not found')
             }
-
-            return res.render('admin/chefs/show', { chef })
+            Recipe.recipeFind(id, ( recipes ) => {
+                return res.render('admin/chefs/show', { chef, recipes })
+            })
         })
     },
 
@@ -60,8 +63,15 @@ module.exports = {
     },
 
     delete(req, res) {
-        Chef.delete(req.body.id, () => {
-            return res.redirect(`/admin/chefs/index`)
+        const id = req.body.id
+        Chef.find(id, ( recipes ) => {
+            if (recipes.total_recipes == 0) {
+                Chef.delete(id, () => {
+                    return res.redirect(`/admin/chefs/index`)
+                })
+            } else {
+                return res.redirect(`/admin/chefs/${id}/edit`)
+            }
         })
     },
 }

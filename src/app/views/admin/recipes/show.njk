@@ -6,13 +6,17 @@
 
 {% block content %}
     <section class="create">
-        <div>
-            <div class="create-recipe">
+        <div class="show-recipe">
+            <div class="create-recipe-p">
                 <p>Receita: {{ recipe.title }}</p>
             </div>
             <div class="save-recipe-show">
-                <a class="btn btn-cancel" type="submit" href="/admin/recipes/index">Voltar</a>
-                <a class="btn" type="submit" href="/admin/recipes/{{ recipe.id }}/edit">Editar receita</a>
+                <a href="/admin/recipes">
+                    <button class="btn-cancel-recipe" type="submit">Voltar</button>
+                </a>
+                <a href="/admin/recipes/{{ recipe.id }}/edit">
+                    <button class="btn-save-recipe" type="submit">Editar receita</button>
+                </a>
             </div>
         </div>
     </section>

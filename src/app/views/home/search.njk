@@ -33,8 +33,9 @@
                 </a>
             </div>
         {% else %}
-            <div class="comida">
-                <p>Desculpe. Não encontramos nenhum chef com o nome "{{ search }}"</p>
+            <div class="search-not-found">
+                <h3>Desculpe</h3>
+                <p>Não encontramos nenhum chef com o nome "{{ search }}"</p>
             </div>
         {% endfor %}
         </div>
@@ -55,8 +56,9 @@
                     </a>
                 </div>
             {% else %}
-                <div class="comida">
-                    <p>Desculpe. Não encontramos nenhuma receita com o nome "{{ search }}"</p>
+                <div class="search-not-found">
+                    <h3>Desculpe</h3>
+                    <p>Não encontramos nenhuma receita com o nome "{{ search }}"</p>
                 </div>
             {% endfor %}
         </div>

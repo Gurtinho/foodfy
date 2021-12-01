@@ -2,12 +2,16 @@
 
 {% block content %}
     <form method="POST" action="/admin/chefs">
-        <section class="create">
-            <div class="create-recipe">
-                <p>Criando chef</p>
-                <div class="save-chefs-create">
-                    <a href="/admin/chefs/index"><button type="button" class="btn-cancel">Cancelar</button></a>
-                    <button class="btn" type="submit">Salvar chef</button>
+        <section class="chefs">
+            <div class="create-chef">
+                <div class="create-chef-p">
+                    <p>Criando chef</p>
+                </div>
+                <div class="save-chef-create">
+                    <a href="/admin/chefs">
+                        <button type="button" class="btn-cancel-chef">Cancelar</button>
+                    </a>
+                    <button class="btn-save-chef" type="submit">Salvar chef</button>
                 </div>
             </div>
         </section>

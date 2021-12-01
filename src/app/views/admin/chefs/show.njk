@@ -5,14 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    <section class="show">
-        <div>
-            <div class="show-chefs">
+    <section class="chefs">
+        <div class="show-chef">
+            <div class="show-chef-p">
                 <p>Chef: {{ chef.name }}</p>
             </div>
-            <div class="save-chefs-show">
-                <a class="btn btn-cancel" type="submit" href="/admin/chefs/index">Voltar</a>
-                <a class="btn" type="submit" href="/admin/chefs/{{ chef.id }}/edit">Editar chef</a>
+            <div class="save-chef-show">
+                <a href="/admin/chefs">
+                    <button class="btn-cancel-chef" type="submit">Voltar</button>
+                </a>
+                <a href="/admin/chefs/{{ chef.id }}/edit">
+                    <button class="btn-save-chef" type="submit">Editar chef</button>
+                </a>
             </div>
         </div>
     </section>

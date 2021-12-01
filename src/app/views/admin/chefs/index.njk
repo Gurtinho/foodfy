@@ -1,11 +1,15 @@
 {% extends 'templates/layouts/layout.njk' %}
 
 {% block content %}
-    <section class="create">
-        <div class="create-recipe">
-            <p>Gerenciar chefs</p>
-            <div class="save-chefs-index">
-                <a href="/admin/chefs/create"><button class="btn" type="submit">Criar novo chef</button></a>
+    <section class="chefs">
+        <div class="index-chef">
+            <div class="index-chef-p">
+                <p>Gerenciar chefs</p>
+            </div>
+            <div class="save-chef-index">
+                <a href="/admin/chefs/create">
+                    <button class="btn-save-chef" type="submit">Criar novo chef</button>
+                </a>
             </div>
         </div>
     </section>

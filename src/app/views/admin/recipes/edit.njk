@@ -3,15 +3,17 @@
 {% block content %}
     <form method="POST" action="/admin/recipes?_method=PUT">
         <section class="create">
-            <div class="create-recipe">
-                <p>Editando receita</p>
+            <div class="edit-recipe">
+                <div class="edit-recipe-p">
+                    <p>Editando receita</p>
+                </div>
                 <div class="save-recipe-edit">
-                    <a href="/admin/recipes/{{ recipe.id }}"><button type="button" class="btn-cancel">Cancelar</button></a>
-                    
-                    <button class="btn-red" type="submit" form="form-delete">Deletar</button>
-
+                    <a href="/admin/recipes/{{ recipe.id }}">
+                        <button type="button" class="btn-cancel-recipe">Cancelar</button>
+                    </a>    
+                    <button class="btn-delete-recipe" type="submit" form="form-delete">Deletar</button>
                     <input type="hidden" name="id" value="{{ recipe.id }}">
-                    <button class="btn" type="submit">Salvar receita</button>
+                    <button class="btn-save-recipe" type="submit">Salvar receita</button>
                 </div>
             </div>
         </section>

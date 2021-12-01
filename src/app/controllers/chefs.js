@@ -67,7 +67,7 @@ module.exports = {
         Chef.find(id, ( recipes ) => {
             if (recipes.total_recipes == 0) {
                 Chef.delete(id, () => {
-                    return res.redirect(`/admin/chefs/index`)
+                    return res.redirect(`/admin/chefs`)
                 })
             } else {
                 return res.redirect(`/admin/chefs/${id}/edit`)

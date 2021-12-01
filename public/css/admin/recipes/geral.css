@@ -5,6 +5,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  height: 100%;
+}
+
 .header-recipes {
   display: flex;
   width: 100%;
@@ -12,6 +16,7 @@
   font-family: 'Roboto', sans-serif;
   background-color: black;
 }
+
 .div-header-recipes {
   display: flex;
   align-items: center;
@@ -19,20 +24,24 @@
   width: 940px;
   background-color: black;
 }
+
 .linkhome-recipes {
   margin: 0;
 }
+
 .links {
   display: flex;
   margin-left: 120px;
   width: 150px;
 }
+
 .links a {
   text-decoration: none;
   color: #999;
   font-size: 16px;
   margin-right: 25px;
 }
+
 .links a.active {
 font-weight: bold;
 color: white;
@@ -46,6 +55,7 @@ color: white;
   margin-top: 30px;
   margin-bottom: 100px;
 }
+
 .fields-item {
   display: grid;
   grid-template-columns: 40% 60%;
@@ -53,6 +63,7 @@ color: white;
   margin-bottom: 20px;
   height: 80px;
 }
+
 .fields-img {
   margin-left: 0;
   border-radius: 8.5px;
@@ -62,9 +73,11 @@ color: white;
   object-position: center center;
   object-fit: cover;
 }
+
 .fields-info {
   width: 100%;
 }
+
 .fields-info h2 {
   margin-right: 10px;
   font-size: 18px;
@@ -74,11 +87,13 @@ color: white;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .fields-info p {
   font-size: 14px;
   color: #777;
   margin-bottom: 8px;
 }
+
 .fields-info a {
   font-size: 14px;
   color: #6558C3;
@@ -86,122 +101,112 @@ color: white;
 }
 
 /*============ CREATE ===========*/
-* {
-  margin: 0 auto;
-  padding: 0;
-}
-body {
-  height: 100%;
-}
 .create {
   display: flex;
-  height: 100px;
+  justify-content: center;
   width: 100%;
+  height: 100px;
   margin-bottom: 20px;
 }
-.create-recipe {
-  background-color: crimson;
-  width: 400px;
-}
-.create div {
+
+.create-recipe,
+.index-recipe,
+.edit-recipe,
+.show-recipe {
   display: flex;
-  width: 940px;
   align-items: flex-end;
+  width: 940px;
 }
-.create p {
+
+.create-recipe-p,
+.index-recipe-p,
+.edit-recipe-p,
+.show-recipe-p {
+  left: 0;
+  margin-left: 0;
+  margin-bottom: 5px;
+}
+
+.create-recipe-p p,
+.index-recipe-p p,
+.edit-recipe-p p,
+.show-recipe-p p {
   font-size: 24px;
   color: #111111;
-  width: 100%;
+  font-weight: bold;
 }
-.save-recipe-create {
-  width: auto;
-  margin-left: 28%;
-  right: 0;
-  background-color: cyan;
-}
-.save-recipe-edit {
-  width: auto;
-  padding-left: 20%;
-  right: 0;
-  background-color: cyan;
-}
-.save-recipe-index {
-  width: auto;
-  margin-left: 48%;
-  right: 0;
-  background-color: cyan;
-}
+
+.save-recipe-create,
+.save-recipe-index,
+.save-recipe-edit,
 .save-recipe-show {
-  width: auto;
   right: 0;
-  background-color: cyan;
-}
-.save-recipe-index a {
   margin-right: 0;
-  right: 0;
 }
-.btn:last-child {
-  border: none;
-  font-size: 16px;
-  color: white;
+
+.save-recipe-create a,
+.save-recipe-index a,
+.save-recipe-edit a,
+.save-recipe-show a {
   text-decoration: none;
+}
+
+.btn-save-recipe {
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
   background-color: #6558C3;
+  border: none;
+  font-weight: bold;
   border-radius: 4px;
-  padding: 10px 20px;
-  margin-right: 0;
-  right: 0;
   cursor: pointer;
 }
-form .btn-red {
-  border: none;
-  font-size: 16px;
+
+.btn-delete-recipe {
   color: white;
-  text-decoration: none;
-  background-color: #DC4747;
-  border-radius: 4px;
+  font-size: 16px;
   padding: 10px 20px;
-  cursor: pointer;
-  right: 0;
-  margin-right: 0;
-}
-.btn-cancel {
+  background-color: #dc4747;
   border: none;
-  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancel-recipe {
   color: white;
-  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 20px;
   background-color: #777777;
+  border: none;
+  font-weight: bold;
   border-radius: 4px;
-  padding: 10px 20px;
   cursor: pointer;
-  right: 0;
-  margin-right: 0;
-  margin-left: 10%;
 }
 
 
 /*============ FIELDS ===========*/
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-* {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-}
 .fields-creation {
   display: flex;
   width: 100%;
 }
+
 .div-fields-creation {
   width: 940px;
   margin-bottom: 100px;
 }
+
 .div-fields-creation {
   margin-top: 30px;
 }
+
 .title {
   margin-top: 30px;
   margin-bottom: 10px;
   font-size: 16px;
   color: #111;
 }
+
 .div-fields-creation div input,
 .div-fields-creation div select,
 .div-fields-creation div textarea {
@@ -215,32 +220,38 @@ form .btn-red {
   border: 1px solid #dddddd;
   resize: none;
 }
+
 .ingredients,
 .preparation,
 .div-ingredients,
 .div-preparation {
   margin-top: 10px;
 }
+
 .div-add-remove {
   margin-top: 10px;
 }
+
 .add-ingredient,
 .add-preparation {
   color: #6558C3;
   cursor: pointer;
 }
+
 .remove-ingredient, 
 .remove-preparation {
   color: rgb(199, 21, 74);
   cursor: pointer;
   margin-left: 20px;
 }
+
 .remove-p,
 .remove-p {
   display: none;
   margin-top: 5px;
   color: #e61f4a;
 }
+
 .ativo,
 .ativo {
   display: block;
@@ -255,6 +266,7 @@ form .btn-red {
   width:940px;
   height:100%;
 }
+
 .food-img {
   margin-top: 10px;
   width:100%;
@@ -262,12 +274,14 @@ form .btn-red {
   border-radius: 15px;
   object-fit: cover;
 }
+
 .food-title {
   font-family: "Roboto", regular;
   font-size:36px;
   color:#111111;
   margin-top:40px;
 }
+
 .food-author {
   font-family: "Roboto", regular;
   font-size: 20px;
@@ -281,16 +295,19 @@ form .btn-red {
   flex-direction: column;
   width: 100%;
 }
+
 .descricao {
   margin-top:40px;
   margin-bottom: 40px;
   width:940px;
   height: 100%;
 }
+
 .inf {
   height: auto;
   margin-bottom: 30px;
 }
+
 .ingredientes h1,
 .preparo h1,
 .adicionais h1 {
@@ -299,6 +316,7 @@ form .btn-red {
   font-size: 24px;
   font-family: "Roboto", bold;
 }
+
 .mostrar {
   display: inline-block;
   align-items: center;
@@ -309,6 +327,7 @@ form .btn-red {
   font-family: "Roboto", bold;
   margin-left: 10px;
 }
+
 .content {
   color:#5e5e5e;
   height: 100%;
@@ -318,10 +337,12 @@ form .btn-red {
   margin-left: 15px;
   margin-top: 15px;
 }
+
 .content li {
   margin-bottom: 5px;
   font-weight: normal;
 }
+
 .ativo {
   display: block;
 }

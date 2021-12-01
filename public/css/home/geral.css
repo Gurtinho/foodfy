@@ -55,7 +55,6 @@ body {
   border: 1px solid #ddd;
   font-size: 14px;
   margin-right: 10px;
-  font-weight: bold;
 }
 .search form div input.fill {
   border: 1px solid rgb(226, 61, 61);
@@ -91,6 +90,20 @@ body {
 }
 .search-recipes {
   margin-bottom: 20px;
+}
+
+.search-not-found {
+  width: 940px;
+  margin-left: 10px;
+}
+
+.search-not-found h3 {
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.search-not-found p {
+  color: #777;
 }
 
 /*==========FOOTER==========*/

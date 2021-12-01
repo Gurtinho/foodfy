@@ -2,16 +2,18 @@
 
 {% block content %}
     <form method="POST" action="/admin/chefs?_method=PUT">
-        <section class="create">
-            <div class="create-recipe">
-                <p>Editando chef</p>
-                <div class="save-chefs-edit">
-                    <a href="/admin/chefs/{{ chef.id }}"><button type="button" class="btn-cancel">Cancelar</button></a>
-                    
-                    <button class="btn-red" type="submit" form="form-delete">Deletar</button>
-
+        <section class="chefs">
+            <div class="edit-chef">
+                <div class="edit-chef-p">
+                    <p>Editando chef</p>
+                </div>
+                <div class="save-chef-edit">
+                    <a href="/admin/chefs/{{ chef.id }}">
+                        <button type="button" class="btn-cancel-chef">Cancelar</button>
+                    </a>                    
+                    <button class="btn-delete-chef" type="submit" form="form-delete">Deletar</button>
                     <input type="hidden" name="id" value="{{ chef.id }}">
-                    <button class="btn" type="submit">Salvar chef</button>
+                    <button class="btn-save-chef" type="submit">Salvar chef</button>
                 </div>
             </div>
         </section>

@@ -1,35 +1,33 @@
-export function addInfo() {
-    // INPUTS
+function addInfo() {
     const ingredients = document.querySelector('.ingredients')
     const preparation = document.querySelector('.preparation')
-    // BUTTONS ADD INPUTS
-    const buttonPreparation = document.querySelector('.add-preparation')
+
     const buttonIngredient = document.querySelector('.add-ingredient')
-    // BUTTONS REMOVE INPUTS
+    const buttonPreparation = document.querySelector('.add-preparation')
+
     const buttonRemoveIngredient = document.querySelector('.remove-ingredient')
     const buttonRemovePreparation = document.querySelector('.remove-preparation')
 
-
     // ADD NEW FIELDS
-    // mais funcional
-    const addNewFields = field => {
+    function addNewFields (field) {
         const newField = field.lastElementChild
         if (newField.lastElementChild.value == '') {
+            newField.lastElementChild.style.color = '#e61f4a'
+            newField.lastElementChild.style.borderColor = '#e61f4a'
+            setTimeout(() => {
+                newField.lastElementChild.style.borderColor = '#ddd'
+                newField.lastElementChild.style.color = '#ddd'
+            }, 1000)
             return false
         }
         const fieldClone = newField.cloneNode(true)
         field.appendChild(fieldClone)
         fieldClone.lastElementChild.value = ''
-        field.nextElementSibling.classList.remove('ativo')
-        fieldClone.lastElementChild.style.borderColor = '#ddd'
-        newField.lastElementChild.style.borderColor = '#ddd'
+        buttonRemoveIngredient.style.visibility = 'visible'
     }
-    buttonIngredient.addEventListener('click', () => { addNewFields( ingredients ) })
-    buttonPreparation.addEventListener('click', () => { addNewFields( preparation ) })
-
 
     // REMOVE FIELDS
-    const removeNewFields = field => {
+    function removeNewFields (field) {
         const lastField = field.lastElementChild
         const firstField = field.firstElementChild
         if (lastField.lastElementChild.value == '' && firstField.firstElementChild.value != '') {
@@ -44,8 +42,13 @@ export function addInfo() {
         setTimeout(() => {
             field.nextElementSibling.classList.remove('ativo')
             lastField.lastElementChild.style.borderColor = '#ddd'
-        }, 2000)
+        }, 1000)
     }
-    buttonRemoveIngredient.addEventListener('click', () => { removeNewFields( ingredients ) })
-    buttonRemovePreparation.addEventListener('click', () => { removeNewFields(preparation) })
+
+    buttonIngredient.addEventListener('click', () => {addNewFields(ingredients)})
+    buttonPreparation.addEventListener('click', () => {addNewFields(preparation)})
+    
+    buttonRemoveIngredient.addEventListener('click', () => {removeNewFields(ingredients)})
+    buttonRemovePreparation.addEventListener('click', () => {removeNewFields(preparation)})
 }
+addInfo()

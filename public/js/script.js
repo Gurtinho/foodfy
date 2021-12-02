@@ -1,23 +1,44 @@
-import { paginate } from "./modules/paginate.js";
-paginate()
+function showDesc() {
+    const mostrar = document.querySelectorAll(".mostrar")
 
-import { showDesc } from "./modules/showDescription.js";
+    function showContentFull() {
+        this.nextElementSibling.classList.toggle('ativo')
+        if (this.innerText == 'Mostrar') {
+            this.innerText = 'Esconder'
+        } else {
+            this.innerText = 'Mostrar'
+        }
+    }
+    mostrar.forEach((item) => {
+        item.addEventListener('click', showContentFull)
+    })
+}
 showDesc()
 
-import { current } from "./modules/current.js";
-current()
 
-import { confirmation } from "./modules/confirm.js";
+function confirmation() {
+    const confirmDelete = document.querySelectorAll('.form-delete')
+    confirmDelete.forEach((item) => {
+        item.addEventListener('submit', (event) => {
+            const confirmation = confirm('Deseja deletar?')
+            if (!confirmation) {
+                event.preventDefault()
+            }
+        })
+    })
+}
 confirmation()
 
-import { fillSearch } from "./modules/fillSearch.js";
-fillSearch()
 
-import { addInfo } from "./modules/addnew.js";
-addInfo()
+function current() {
+    const currentPage = location.pathname
+    const menuItems = document.querySelectorAll('.links a')
 
-
-
-
-
+    for (let item of menuItems) {
+        if (currentPage.includes(item.getAttribute('href'))) {
+            item.classList.add('active')
+        }
+    }
+}
+current()
 

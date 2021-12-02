@@ -2,12 +2,22 @@
     <div class="div-fields-creation">
         <div>
             <p class="title">Imagem da receita</p>
-            <input type="url" name="image" value="{{ recipe.image }}" placeholder="Url da imagem">
+            <input 
+                type="url" 
+                name="image" 
+                value="{{ recipe.image }}" 
+                placeholder="Url da imagem" 
+                required>
         </div>
 
         <div>
             <p class="title">Nome da receita</p>
-            <input type="text" name="title" value="{{ recipe.title }}" placeholder="Nome da receita">
+            <input 
+                type="text" 
+                name="title" 
+                value="{{ recipe.title }}" 
+                placeholder="Nome da receita" 
+                required>
         </div>
 
         <div>
@@ -26,11 +36,21 @@
             <div class="ingredients">
                 {% for ingredient in recipe.ingredients %}
                     <div class="div-ingredients">
-                        <input type="text" name="ingredients[]" value="{{ ingredient }}" placeholder="Adicione um ingrediente">
+                        <input 
+                            type="text" 
+                            name="ingredients[]" 
+                            value="{{ ingredient }}" 
+                            placeholder="Adicione um ingrediente" 
+                            required>
                     </div>
                 {% else %}
                     <div class="div-ingredients">
-                        <input type="text" name="ingredients[]" value="{{ ingredient }}" placeholder="Adicione um ingrediente">
+                        <input 
+                            type="text" 
+                            name="ingredients[]" 
+                            value="{{ ingredient }}" 
+                            placeholder="Adicione um ingrediente" 
+                            required>
                     </div>
                 {% endfor %}
             </div>
@@ -46,11 +66,21 @@
             <div class="preparation">
                 {% for prep in recipe.preparation %}
                     <div class="div-preparation">
-                        <input type="text" name="preparation[]" value="{{ prep }}" placeholder="Adicione um passo">
+                        <input 
+                            type="text" 
+                            name="preparation[]" 
+                            value="{{ prep }}" 
+                            placeholder="Adicione um passo" 
+                            required>
                     </div>
                 {% else %}
                     <div class="div-preparation">
-                        <input type="text" name="preparation[]" value="{{ prep }}" placeholder="Adicione um passo">
+                        <input 
+                            type="text" 
+                            name="preparation[]" 
+                            value="{{ prep }}" 
+                            placeholder="Adicione um passo" 
+                            required>
                     </div>
                 {% endfor %}
             </div>
@@ -63,7 +93,11 @@
 
         <div>
             <p class="title">Informações adicionais</p>
-            <textarea name="information" cols="30" rows="10" placeholder="Escreva algo sobre a receita :)">{{ recipe.information }}</textarea>
+            <textarea 
+                name="information" 
+                cols="30" rows="10" 
+                placeholder="Escreva algo sobre a receita :)" required>{{ recipe.information }}</textarea>
         </div>
     </div>
 </section>
+<script src="/js/addnew.js"></script>

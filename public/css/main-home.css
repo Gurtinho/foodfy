@@ -3,7 +3,7 @@
 @import 'home/mobile.css';
 
 /* error */
-@import 'error.css';
+@import 'error/error.css';
 
 .active {
   font-weight: bold;

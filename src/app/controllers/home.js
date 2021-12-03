@@ -52,13 +52,13 @@ module.exports = {
             Search.findRecipe(search, ( recipes ) => {
                 Search.findChef(search, (chefs) => {
                     if (chefs && recipes == '') {
-                        return res.render('home/search', { search, chefs, recipes })
+                        return res.render('home/search', { search })
                     }
                     return res.render('home/search', { search, chefs, recipes })
                 })
             })
         } else {
-            return res.redirect('/')
+            return
         }
     }
 }

@@ -84,5 +84,27 @@ module.exports = {
             }
             return callback()
         })
+    },
+
+    paginate(params) {
+        const { limit, offset, callback } = params
+
+        // contar os registros
+        let total = `(SELECT count(*) FROM chefs) AS total`
+        
+        const query = `
+            SELECT chefs.*, ${total},
+            count(recipes) AS total_recipes
+            FROM chefs
+            LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
+            GROUP BY chefs.id LIMIT $1 OFFSET $2
+        `
+
+        db.query(query, [limit, offset], ( err, results ) => {
+            if (err) {
+                throw `database error ${err}`
+            }
+            callback(results.rows)
+        })
     }
 }

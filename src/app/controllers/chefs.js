@@ -3,9 +3,27 @@ const Recipe = require('../models/recipe')
 
 module.exports = {
     index(req, res) {
-        Chef.all(( chefs ) => {
-            return res.render('admin/chefs/index', { chefs })
-        })
+        let { page, limit } = req.query
+        page = page || 1
+        limit = limit || 12
+        let offset = limit * (page - 1)
+
+        const params = {
+            page,
+            limit,
+            offset,
+            callback(chefs) {
+                const pagination = {
+                    total: Math.ceil(chefs[0].total / limit),
+                    page,
+                }
+                return res.render('admin/chefs/index', { chefs, pagination })
+            }
+        }
+        Chef.paginate(params)
+        // Chef.all(( chefs ) => {
+        //     return res.render('admin/chefs/index', { chefs })
+        // })
     },
 
     create(req, res) {

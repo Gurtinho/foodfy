@@ -48,12 +48,18 @@ color: white;
 }
 
 /*========== INDEX ==========*/
+.fields-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .fields-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 940px;
   margin-top: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
 
 .fields-item {
@@ -345,4 +351,25 @@ color: white;
 
 .ativo {
   display: block;
+}
+
+
+/*========= pagination =========*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pagination a,
+.pagination span {
+  text-decoration: none;
+  color: #6558C3;
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+.pagination a:hover {
+  filter: brightness(0.3);
+  border-bottom: 1px solid #6558C3;
 }

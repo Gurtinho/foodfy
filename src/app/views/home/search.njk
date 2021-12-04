@@ -39,6 +39,10 @@
             </div>
         {% endfor %}
         </div>
+
+        {# pagination #}
+        <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></div>
+
     </section>
 
     <div class="search-recipes">
@@ -62,5 +66,9 @@
                 </div>
             {% endfor %}
         </div>
+
+        {# pagination #}
+        <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></div>
+
     </section>
 {% endblock %}

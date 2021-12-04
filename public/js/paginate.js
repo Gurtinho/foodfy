@@ -1,4 +1,43 @@
-function pagination() {
-    
+function paginate(selectedPage, totalPage) {
+    // paginate
+    let pages = [],
+        oldPage
+
+    for (let currentPage = 1; currentPage <= totalPage; currentPage++) {
+
+        const firstAndLastPages = currentPage == 1 || currentPage == totalPage
+        const currentPageAfter = currentPage <= selectedPage + 2
+        const currentPageBefore = currentPage >= selectedPage - 2
+
+        if (firstAndLastPages || currentPageAfter && currentPageBefore) {
+            if (oldPage && currentPage - oldPage > 2) {
+                pages.push('...')
+            }
+            if (oldPage && currentPage - oldPage == 2) {
+                pages.push(oldPage + 1)
+            }
+            pages.push(currentPage)
+
+            oldPage = currentPage
+        }
+    }
+    return pages
 }
-pagination()
+paginate()
+
+const pagination = document.querySelector('.pagination')
+const page = +pagination.dataset.page
+const total = +pagination.dataset.total
+const pages = paginate(page, total)
+
+let elements = ''
+
+for (let page of pages) {
+    if (String(page).includes('...')) {
+        elements += `<span>${page}</span>`
+    } else {
+        elements += `<a href="?page=${page}">${page}</a>`
+    }
+}
+
+pagination.innerHTML = elements

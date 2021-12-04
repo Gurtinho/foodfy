@@ -16,6 +16,8 @@ body {
   width: 100%;
   height: 80px;
   font-family: 'Roboto', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .div-header {
   display: flex;
@@ -232,8 +234,9 @@ footer p {
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: auto;
-  margin-bottom: 70px;
 }
 .acess-content {
   display: grid;
@@ -366,6 +369,7 @@ footer p {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .fields-grid-chefs {
   display: grid;
@@ -495,4 +499,24 @@ footer p {
 }
 .ativo {
   display: block;
+}
+
+/*=========== pagination ===========*/
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pagination a,
+.pagination span {
+  text-decoration: none;
+  color: #6558C3;
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+.pagination a:hover {
+  filter: brightness(0.3);
+  border-bottom: 1px solid #6558C3;
 }

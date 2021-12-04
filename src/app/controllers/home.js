@@ -8,21 +8,66 @@ module.exports = {
     },
 
     home(req, res) {
-        Recipe.all(( recipes ) => {
-            return res.render('home/home', { recipes })
-        })
+        let { page, limit } = req.query
+        page = page || 1
+        limit = limit || 6
+        let offset = limit * (page - 1)
+
+        const params = {
+            page,
+            limit,
+            offset,
+            callback(recipes) {
+                const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
+                    page,
+                }
+                return res.render('home/home', { recipes, pagination })
+            }
+        }
+        Recipe.paginate(params)
     },
 
     recipes(req, res) {
-        Recipe.all(( recipes ) => {
-            return res.render('home/recipes', { recipes })
-        })
+        let { page, limit } = req.query
+        page = page || 1
+        limit = limit || 6
+        let offset = limit * (page - 1)
+
+        const params = {
+            page,
+            limit,
+            offset,
+            callback(recipes) {
+                const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
+                    page,
+                }
+                return res.render('home/recipes', { recipes, pagination })
+            }
+        }
+        Recipe.paginate(params)
     },
 
     chefs(req, res) {
-        Chef.all(( chefs ) => {
-            return res.render('home/chefs', { chefs })
-        })
+        let { page, limit } = req.query
+        page = page || 1
+        limit = limit || 12
+        let offset = limit * (page - 1)
+
+        const params = {
+            page,
+            limit,
+            offset,
+            callback(chefs) {
+                const pagination = {
+                    total: Math.ceil(chefs[0].total / limit),
+                    page,
+                }
+                return res.render('home/chefs', { chefs, pagination })
+            }
+        }
+        Chef.paginate(params)
     },
 
     show(req, res) {
@@ -46,9 +91,25 @@ module.exports = {
     },
 
     search(req, res) {
-        // pesquisa as receitas e os chefs
-        const { search } = req.query
-        if ( search ) {
+        const { search, page, limit } = req.query
+        if (search) {
+            // page = page || 1
+            // limit = limit || 6
+            // let offset = limit * (page - 1)
+
+            // const params = {
+            //     page,
+            //     limit,
+            //     offset,
+            //     callback(recipes) {
+            //         const pagination = {
+            //             total: Math.ceil(recipes[0].total / limit),
+            //             page,
+            //         }
+            //         return res.render('admin/recipes/index', { recipes, pagination })
+            //     }
+            // }
+            // Recipe.paginate(params)
             Search.findRecipe(search, ( recipes ) => {
                 Search.findChef(search, (chefs) => {
                     if (chefs && recipes == '') {

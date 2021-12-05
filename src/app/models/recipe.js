@@ -109,10 +109,13 @@ module.exports = {
 
     recipeFind(params) {
         let { id, limit, offset, callback } = params
+
+        let total = `(SELECT count(*) FROM recipes WHERE recipes.chef_id = ${id}) AS total`
         
         let query = `
-            SELECT recipes.*,
-            chefs.name AS chefs_name FROM recipes
+            SELECT recipes.*, ${total}, 
+            chefs.name AS chefs_name
+            FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
             WHERE chefs.id = ${id} 
             ORDER BY id DESC

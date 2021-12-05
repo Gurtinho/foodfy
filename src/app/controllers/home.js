@@ -92,7 +92,7 @@ module.exports = {
                 offset,
                 callback(recipes) {
                     const pagination = {
-                        total: Math.ceil(recipes.total / limit),
+                        total: Math.ceil(recipes[0].total / limit),
                         page,
                     }
                     return res.render('home/show', { chef, recipes, pagination })

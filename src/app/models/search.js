@@ -37,30 +37,19 @@ module.exports = {
 
     paginate(params) {
         const { search, limit, offset, callback } = params
-
-        // contar os registros
-        let query = ''
-        let searchQuery = ''
-        let total = `(SELECT count(*) FROM recipes) AS total`
         
-        if (search) {
+        let searchQuery = `
+            WHERE recipes.title ILIKE '%${search}%'
+            OR chefs.name ILIKE '%${search}%'
+        `
 
-            searchQuery = `
-                WHERE recipes.title ILIKE '%${search}%'
-                WHERE chefs.name ILIKE '%${search}%'
-            `
-            total = `(SELECT count(*) FROM recipes
-            ${searchQuery}
-            ) AS total
-            `
-        }
-
-        query = `
-            SELECT recipes.*, ${total},
+        let query = `
+            SELECT recipes.*,
+            (SELECT count(*) FROM recipes ${searchQuery}) AS total,
             chefs.name AS chefs_name
             FROM recipes
-            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-            ${searchQuery}
+            WHERE recipes.title ILIKE '%${search}%'
+            OR chefs.name ILIKE '%${search}%'
             ORDER BY id DESC
             LIMIT $1 OFFSET $2
         `

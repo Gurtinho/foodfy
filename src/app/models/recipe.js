@@ -107,26 +107,32 @@ module.exports = {
         })
     },
 
-    recipeFind(id, callback) {
-        const recipe = `
-            SELECT recipes.* FROM recipes
-            LEFT JOIN chefs ON (recipes.chef_id = chefs.id) 
-            WHERE chefs.id = $1`
-        db.query(recipe, [id], ( err, results ) => {
+    recipeFind(params) {
+        let { id, limit, offset, callback } = params
+        
+        let query = `
+            SELECT recipes.*,
+            chefs.name AS chefs_name FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            WHERE chefs.id = ${id} 
+            ORDER BY id DESC
+            LIMIT $1 OFFSET $2
+        `
+        db.query(query, [limit, offset], ( err, results ) => {
             if (err) {
                 throw `database error ${err}`
             }
             callback(results.rows)
         })
+
     },
 
     paginate(params) {
-        const { limit, offset, callback } = params
+        let { limit, offset, callback } = params
 
-        // contar os registros
         let total = `(SELECT count(*) FROM recipes) AS total`
         
-        const query = `
+        let query = `
             SELECT recipes.*, ${total},
             chefs.name AS chefs_name
             FROM recipes

@@ -1,7 +1,7 @@
 function paginate(selectedPage, totalPage) {
     // paginate
-    let pages = [],
-        oldPage
+    let pages = []
+    let oldPage
 
     for (let currentPage = 1; currentPage <= totalPage; currentPage++) {
 
@@ -26,6 +26,7 @@ function paginate(selectedPage, totalPage) {
 paginate()
 
 const pagination = document.querySelector('.pagination')
+const search = pagination.dataset.search
 const page = +pagination.dataset.page
 const total = +pagination.dataset.total
 const pages = paginate(page, total)
@@ -36,7 +37,11 @@ for (let page of pages) {
     if (String(page).includes('...')) {
         elements += `<span>${page}</span>`
     } else {
-        elements += `<a href="?page=${page}">${page}</a>`
+        if ( search ) {
+            elements += `<a href="?search=${search}&page=${page}">${page}</a>`
+        } else {
+            elements += `<a href="?page=${page}">${page}</a>`
+        }
     }
 }
 

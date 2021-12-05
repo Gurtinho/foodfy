@@ -236,11 +236,13 @@ footer p {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: auto;
+  height: 550px;
+  margin-bottom: auto;
 }
 .acess-content {
   display: grid;
   width: 940px;
+  height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 0;
   grid-gap: 15px;
@@ -375,6 +377,7 @@ footer p {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   width: 940px;
+  height: 350px;
   margin-top: 20px;
   margin-bottom: 30px;
 }
@@ -502,10 +505,14 @@ footer p {
 }
 
 /*=========== pagination ===========*/
-.pagination {
+.container-pagination {
   display: flex;
+  bottom: 0;
+  margin-bottom: 0;
+  margin-top: auto;
   justify-content: center;
-  margin-bottom: 30px;
+  width: 100%;
+  min-height: 62px;
 }
 
 .pagination a,
@@ -518,5 +525,4 @@ footer p {
 
 .pagination a:hover {
   filter: brightness(0.3);
-  border-bottom: 1px solid #6558C3;
 }

@@ -71,13 +71,34 @@ module.exports = {
     },
 
     show(req, res) {
-        Chef.find(req.params.id, ( chef ) => {
+        const id = req.params.id
+
+        Chef.find(id, ( chef ) => {
             if ( !chef ) {
                 return res.send('chef not found')
             }
-            Recipe.recipeFind(req.params.id, ( recipe ) => {
-                return res.render('home/show', { chef, recipes: recipe })
-            })
+
+            let { page, limit } = req.query
+
+            page = page || 1
+            limit = limit || 6
+            let offset = limit * (page - 1)
+            
+
+            const params = {
+                id,
+                page,
+                limit,
+                offset,
+                callback(recipes) {
+                    const pagination = {
+                        total: Math.ceil(recipes.total / limit),
+                        page,
+                    }
+                    return res.render('home/show', { chef, recipes, pagination })
+                }
+            }
+            Recipe.recipeFind(params)
         })
     },
 
@@ -91,33 +112,35 @@ module.exports = {
     },
 
     search(req, res) {
-        const { search, page, limit } = req.query
+        let { search, page, limit } = req.query
         if (search) {
-            // page = page || 1
-            // limit = limit || 6
-            // let offset = limit * (page - 1)
+            page = page || 1
+            limit = limit || 6
+            let offset = limit * (page - 1)
 
-            // const params = {
-            //     page,
-            //     limit,
-            //     offset,
-            //     callback(recipes) {
-            //         const pagination = {
-            //             total: Math.ceil(recipes[0].total / limit),
-            //             page,
-            //         }
-            //         return res.render('admin/recipes/index', { recipes, pagination })
-            //     }
-            // }
-            // Recipe.paginate(params)
-            Search.findRecipe(search, ( recipes ) => {
-                Search.findChef(search, (chefs) => {
-                    if (chefs && recipes == '') {
-                        return res.render('home/search', { search })
+            const params = {
+                search,
+                page,
+                limit,
+                offset,
+                callback(recipes) {
+                    const pagination = {
+                        total: Math.ceil(recipes[0].total / limit),
+                        page,
                     }
-                    return res.render('home/search', { search, chefs, recipes })
-                })
-            })
+                    return res.render('home/search', { search, recipes, pagination })
+                },
+            }
+            Recipe.paginate(params)
+            
+            // Search.findRecipe(search, ( recipes ) => {
+            //     Search.findChef(search, (chefs) => {
+            //         if (chefs && recipes == '') {
+            //             return res.render('home/search', { search })
+            //         }
+            //         return res.render('home/search', { search, chefs, recipes })
+            //     })
+            // })
         } else {
             return
         }

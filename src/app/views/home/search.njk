@@ -11,7 +11,7 @@
         <p>Buscando por "{{ search }}"</p>
     </div>
 
-    <div class="search-chefs">
+    {# <div class="search-chefs">
         <p>Chefs</p>
     </div>
 
@@ -40,10 +40,10 @@
         {% endfor %}
         </div>
 
-        {# pagination #}
+
         <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></div>
 
-    </section>
+    </section> #}
 
     <div class="search-recipes">
         <p>Receitas</p>
@@ -68,7 +68,10 @@
         </div>
 
         {# pagination #}
-        <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></div>
+        <div class="pagination" 
+            data-page={{pagination.page}} 
+            data-total={{pagination.total}}
+            data-search="{{search}}"></div>
 
     </section>
 {% endblock %}

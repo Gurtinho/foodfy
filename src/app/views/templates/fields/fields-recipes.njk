@@ -2,12 +2,6 @@
     <div class="div-fields-creation">
         <div>
             <p class="title">Imagem da receita</p>
-            <input 
-                type="url" 
-                name="image" 
-                value="{{ recipe.image }}" 
-                placeholder="Url da imagem" 
-                required>
         </div>
 
         <div>
@@ -23,7 +17,7 @@
         <div>
             <p class="title">Selecione o chef</p>
             <select name="chef">
-                {% for chef in chefOptions %}
+                {% for chef in chefsOptions %}
                 <option value="{{ chef.id }}" {% if recipes.chef_id == chef.id %} selected {% endif %}>
                     {{ chef.name }}
                 </option>

@@ -13,7 +13,7 @@ module.exports = {
             offset,
             callback(recipes) {
                 const pagination = {
-                    total: Math.ceil(recipes[0].total / limit),
+                    // total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
                 return res.render('admin/recipes/index', { recipes, pagination })
@@ -22,13 +22,15 @@ module.exports = {
         Recipe.paginate(params)
     },
 
-    create(req, res) {
-        Recipe.chefFindOption(( options ) => {
-            return res.render('admin/recipes/create', { chefOptions: options })
-        })
+    async create(req, res) {
+        let findChef = await Recipe.chefFindOption()
+        const chefsOptions = findChef.rows
+
+        console.log(chefsOptions)
+        return res.render('admin/recipes/create', { chefsOptions })
     },
 
-    post(req, res) {
+    async post(req, res) {
         const keys = Object.keys(req.body)
 
         for ( let key of keys ) {
@@ -37,10 +39,10 @@ module.exports = {
             }
         }
 
-        Recipe.create(req.body, ( recipe ) => {
-            return res.redirect(`/admin/recipes/${recipe.id}`)
-        })
-        
+        let results = await Recipe.create(req.body)
+        const recipes = results.rows[0]
+
+        return res.redirect(`admin/recipes/${recipes.id}`)
     },
     
     show(req, res) {

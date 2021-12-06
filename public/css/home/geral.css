@@ -62,9 +62,11 @@ body {
 .search form div input.fill {
   border: 1px solid rgb(226, 61, 61);
   box-shadow: 0px 0px 2px 0px rgb(226, 61, 61);
+  transition: 200ms;
 }
 .search form div input.fill::placeholder {
   color: rgb(226, 61, 61);
+  transition: 200ms;
 }
 .search form div button {
   background-color: #6558C3;

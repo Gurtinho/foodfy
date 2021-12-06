@@ -19,7 +19,7 @@ module.exports = {
             offset,
             callback(recipes) {
                 const pagination = {
-                    total: Math.ceil(recipes[0].total / limit),
+                    // total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
                 return res.render('home/home', { recipes, pagination })
@@ -40,7 +40,7 @@ module.exports = {
             offset,
             callback(recipes) {
                 const pagination = {
-                    total: Math.ceil(recipes[0].total / limit),
+                    // total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
                 return res.render('home/recipes', { recipes, pagination })
@@ -61,7 +61,7 @@ module.exports = {
             offset,
             callback(chefs) {
                 const pagination = {
-                    total: Math.ceil(chefs[0].total / limit),
+                    // total: Math.ceil(chefs[0].total / limit),
                     page,
                 }
                 return res.render('home/chefs', { chefs, pagination })
@@ -92,7 +92,7 @@ module.exports = {
                 offset,
                 callback(recipes) {
                     const pagination = {
-                        total: Math.ceil(recipes[0].total / limit),
+                        // total: Math.ceil(recipes[0].total / limit),
                         page,
                     }
                     return res.render('home/show', { chef, recipes, pagination })
@@ -128,10 +128,9 @@ module.exports = {
                     return res.render('home/search', { search })
                 }
                 const pagination = {
-                    total: Math.ceil(recipes[0].total / limit),
+                    // total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
-                console.log(recipes[0].total / limit)
                 return res.render('home/search', { search, recipes, pagination })
             },
         }

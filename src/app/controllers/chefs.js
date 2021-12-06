@@ -14,7 +14,7 @@ module.exports = {
             offset,
             callback(chefs) {
                 const pagination = {
-                    total: Math.ceil(chefs[0].total / limit),
+                    // total: Math.ceil(chefs[0].total / limit),
                     page,
                 }
                 return res.render('admin/chefs/index', { chefs, pagination })
@@ -27,7 +27,7 @@ module.exports = {
         return res.render('admin/chefs/create')
     },
     
-    post(req, res) {
+    async post(req, res) {
         const keys = Object.keys(req.body)
 
         for ( let key of keys ) {
@@ -36,9 +36,10 @@ module.exports = {
             }
         }
 
-        Chef.create(req.body, ( chef ) => {
-            return res.redirect(`/admin/chefs/${chef.id}`)
-        })
+        const results = await Chef.create(req.body)
+        const chefs = results.rows[0]
+
+        return res.redirect(`/admin/chefs/${chefs.id}`)
     },
 
     show(req, res) {
@@ -62,7 +63,7 @@ module.exports = {
                 offset,
                 callback(recipes) {
                     const pagination = {
-                        total: Math.ceil(recipes[0].total / limit),
+                        // total: Math.ceil(recipes[0].total / limit),
                         page,
                     }
                     return res.render('admin/chefs/show', { chef, recipes, pagination })

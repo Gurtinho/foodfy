@@ -21,9 +21,6 @@ module.exports = {
             }
         }
         Chef.paginate(params)
-        // Chef.all(( chefs ) => {
-        //     return res.render('admin/chefs/index', { chefs })
-        // })
     },
 
     create(req, res) {
@@ -46,13 +43,32 @@ module.exports = {
 
     show(req, res) {
         const id = req.params.id
+
         Chef.find(id, ( chef ) => {
             if ( !chef ) {
                 return res.send('chef not found')
             }
-            Recipe.recipeFind(id, ( recipes ) => {
-                return res.render('admin/chefs/show', { chef, recipes })
-            })
+
+            let { page, limit } = req.query
+
+            page = page || 1
+            limit = limit || 6
+            let offset = limit * (page - 1)
+
+            const params = {
+                id,
+                page,
+                limit,
+                offset,
+                callback(recipes) {
+                    const pagination = {
+                        total: Math.ceil(recipes[0].total / limit),
+                        page,
+                    }
+                    return res.render('admin/chefs/show', { chef, recipes, pagination })
+                }
+            }
+            Recipe.recipeFind(params)
         })
     },
 

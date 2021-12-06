@@ -131,16 +131,8 @@ module.exports = {
                     return res.render('home/search', { search, recipes, pagination })
                 },
             }
-            Recipe.paginate(params)
-            
-            // Search.findRecipe(search, ( recipes ) => {
-            //     Search.findChef(search, (chefs) => {
-            //         if (chefs && recipes == '') {
-            //             return res.render('home/search', { search })
-            //         }
-            //         return res.render('home/search', { search, chefs, recipes })
-            //     })
-            // })
+            Search.paginate(params)
+
         } else {
             return
         }

@@ -41,20 +41,21 @@ module.exports = {
         let searchQuery = `
             WHERE recipes.title ILIKE '%${search}%'
             OR chefs.name ILIKE '%${search}%'
-        `
+            `
+        let total = `(SELECT count(*) FROM recipes ${searchQuery}) AS total`
 
         let query = `
             SELECT recipes.*,
-            (SELECT count(*) FROM recipes ${searchQuery}) AS total,
+            ${total},
             chefs.name AS chefs_name
             FROM recipes
-            WHERE recipes.title ILIKE '%${search}%'
-            OR chefs.name ILIKE '%${search}%'
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            ${searchQuery}
             ORDER BY id DESC
-            LIMIT $1 OFFSET $2
-        `
+            LIMIT ${limit} OFFSET ${offset}
+            `
 
-        db.query(query, [limit, offset], ( err, results ) => {
+        db.query(query, ( err, results ) => {
             if (err) {
                 throw `database error ${err}`
             }

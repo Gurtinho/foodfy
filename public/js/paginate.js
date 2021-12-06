@@ -39,6 +39,7 @@ for (let page of pages) {
     } else {
         if ( search ) {
             elements += `<a href="?search=${search}&page=${page}">${page}</a>`
+            console.log('tem search')
         } else {
             elements += `<a href="?page=${page}">${page}</a>`
         }

@@ -45,9 +45,9 @@
 
     </section> #}
 
-    <div class="search-recipes">
+    {# <div class="search-recipes">
         <p>Receitas</p>
-    </div>
+    </div> #}
 
     <section class="acessadas">
         <div class="acess-content">
@@ -67,11 +67,12 @@
             {% endfor %}
         </div>
 
-        {# pagination #}
-        <div class="pagination" 
-            data-page={{pagination.page}} 
-            data-total={{pagination.total}}
-            data-search="{{search}}"></div>
-
+        <div class="container-pagination">
+            <div class="pagination"  
+                data-page={{pagination.page}} 
+                data-total={{pagination.total}}
+                data-search={{search}}>
+            </div>
+        </div>
     </section>
 {% endblock %}

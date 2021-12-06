@@ -20,6 +20,7 @@ body {
   width: 940px;
   margin-top: 30px;
   margin-bottom: 30px;
+  height: 300px;
 }
 
 .fields-item-chefs {
@@ -359,7 +360,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 940px;
-  margin-bottom: 100px;
+  height: 300px;
+  margin-bottom: 30px;
 }
 
 .fields-item-show-chef {
@@ -413,10 +415,14 @@ body {
 
 
 /*========= pagination =========*/
-.pagination {
+.container-pagination {
   display: flex;
+  bottom: 0;
+  margin-bottom: 0;
+  margin-top: auto;
   justify-content: center;
-  margin-bottom: 30px;
+  width: 100%;
+  min-height: 62px;
 }
 
 .pagination a,
@@ -429,7 +435,6 @@ body {
 
 .pagination a:hover {
   filter: brightness(0.3);
-  border-bottom: 1px solid #6558C3;
 }
 
 

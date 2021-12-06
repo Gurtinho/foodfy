@@ -66,6 +66,7 @@ color: white;
 .fields-item {
   display: grid;
   grid-template-columns: 40% 60%;
+  align-items: center;
   width: 470px;
   margin-bottom: 20px;
   height: 80px;

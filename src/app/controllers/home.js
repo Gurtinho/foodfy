@@ -113,28 +113,28 @@ module.exports = {
 
     search(req, res) {
         let { search, page, limit } = req.query
-        if (search) {
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
 
-            const params = {
-                search,
-                page,
-                limit,
-                offset,
-                callback(recipes) {
-                    const pagination = {
-                        total: Math.ceil(recipes[0].total / limit),
-                        page,
-                    }
-                    return res.render('home/search', { search, recipes, pagination })
-                },
-            }
-            Search.paginate(params)
+        page = page || 1
+        limit = limit || 6
+        let offset = limit * (page - 1)
 
-        } else {
-            return
+        const params = {
+            search,
+            page,
+            limit,
+            offset,
+            callback(recipes) {
+                if (recipes == '') {
+                    return res.render('home/search', { search })
+                }
+                const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
+                    page,
+                }
+                console.log(recipes[0].total / limit)
+                return res.render('home/search', { search, recipes, pagination })
+            },
         }
+        Search.paginate(params)
     }
 }

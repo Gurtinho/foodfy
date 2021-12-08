@@ -216,18 +216,27 @@ color: white;
   color: #111;
 }
 
-.div-fields-creation div input,
-.div-fields-creation div select,
-.div-fields-creation div textarea {
-  display: inline-block;
+.div-fields-creation input,
+.div-fields-creation select,
+.div-fields-creation textarea {
   box-sizing: border-box;
-  width: 100%;
   padding: 10px;
+  width: 100%;
   outline: none;
   cursor: pointer;
   border-radius: 4px;
   border: 1px solid #dddddd;
   resize: none;
+}
+
+
+.div-fields-creation input.active {
+  border-color: #e61f4a;
+  color: #e61f4a;
+}
+
+.div-fields-creation input.active::placeholder {
+  color: #e61f4a;
 }
 
 .ingredients,
@@ -237,33 +246,52 @@ color: white;
   margin-top: 10px;
 }
 
-.div-add-remove {
+.add-remove {
   margin-top: 10px;
 }
 
 .add-ingredient,
 .add-preparation {
-  color: #6558C3;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
   cursor: pointer;
+  background-color: #a8a0e9;
+  transition: 200ms ease-in-out;
+} 
+
+.add-ingredient:hover,
+.add-preparation:hover {
+  background-color: #6558C3;
+}
+
+.add-ingredient div,
+.add-preparation div {
+  display: flex;
+  align-items: center;
 }
 
 .remove-ingredient, 
 .remove-preparation {
-  color: rgb(199, 21, 74);
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
   cursor: pointer;
-  margin-left: 20px;
+  background-color: rgb(209, 127, 152);
+  transition: 200ms ease-in-out;
 }
 
-.remove-p,
-.remove-p {
-  display: none;
-  margin-top: 5px;
-  color: #e61f4a;
+.remove-ingredient:hover, 
+.remove-preparation:hover {
+  background-color: #e61f4a;
 }
 
-.ativo,
-.ativo {
-  display: block;
+.remove-ingredient div, 
+.remove-preparation div {
+  display: flex;
+  align-items: center;
 }
 
 /*============ FOOD ============*/

@@ -2,19 +2,14 @@ const db = require('../../config/db')
 const { date } = require('../../libs/utils')
 
 module.exports = {
-    all(callback) {
+    all() {
         const select = `
             SELECT chefs.*, count(recipes) AS total_recipes
             FROM chefs 
             LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
             GROUP BY chefs.id
             ORDER BY total_recipes DESC`
-        db.query(select, ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            callback(results.rows)
-        })
+        return db.query(select)
     },
 
     create(data) {
@@ -33,57 +28,42 @@ module.exports = {
             date(Date.now()).iso
         ]
 
-        db.query(query, values)
+        return db.query(query, values)
     },
     
-    find(id, callback) {
+    find(id) {
         const select = `
             SELECT chefs.*, count(recipes) AS total_recipes
             FROM chefs 
             LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
             WHERE chefs.id = $1
             GROUP BY chefs.id`
-        db.query(select, [id], ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            callback(results.rows[0])
-        })
+        return db.query(select, [id])
     },
 
-    update(data, callback) {
+    update(data) {
         const query = `
             UPDATE chefs SET
                 name = ($1),
-                avatar_url = ($2)
+                file_id = ($2)
             WHERE id = $3
         `
         const values = [
             data.name,
-            data.avatar_url,
+            1,
             data.id
         ]
         
-        db.query(query, values, ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            return callback()
-        })
+        return db.query(query, values)
     },
 
-    delete(id, callback) {
+    delete(id) {
         const query = `DELETE FROM chefs WHERE id = $1`
-        db.query(query, [id], ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            return callback()
-        })
+        db.query(query, [id])
     },
 
     paginate(params) {
-        const { limit, offset, callback } = params
+        const { limit, offset } = params
 
         // contar os registros
         let total = `(SELECT count(*) FROM chefs) AS total`
@@ -96,11 +76,6 @@ module.exports = {
             GROUP BY chefs.id LIMIT $1 OFFSET $2
         `
 
-        db.query(query, [limit, offset], ( err, results ) => {
-            if (err) {
-                throw `database error ${err}`
-            }
-            callback(results.rows)
-        })
+        return db.query(query, [limit, offset])
     }
 }

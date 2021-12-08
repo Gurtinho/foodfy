@@ -1,10 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
 * {
   margin: 0 auto;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   height: 100%;
+}
+
+/*========== HEADER ==========*/
+.header-recipes {
+  display: flex;
+  width: 100%;
+  height:80px;
+  font-family: 'Roboto', sans-serif;
+  background-color: black;
+}
+
+.div-header-recipes {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 940px;
+  background-color: black;
+}
+
+.linkhome-recipes {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  margin-left: 120px;
+  width: 150px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #999;
+  font-size: 16px;
+  margin-right: 25px;
+}
+
+.links a.active {
+font-weight: bold;
+color: white;
 }
 
 /*=========== INDEX ===========*/
@@ -219,6 +261,51 @@ body {
   cursor: pointer;
 }
 
+/*============ FIELDS ===========*/
+.fields-creation {
+  display: flex;
+  width: 100%;
+}
+
+.div-fields-creation {
+  width: 940px;
+  margin-bottom: 100px;
+}
+
+.div-fields-creation {
+  margin-top: 30px;
+}
+
+.title {
+  margin-top: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #111;
+}
+
+.div-fields-creation input,
+.div-fields-creation select,
+.div-fields-creation textarea {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #dddddd;
+  resize: none;
+}
+
+
+.div-fields-creation input.active {
+  border-color: #e61f4a;
+  color: #e61f4a;
+}
+
+.div-fields-creation input.active::placeholder {
+  color: #e61f4a;
+}
 
 /*============ CHEFS ============*/
 /* food page */

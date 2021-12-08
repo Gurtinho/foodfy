@@ -1,18 +1,17 @@
+const { off } = require('../../config/db')
 const db = require('../../config/db')
 const { date } = require('../../libs/utils')
 
 module.exports = {
-    all(callback) {
-        const select = `SELECT recipes.*, chefs.name AS chefs_name 
+    all(id) {
+        const select = `
+            SELECT recipes.*,
+            chefs.name AS chefs_name
             FROM recipes
             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            WHERE recipes.id = $1
             ORDER BY id DESC`
-        db.query(select, ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            callback(results.rows)
-        })
+        return db.query(select, [id])
     },
 
     create(data) {
@@ -39,55 +38,37 @@ module.exports = {
         return db.query(query, values)
     },
     
-    find(id, callback) {
-        const select = `SELECT recipes.*, chefs.name AS chefs_name 
-            FROM recipes
-            LEFT JOIN chefs ON (recipes.chef_id = chefs.id) 
-            WHERE recipes.id = $1`
-        db.query(select, [id], ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            callback(results.rows[0])
-        })
+    find(id) {
+        const select = `
+            SELECT * FROM recipes WHERE id = $1`
+        
+        return db.query(select, [id])
     },
 
-    update(data, callback) {
+    update(data) {
         const query = `
             UPDATE recipes SET
                 chef_id = ($1),
-                image = ($2),
-                title = ($3),
-                ingredients = ($4),
-                preparation = ($5),
-                information = ($6)
-            WHERE id = $7
+                title = ($2),
+                ingredients = ($3),
+                preparation = ($4),
+                information = ($5)
+            WHERE id = $6
         `
         const values = [
             data.chef,
-            data.image,
             data.title,
             data.ingredients,
             data.preparation,
             data.information,
             data.id
         ]
-        db.query(query, values, ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            return callback()
-        })
+        return db.query(query, values)
     },
 
-    delete(id, callback) {
+    delete(id) {
         const query = `DELETE FROM recipes WHERE id = $1`
-        db.query(query, [id], ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            return callback()
-        })
+        return db.query(query, [id])
     },
 
     chefFindOption() {
@@ -96,30 +77,25 @@ module.exports = {
     },
 
     recipeFind(params) {
-        let { id, limit, offset, callback } = params
+        let { id, limit, offset } = params
 
         let total = `(SELECT count(*) FROM recipes WHERE recipes.chef_id = ${id}) AS total`
-        
-        let query = `
-            SELECT recipes.*, ${total}, 
-            chefs.name AS chefs_name
-            FROM recipes
-            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-            WHERE chefs.id = ${id} 
-            ORDER BY id DESC
-            LIMIT $1 OFFSET $2
-        `
-        db.query(query, [limit, offset], ( err, results ) => {
-            if (err) {
-                throw `database error ${err}`
-            }
-            callback(results.rows)
-        })
 
+        let query = `
+                SELECT recipes.*, ${total}, 
+                chefs.name AS chefs_name
+                FROM recipes
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                WHERE chefs.id = ${id}
+                ORDER BY id DESC
+                LIMIT $1 OFFSET $2
+            `
+        
+        return db.query(query, [limit, offset])
     },
 
     paginate(params) {
-        let { limit, offset, callback } = params
+        let { limit, offset } = params
 
         let total = `(SELECT count(*) FROM recipes) AS total`
         
@@ -132,11 +108,6 @@ module.exports = {
             LIMIT $1 OFFSET $2
         `
 
-        db.query(query, [limit, offset], ( err, results ) => {
-            if (err) {
-                throw `database error ${err}`
-            }
-            callback(results.rows)
-        })
+        return db.query(query, [limit, offset])
     }
 }

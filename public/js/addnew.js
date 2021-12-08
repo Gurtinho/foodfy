@@ -9,40 +9,46 @@ function addInfo() {
     const buttonRemovePreparation = document.querySelector('.remove-preparation')
 
     // ADD NEW FIELDS
-    function addNewFields (field) {
-        const newField = field.lastElementChild
-        if (newField.lastElementChild.value == '') {
-            newField.lastElementChild.style.color = '#e61f4a'
-            newField.lastElementChild.style.borderColor = '#e61f4a'
-            setTimeout(() => {
-                newField.lastElementChild.style.borderColor = '#ddd'
-                newField.lastElementChild.style.color = '#ddd'
-            }, 1000)
-            return false
+    function addNewFields(field) {
+        const fChild = field.lastElementChild
+        if (fChild.lastElementChild.value == '') {
+                fChild.lastElementChild.classList.add('active')
+                setTimeout(() => {
+                    fChild.lastElementChild.classList.remove('active')
+                }, 1000)
+                return false
         }
-        const fieldClone = newField.cloneNode(true)
+        // for (let fChild of field.children) {
+            // if (fChild.children[0].value == '') {
+            //     fChild.children[0].classList.add('active')
+            //     setTimeout(() => {
+            //         fChild.children[0].classList.remove('active')
+            //     }, 1000)
+            //     return false
+            // }
+        // }
+        const clonefield = field.lastElementChild
+        const fieldClone = clonefield.cloneNode(true)
         field.appendChild(fieldClone)
         fieldClone.lastElementChild.value = ''
-        buttonRemoveIngredient.style.visibility = 'visible'
     }
 
     // REMOVE FIELDS
-    function removeNewFields (field) {
-        const lastField = field.lastElementChild
-        const firstField = field.firstElementChild
-        if (lastField.lastElementChild.value == '' && firstField.firstElementChild.value != '') {
-            lastField.remove()
-            field.nextElementSibling.classList.remove('ativo')
+    function removeNewFields(field) {
+        if (field.children.length > 1) {
+            for (let fChild of field.children) {
+                if (fChild.children[0].value == '') {
+                    fChild.remove()
+                }
+            }
+        } else if (field.children.length == 1) {
+            for (let fChild of field.children) {
+                fChild.children[0].classList.add('active')
+                setTimeout(() => {
+                    fChild.children[0].classList.remove('active')
+                }, 1000)
+            }
         }
-        if (lastField.lastElementChild.value != '') {
-            field.nextElementSibling.classList.add('ativo')
-            lastField.lastElementChild.style.borderColor = '#e61f4a'
-        }
-        // auto remove warnings
-        setTimeout(() => {
-            field.nextElementSibling.classList.remove('ativo')
-            lastField.lastElementChild.style.borderColor = '#ddd'
-        }, 1000)
     }
 
     buttonIngredient.addEventListener('click', () => {addNewFields(ingredients)})

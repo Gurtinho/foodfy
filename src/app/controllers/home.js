@@ -3,11 +3,11 @@ const Chef = require('../models/chef')
 const Search = require('../models/search')
 
 module.exports = {
-    about(req, res) {
+    async about(req, res) {
         return res.render("home/about")
     },
 
-    home(req, res) {
+    async home(req, res) {
         let { page, limit } = req.query
         page = page || 1
         limit = limit || 6
@@ -16,19 +16,23 @@ module.exports = {
         const params = {
             page,
             limit,
-            offset,
-            callback(recipes) {
-                const pagination = {
-                    // total: Math.ceil(recipes[0].total / limit),
-                    page,
-                }
-                return res.render('home/home', { recipes, pagination })
-            }
+            offset
         }
-        Recipe.paginate(params)
+        const recipeResults = await Recipe.paginate(params)
+        const recipes = recipeResults.rows
+
+        if (recipes[0] != undefined) {
+            const pagination = {
+                total: Math.ceil(recipes[0].total / limit),
+                page,
+            }
+            return res.render('home/home', { recipes, pagination })
+        }
+
+        return res.render('home/home', { recipes })
     },
 
-    recipes(req, res) {
+    async recipes(req, res) {
         let { page, limit } = req.query
         page = page || 1
         limit = limit || 6
@@ -37,19 +41,22 @@ module.exports = {
         const params = {
             page,
             limit,
-            offset,
-            callback(recipes) {
-                const pagination = {
-                    // total: Math.ceil(recipes[0].total / limit),
+            offset
+        }
+        const recipeResults = await Recipe.paginate(params)
+        const recipes = recipeResults.rows
+
+        if (recipes[0] != undefined) {
+            const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
-                return res.render('home/recipes', { recipes, pagination })
-            }
+            return res.render('home/recipes', { recipes, pagination })
         }
-        Recipe.paginate(params)
+        return res.render('home/recipes', { recipes })
     },
 
-    chefs(req, res) {
+    async chefs(req, res) {
         let { page, limit } = req.query
         page = page || 1
         limit = limit || 12
@@ -58,60 +65,64 @@ module.exports = {
         const params = {
             page,
             limit,
-            offset,
-            callback(chefs) {
-                const pagination = {
-                    // total: Math.ceil(chefs[0].total / limit),
+            offset
+        }
+        const chefResults = await Chef.paginate(params)
+        const chefs = chefResults.rows
+
+        if (chefs[0] != undefined) {
+            const pagination = {
+                    total: Math.ceil(chefs[0].total / limit),
                     page,
                 }
-                return res.render('home/chefs', { chefs, pagination })
-            }
+            return res.render('home/chefs', { chefs, pagination })
         }
-        Chef.paginate(params)
+        return res.render('home/chefs', { chefs })
     },
 
-    show(req, res) {
+    async show(req, res) {
         const id = req.params.id
 
-        Chef.find(id, ( chef ) => {
-            if ( !chef ) {
-                return res.send('chef not found')
-            }
+        const chefResults = await Chef.find(id)
+        const chef = chefResults.rows[0]
 
-            let { page, limit } = req.query
+        if ( !chef ) return res.send('chef not found')
 
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
-            
+        let { page, limit } = req.query
 
-            const params = {
-                id,
-                page,
-                limit,
-                offset,
-                callback(recipes) {
-                    const pagination = {
-                        // total: Math.ceil(recipes[0].total / limit),
-                        page,
-                    }
-                    return res.render('home/show', { chef, recipes, pagination })
+        page = page || 1
+        limit = limit || 6
+        let offset = limit * (page - 1)
+        
+
+        const params = {
+            id,
+            page,
+            limit,
+            offset
+        }
+        const recipesResults = await Recipe.recipeFind(params)
+        const recipes = recipesResults.rows
+
+        if (recipes[0] != undefined) {
+            const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
+                    page,
                 }
-            }
-            Recipe.recipeFind(params)
-        })
+            return res.render('home/show', { chef, recipes, pagination })
+        }
+        return res.render('home/show', { chef, recipes })
     },
 
-    id(req, res) {
-        Recipe.find(req.params.id, ( recipe ) => {
-            if ( !recipe ) {
-                return res.send('recipe not found')
-            }
-            return res.render('home/food', { recipe })
-        })
+    async id(req, res) {
+        const recipeResults = await Recipe.find(req.params.id)
+        const recipe = recipeResults.rows[0]
+        if (!recipe) return res.send('recipe not found')
+        
+        return res.render('home/food', { recipe })
     },
 
-    search(req, res) {
+    async search(req, res) {
         let { search, page, limit } = req.query
 
         page = page || 1
@@ -122,18 +133,18 @@ module.exports = {
             search,
             page,
             limit,
-            offset,
-            callback(recipes) {
-                if (recipes == '') {
-                    return res.render('home/search', { search })
-                }
-                const pagination = {
-                    // total: Math.ceil(recipes[0].total / limit),
+            offset
+        }
+        const recipesResults = await Search.paginate(params)
+        const recipes = recipesResults.rows
+
+        if (recipes[0] != undefined) {
+            const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
-                return res.render('home/search', { search, recipes, pagination })
-            },
+            return res.render('home/search', { search, recipes, pagination })
         }
-        Search.paginate(params)
+        return res.render('home/search', { search })
     }
 }

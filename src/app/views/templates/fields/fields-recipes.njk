@@ -2,6 +2,11 @@
     <div class="div-fields-creation">
         <div>
             <p class="title">Imagem da receita</p>
+            <input
+                type="file"
+                name="image" 
+                value="{{ recipe.image }}" 
+                required>
         </div>
 
         <div>
@@ -18,7 +23,7 @@
             <p class="title">Selecione o chef</p>
             <select name="chef">
                 {% for chef in chefsOptions %}
-                <option value="{{ chef.id }}" {% if recipes.chef_id == chef.id %} selected {% endif %}>
+                <option class="option" value="{{ chef.id }}" {% if recipes.chef_id == chef.id %} selected {% endif %}>
                     {{ chef.name }}
                 </option>
                 {% endfor %}
@@ -39,7 +44,7 @@
                     </div>
                 {% else %}
                     <div class="div-ingredients">
-                        <input 
+                        <input
                             type="text" 
                             name="ingredients[]" 
                             value="{{ ingredient }}" 
@@ -48,10 +53,17 @@
                     </div>
                 {% endfor %}
             </div>
-            <p class="remove-p">Apague o conteúdo antes</p>
-            <div class="div-add-remove">
-                <a class="add-ingredient">Adicionar novo ingrediente</a>
-                <a class="remove-ingredient">Remover ingrediente</a>
+            <div class="add-remove">
+                <button class="add-ingredient" type="button">
+                    <div>
+                        <span class="material-icons">add_circle_outline</span>
+                    </div>
+                </button>
+                <button class="remove-ingredient" type="button">
+                    <div>
+                        <span class="material-icons">delete</span>
+                    </div>
+                </button>
             </div>
         </div>
 
@@ -64,7 +76,7 @@
                             type="text" 
                             name="preparation[]" 
                             value="{{ prep }}" 
-                            placeholder="Adicione um passo" 
+                            placeholder="Adicione um passo"
                             required>
                     </div>
                 {% else %}
@@ -78,10 +90,17 @@
                     </div>
                 {% endfor %}
             </div>
-            <p class="remove-p">Apague o conteúdo antes</p>
-            <div class="div-add-remove">
-                <a class="add-preparation">Adicionar novo passo</a>
-                <a class="remove-preparation">Remover passo</a>
+            <div class="add-remove">
+                <button class="add-preparation" type="button">
+                    <div>
+                        <span class="material-icons">add_circle_outline</span>
+                    </div>
+                </button>
+                <button class="remove-preparation" type="button">
+                    <div>
+                        <span class="material-icons">delete</span>
+                    </div>
+                </button>
             </div>
         </div>
 

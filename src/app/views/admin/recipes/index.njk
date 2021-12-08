@@ -1,4 +1,4 @@
-{% extends 'templates/layouts/layout.njk' %}
+{% extends 'templates/layouts/layout-recipes.njk' %}
 
 {% block content %}
     <section class="create">
@@ -23,6 +23,10 @@
                     <p>Por {{ recipe.chefs_name }}</p>
                     <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
                 </div>
+            </div>
+        {% else %}
+            <div class="fields-info">
+                <p>Ainda não temos receitas</p>
             </div>
         {% endfor %}
         </div>

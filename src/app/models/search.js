@@ -1,7 +1,7 @@
 const db = require('../../config/db')
 
 module.exports = {
-    findRecipe(search, callback) {
+    findRecipe(search) {
         const recipes = `
             SELECT recipes.*,
             chefs.name AS chefs_name
@@ -10,15 +10,10 @@ module.exports = {
             WHERE recipes.title ILIKE '%${search}%'
             OR chefs.name ILIKE '%${search}%'
             `
-        db.query(recipes, ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            callback(results.rows)
-        })
+        return db.query(recipes)
     },
 
-    findChef(search, callback) {
+    findChef(search) {
         const chefs = `
             SELECT chefs.*,
             count(recipes) AS total_recipes
@@ -27,16 +22,11 @@ module.exports = {
             WHERE chefs.name ILIKE '%${search}%'
             GROUP BY chefs.id
             `
-        db.query(chefs, ( err, results ) => {
-            if (err) {
-                throw `Database Error ${err}`
-            }
-            callback(results.rows)
-        })
+        return db.query(chefs)
     },
 
     paginate(params) {
-        const { search, limit, offset, callback } = params
+        const { search, limit, offset } = params
         
         let searchQuery = `
             WHERE recipes.title ILIKE '%${search}%'
@@ -55,11 +45,6 @@ module.exports = {
             LIMIT $1 OFFSET $2
             `
 
-        db.query(query, [limit, offset], ( err, results ) => {
-            if (err) {
-                throw `database error ${err}`
-            }
-            callback(results.rows)
-        })
+        return db.query(query, [limit, offset])
     }
 }

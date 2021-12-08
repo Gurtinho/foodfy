@@ -1,4 +1,4 @@
-{% extends 'templates/layouts/layout.njk' %}
+{% extends 'templates/layouts/layout-chefs.njk' %}
 
 {% block content %}
     <section class="chefs">
@@ -22,6 +22,10 @@
                     <h2>{{ chef.name }}</h2>
                     <a href="/admin/chefs/{{ chef.id }}">visualizar</a>
                 </div>
+            </div>
+        {% else %}
+             <div class="fields-info-chefs">
+                <h2>Ainda não temos chefs</h2>
             </div>
         {% endfor %}
         </div>

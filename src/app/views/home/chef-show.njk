@@ -1,0 +1,60 @@
+{% extends "templates/layouts/layout-home.njk" %}
+
+{% block head %}
+    <title>{{ chef.name }}</title>
+{% endblock %}
+
+{% block content %}
+    <section class="accessfood">
+        <div class="receitas-content-food">
+            <div class="food-show">
+                <div class="food-img-show">
+                    <img src="{{ chef.avatar_url }}">
+                </div>
+                <h2 class="food-title">{{ chef.name }}</h2>
+                {% if chef.total_recipes != 0 %}
+                    <p class="food-author">
+                        {{ chef.total_recipes }} 
+                        {% if chef.total_recipes > 1 %}
+                            receitas
+                        {% else %} 
+                            receita
+                        {% endif %}
+                    </p>
+                {% else %}
+                    <p class="food-author">Nenhuma receita</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="div-mais-acessadas">
+        <div class="sub-acessadas">
+            <p class="mais-acessadas">Receitas</p>
+        </div>
+    </section>
+
+    <section class="acessadas">
+        <div class="acess-content">
+            {% for recipe in recipes %}
+                <div class="comida">
+                    <a type="hidden" href="/recipes/food/{{ recipe.id }}">
+                        <img class="img" src="{{ recipe.image }}">
+                        <h2 class="comidatitle">{{ recipe.title }}</h2>
+                        <h3 class="comidaautor">{{ recipe.chefs_name }}</h3>
+                    </a>
+                </div>
+            {% else %}
+                <div class="comida">
+                    <p>Esse chef ainda não possui receitas</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="container-pagination">
+            <div class="pagination"  
+                data-page={{pagination.page}} 
+                data-total={{pagination.total}}>
+            </div>
+        </div>
+    </section>
+{% endblock %}

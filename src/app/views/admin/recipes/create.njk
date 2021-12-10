@@ -1,7 +1,7 @@
 {% extends 'templates/layouts/layout-recipes.njk' %}
 
 {% block content %}
-    <form method="POST" action="/admin/recipes">
+    <form method="POST" action="/admin/recipes" enctype="multipart/form-data">
         <section class="create">
             <div class="create-recipe">
                 <div class="create-recipe-p">

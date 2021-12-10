@@ -8,7 +8,7 @@ function fillSearch() {
             setTimeout(() => {
                 input.classList.remove('fill')
             }, 1000)
-        } 
+        }
     }
 
     formSearch.addEventListener('submit', fill)

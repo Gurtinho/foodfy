@@ -261,6 +261,21 @@ color: white;
   cursor: pointer;
 }
 
+.btn-save-chef:hover {
+  background-color: #5042bb;
+  transition: 200ms;
+}
+
+.btn-delete-chef:hover {
+  background-color: #cf3a3a;
+  transition: 200ms;
+}
+
+.btn-cancel-chef:hover {
+  background-color: #616161;
+  transition: 200ms;
+}
+
 /*============ FIELDS ===========*/
 .fields-creation {
   display: flex;
@@ -269,7 +284,7 @@ color: white;
 
 .div-fields-creation {
   width: 940px;
-  margin-bottom: 100px;
+  margin-bottom: 200px;
 }
 
 .div-fields-creation {
@@ -305,6 +320,33 @@ color: white;
 
 .div-fields-creation input.active::placeholder {
   color: #e61f4a;
+}
+
+.image-preview {
+  margin-bottom: 20px;
+}
+
+.input-view {
+  display: none;
+}
+
+.avatar {
+  margin-top: 25px;
+}
+
+.input-file {
+  display: none;
+}
+
+.label-file {
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #6558C3;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 /*============ CHEFS ============*/

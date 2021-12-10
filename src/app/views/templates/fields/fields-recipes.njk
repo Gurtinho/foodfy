@@ -2,11 +2,28 @@
     <div class="div-fields-creation">
         <div>
             <p class="title">Imagem da receita</p>
-            <input
-                type="file"
-                name="image" 
-                value="{{ recipe.image }}" 
-                required>
+            <div class="container-image">
+                <div class="cam">
+                    <input
+                        class="input-file"
+                        id="file"
+                        type="file" 
+                        name="image"
+                        value="{{ recipe.image }}"
+                        multiple="multiple"
+                        accept="image/*"
+                        required
+                        onchange="imageUpload.handleFileInput(event)">
+
+                    <label class="label-file" for="file">
+                        <span class="material-icons">add</span>
+                    </label>
+                </div>
+
+                <div class="image-preview">
+
+                </div>
+            </div>
         </div>
 
         <div>
@@ -38,30 +55,30 @@
                         <input 
                             type="text" 
                             name="ingredients[]" 
-                            value="{{ ingredient }}" 
-                            placeholder="Adicione um ingrediente" 
-                            required>
+                            value="{{ ingredient }}"
+                            placeholder="Adicione um ingrediente">
                     </div>
                 {% else %}
                     <div class="div-ingredients">
                         <input
                             type="text" 
                             name="ingredients[]" 
-                            value="{{ ingredient }}" 
-                            placeholder="Adicione um ingrediente" 
-                            required>
+                            value="{{ ingredient }}"
+                            placeholder="Adicione um ingrediente">
                     </div>
                 {% endfor %}
             </div>
             <div class="add-remove">
                 <button class="add-ingredient" type="button">
                     <div>
-                        <span class="material-icons">add_circle_outline</span>
+                        <span class="material-icons">add</span>
+                        <p>Adicionar</p>
                     </div>
                 </button>
                 <button class="remove-ingredient" type="button">
                     <div>
                         <span class="material-icons">delete</span>
+                        <p>Remover</p>
                     </div>
                 </button>
             </div>
@@ -93,12 +110,14 @@
             <div class="add-remove">
                 <button class="add-preparation" type="button">
                     <div>
-                        <span class="material-icons">add_circle_outline</span>
+                        <span class="material-icons">add</span>
+                        <p>Adicionar</p>
                     </div>
                 </button>
                 <button class="remove-preparation" type="button">
                     <div>
                         <span class="material-icons">delete</span>
+                        <p>Remover</p>
                     </div>
                 </button>
             </div>
@@ -114,3 +133,4 @@
     </div>
 </section>
 <script src="/js/addnew.js"></script>
+<script src="/js/imageUploadRecipe.js"></script>

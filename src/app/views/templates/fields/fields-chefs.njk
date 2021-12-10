@@ -5,7 +5,24 @@
             <input type="text" name="name" value="{{ chef.name }}" placeholder="Nome do chef" required>
         </div>
         <div>
-            <p class="title">Avatar</p>
+            <p class="title">Imagem do chef</p>
+            <div class="image-preview">
+                    <input class="input-view" type="text" disabled value="{{ chef.file_id }}">
+            </div>
+
+            <div class="avatar">
+                <input
+                    class="input-file"
+                    id="file"
+                    type="file"
+                    name="file_id"
+                    accept="image/*"
+                    onchange="imageUploadChef(event)"
+                    required>
+
+                <label class="label-file" for="file">Enviar avatar</label>
+            </div>
         </div>
     </div>
 </section>
+<script src="/js/imageUploadChef.js"></script>

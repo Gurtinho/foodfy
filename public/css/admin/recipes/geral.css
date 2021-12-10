@@ -109,6 +109,90 @@ color: white;
 }
 
 /*============ CREATE ===========*/
+.container-image {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+}
+
+.image-preview {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  height: 140px;
+  margin-left: 8px;
+}
+
+.image-preview img {
+  width: 140px;
+  height: 140px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.image-preview .input-image {
+  position: relative;
+}
+
+.image-preview .input-image span {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background-color: rgb(255, 255, 255, 0.5);
+  color: #e26c6c;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 28px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview .input-image span:hover {
+  animation: closeimage 500ms forwards;
+}
+
+@keyframes closeimage {
+  from {
+  }
+  to {
+    background-color: rgb(255, 255, 255, 0.7);
+    color: #FF0000;
+  }
+}
+
+.cam {
+  height: 140px;
+}
+
+.input-file {
+  display: none;
+}
+
+.label-file {
+  left: 0;
+  margin: 0;
+}
+
+.label-file span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 140px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #777;
+  font-size: 28px;
+  border: 1px solid #dddddd;
+}
+
 .create {
   display: flex;
   justify-content: center;
@@ -192,6 +276,21 @@ color: white;
   cursor: pointer;
 }
 
+.btn-save-recipe:hover {
+  background-color: #5042bb;
+  transition: 200ms;
+}
+
+.btn-delete-recipe:hover {
+  background-color: #cf3a3a;
+  transition: 200ms;
+}
+
+.btn-cancel-recipe:hover {
+  background-color: #616161;
+  transition: 200ms;
+}
+
 
 /*============ FIELDS ===========*/
 .fields-creation {
@@ -229,7 +328,6 @@ color: white;
   resize: none;
 }
 
-
 .div-fields-creation input.active {
   border-color: #e61f4a;
   color: #e61f4a;
@@ -244,6 +342,10 @@ color: white;
 .div-ingredients,
 .div-preparation {
   margin-top: 10px;
+}
+
+.div-ing {
+  display: flex;
 }
 
 .add-remove {
@@ -281,6 +383,15 @@ color: white;
   cursor: pointer;
   background-color: rgb(209, 127, 152);
   transition: 200ms ease-in-out;
+}
+
+.add-ingredient div p,
+.add-preparation div p,
+.remove-ingredient div p, 
+.remove-preparation div p {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: bold;
 }
 
 .remove-ingredient:hover, 

@@ -1,0 +1,59 @@
+{% extends "templates/layouts/layout-home.njk" %}
+
+{% block head %}
+    <title>{{ recipe.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <section class="accessfood">
+        <div class="receitas-content-food">
+            <div class="food-page">
+                <img class="food-img-page" src="{{ recipe.image }}">
+                <h2 class="food-title-page">{{ recipe.title }}</h2>
+                <h3 class="food-author-page">Por {{ recipe.chefs_name }}</h3>
+            </div>
+        </div>
+
+        <section class="descricao">
+            <div class="ingredientes">
+                <div class="inf">
+                    <h1>Ingredientes</h1>
+                    <p class="mostrar">Mostrar</p>
+                    <ul class="content">
+                        {% for ingredient in recipe.ingredients %}
+                        <li class="li">{{ ingredient + ';'}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="preparo">
+                <div class="inf">
+                    <h1>Modo de preparo</h1>
+                    <p class="mostrar">Mostrar</p>  
+                    <ul class="content">
+                        {% for preparation in recipe.preparation %}
+                        <li class="li">{{ preparation + '.'}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="adicionais">
+                <div class="inf">
+                    <h1>Informações adicionais</h1>
+                    <p class="mostrar">Mostrar</p>
+                    <ul class="content">
+                        <li class="li"> 
+                            {% if recipe.information != ''%}
+                            {{ recipe.information + '.' }}
+                            {% else %}
+                            Sem informações adicionais.
+                            {% endif %}
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock %}

@@ -13,7 +13,6 @@
                     <img class="fields-img-chefs" src="{{ chef.avatar_url }}">
                     <div class="fields-info-chefs">
                         <h2>{{ chef.name }}</h2>
-
                         {% if chef.total_recipes != 0 %}
                             <p>
                                 {{ chef.total_recipes }} {% if chef.total_recipes > 1 %}receitas{% else %} receita{% endif %}
@@ -21,9 +20,12 @@
                         {% else %}
                             <p>Nenhuma receita</p>
                         {% endif %}
-                        
                     </div>
                 </a>
+            </div>
+        {% else %}
+            <div class="fields-info-chefs">
+                <p>Ainda não temos chefs</p>
             </div>
         {% endfor %}
         </div>

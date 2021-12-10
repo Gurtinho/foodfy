@@ -1,7 +1,7 @@
 {% extends 'templates/layouts/layout-chefs.njk' %}
 
 {% block content %}
-    <form method="POST" action="/admin/chefs">
+    <form method="POST" action="/admin/chefs" enctype="multipart/form-data">
         <section class="chefs">
             <div class="create-chef">
                 <div class="create-chef-p">

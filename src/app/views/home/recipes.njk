@@ -16,6 +16,10 @@
                         <h3 class="comidaautor">{{ recipe.chefs_name }}</h3>
                     </a>
                 </div>
+            {% else %}
+                <div class="fields-info">
+                    <p>Ainda não temos receitas</p>
+                </div>
             {% endfor %}
         </div>
         <div class="container-pagination">

@@ -8,7 +8,7 @@ function addInfo() {
     const buttonRemoveIngredient = document.querySelector('.remove-ingredient')
     const buttonRemovePreparation = document.querySelector('.remove-preparation')
 
-    // ADD NEW FIELDS
+
     function addNewFields(field) {
         const fChild = field.lastElementChild
         if (fChild.lastElementChild.value == '') {
@@ -18,20 +18,11 @@ function addInfo() {
                 }, 1000)
                 return false
         }
-        // for (let fChild of field.children) {
-            // if (fChild.children[0].value == '') {
-            //     fChild.children[0].classList.add('active')
-            //     setTimeout(() => {
-            //         fChild.children[0].classList.remove('active')
-            //     }, 1000)
-            //     return false
-            // }
-        // }
-        const clonefield = field.lastElementChild
-        const fieldClone = clonefield.cloneNode(true)
+        const fieldClone = fChild.cloneNode(true)
         field.appendChild(fieldClone)
         fieldClone.lastElementChild.value = ''
     }
+ 
 
     // REMOVE FIELDS
     function removeNewFields(field) {
@@ -52,8 +43,8 @@ function addInfo() {
     }
 
     buttonIngredient.addEventListener('click', () => {addNewFields(ingredients)})
-    buttonPreparation.addEventListener('click', () => {addNewFields(preparation)})
-    
+    buttonPreparation.addEventListener('click', () => { addNewFields(preparation)})
+
     buttonRemoveIngredient.addEventListener('click', () => {removeNewFields(ingredients)})
     buttonRemovePreparation.addEventListener('click', () => {removeNewFields(preparation)})
 }

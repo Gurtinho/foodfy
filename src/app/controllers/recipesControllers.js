@@ -97,7 +97,7 @@ module.exports = {
         const chefsOptions = results.rows
 
         // images 
-        // results = await Recipe.files(recipe.id)
+        results = await Recipe.files(recipe.id)
 
         return res.render('admin/recipes/edit', { recipe, chefsOptions })
     },

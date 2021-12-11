@@ -74,5 +74,13 @@ module.exports = {
         `
 
         return db.query(query, [limit, offset])
+    },
+
+    files(id) {
+        const query = `
+            SELECT * FROM files
+            WHERE id = $1
+        `
+        return db.query(query, [id])
     }
 }

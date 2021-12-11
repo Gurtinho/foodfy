@@ -114,9 +114,10 @@ module.exports = {
     },
 
     files(id) {
+        const recipe_id = `(SELECT * FROM recipe_files WHERE recipe_id = $1) AS recipe_id`
         const query = `
-            SELECT * FROM files
-            WHERE id = $1
+            SELECT *, ${recipe_id}, FROM files
+            WHERE 
         `
         return db.query(query, [id])
     }

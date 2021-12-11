@@ -87,12 +87,15 @@ module.exports = {
     },
 
     async edit(req, res) {
-        const chefFind = await Chef.find(req.params.id)
+        let chefFind = await Chef.find(req.params.id)
         const chef = chefFind.rows[0]
 
         if (!chef) return res.send('chef not found')
+
+        chefFind = await Chef.files(chef.file_id)
+        let files = chefFind.rows[0]
         
-        return res.render('admin/chefs/edit', { chef })
+        return res.render('admin/chefs/edit', { chef, files })
     },
 
     async put(req, res) {

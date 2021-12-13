@@ -3,16 +3,15 @@
         <div>
             <p class="title">Imagem da receita</p>
             <div class="container-image">
+
                 <div class="cam">
                     <input
                         class="input-file"
                         id="file"
                         type="file" 
                         name="image"
-                        value="{{ recipe.image }}"
                         multiple="multiple"
                         accept="image/*"
-                        required
                         onchange="imageUpload.handleFileInput(event)">
 
                     <label class="label-file" for="file">
@@ -21,7 +20,7 @@
                 </div>
 
                 <div class="image-preview">
-                    {% if files %}
+                    {# {% if files %}
                         {% for file in files %}
                             <div class="input-image" id="{{ file.id }}">
                                 <img src="{{ file.src }}" alt="{{ file.name }}">
@@ -32,7 +31,7 @@
                             </div>
                         {% endfor %}
                         <input type="hidden" name="removed_files">
-                    {% endif %}
+                    {% endif %} #}
                 </div>
             </div>
         </div>

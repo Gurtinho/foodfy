@@ -131,10 +131,20 @@ module.exports = {
                 if (req.body[key] == '') return res.send('Preencha todos os campos')
             }
 
-            await Chef.update(req.body)
+            let file_id
+
+            if (req.files.length != 0) {
+                const { filename, path } = req.files[0]
+                file_id = await File.create({ name: filename, path })
+                file_id = file_id.rows[0].id
+            }
+
+            const { name } = req.body
+            await Chef.update({ name, file_id: file_id || req.body.file_id })
 
             return res.redirect(`/admin/chefs/${req.body.id}`)
-           
+
+            
         } catch (err) {
             console.error(err)
        }

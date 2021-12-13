@@ -8,23 +8,25 @@
             <p class="title">Imagem do chef</p>
             <div class="image-preview">
                 {% if files %}
-                    <input class="input-view" type="text" disabled value="{{ files.name }}">
+                    <input class="input-view" type="text" disabled value="{{ files.path }}">
                 {% else %}
-                    <input class="input-view input-view-none" type="text" disabled value="{{ files.name }}">
+                    <input class="input-view input-view-none" type="text" disabled value="{{ files.path }}">
                 {% endif %}
             </div>
 
             <div class="avatar">
-                <input
-                    class="input-file"
-                    id="file"
-                    type="file"
-                    name="file_id"
-                    accept="image/*"
-                    onchange="imageUploadChef(event)"
-                    required>
-
-                <label class="label-file" for="file">Enviar avatar</label>
+                    <input
+                        class="input-file"
+                        id="file"
+                        type="file"
+                        name="file_id"
+                        accept="image/*"
+                        onchange="imageUploadChef(event)">
+                {% if files %}
+                    <label class="label-file" for="file">Enviar novo avatar</label>
+                {% else %}
+                    <label class="label-file" for="file">Enviar avatar</label>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -47,7 +47,7 @@ module.exports = {
         `
         const values = [
             data.name,
-            1,
+            data.file_id,
             data.id
         ]
         

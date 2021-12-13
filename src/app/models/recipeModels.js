@@ -1,5 +1,4 @@
 const db = require('../../config/db')
-const { date } = require('../../libs/utils')
 
 module.exports = {
     recipe(id) {
@@ -47,7 +46,9 @@ module.exports = {
         return db.query(select, [id])
     },
 
-    update(data) {
+    update(id, data) {
+        const { chef_id, title, ingredients, preparation, information } = data
+
         const query = `
             UPDATE recipes SET
                 chef_id = ($1),
@@ -55,15 +56,14 @@ module.exports = {
                 ingredients = ($3),
                 preparation = ($4),
                 information = ($5)
-            WHERE id = $6
+            WHERE id = ${id}
         `
         const values = [
-            data.chef,
-            data.title,
-            data.ingredients,
-            data.preparation,
-            data.information,
-            data.id
+            chef_id,
+            title,
+            ingredients,
+            preparation,
+            information
         ]
         return db.query(query, values)
     },

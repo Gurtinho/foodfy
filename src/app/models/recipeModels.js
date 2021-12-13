@@ -98,9 +98,7 @@ module.exports = {
 
     paginate(params) {
         let { limit, offset } = params
-
         let total = `(SELECT count(*) FROM recipes) AS total`
-        
         let query = `
             SELECT recipes.*, ${total},
             chefs.name AS chefs_name
@@ -113,11 +111,13 @@ module.exports = {
         return db.query(query, [limit, offset])
     },
 
-    files(id) {
-        const recipe_id = `(SELECT * FROM recipe_files WHERE recipe_id = $1) AS recipe_id`
+    recipe_files(id) {
         const query = `
-            SELECT *, ${recipe_id}, FROM files
-            WHERE 
+            SELECT recipe_files.*,
+            files.name AS name, files.path AS path, files.id AS file_id
+            FROM recipe_files
+            LEFT JOIN files ON (recipe_files.file_id = files.id)
+            WHERE recipe_files.recipe_id = $1
         `
         return db.query(query, [id])
     }

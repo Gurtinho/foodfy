@@ -8,9 +8,9 @@
             <p class="title">Imagem do chef</p>
             <div class="image-preview">
                 {% if files %}
-                    <input class="input-view" type="text" disabled value="{{ files.path }}">
+                    <input class="input-view" type="text" disabled value="{{ files.name }}">
                 {% else %}
-                    <input class="input-view input-view-none" type="text" disabled value="{{ files.path }}">
+                    <input class="input-view input-view-none" type="text" disabled value="{{ files.name }}">
                 {% endif %}
             </div>
 

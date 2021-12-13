@@ -131,16 +131,16 @@ module.exports = {
                 if (req.body[key] == '') return res.send('Preencha todos os campos')
             }
 
-            let file_id
+            const chef_results = await File.findFiles(req.body.id)
+            const chefs_id = chef_results.rows[0].file_id
 
             if (req.files.length != 0) {
                 const { filename, path } = req.files[0]
-                file_id = await File.create({ name: filename, path })
-                file_id = file_id.rows[0].id
+                await File.updateFile(chefs_id, { name: filename, path })
             }
 
-            const { name } = req.body
-            await Chef.update({ name, file_id: file_id || req.body.file_id })
+            const { name, id } = req.body
+            await Chef.update({ name, file_id: chefs_id || req.body.file_id, id })
 
             return res.redirect(`/admin/chefs/${req.body.id}`)
 
@@ -152,16 +152,19 @@ module.exports = {
 
     async delete(req, res) {
         try {
-             const id = req.body.id
+            const id = req.body.id
             const findChef = await Chef.find(id)
             const chef = findChef.rows[0]
 
-                if (chef.total_recipes == 0) {
-                    Chef.delete(id)
-                    return res.redirect(`/admin/chefs`)
-                } else {
-                    return res.redirect(`/admin/chefs/${id}/edit`)
-                }
+            if (chef.total_recipes == 0) {
+                Chef.delete(id)
+
+                await File.delete(chef.file_id)
+
+                return res.redirect(`/admin/chefs`)
+            } else {
+                return res.redirect(`/admin/chefs/${id}/edit`)
+            }
            
         } catch (err) {
             console.error(err)

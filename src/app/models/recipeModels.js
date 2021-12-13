@@ -1,4 +1,5 @@
 const db = require('../../config/db')
+const fs = require('fs')
 
 module.exports = {
     recipe(id) {
@@ -68,9 +69,17 @@ module.exports = {
         return db.query(query, values)
     },
 
-    delete(id) {
-        const query = `DELETE FROM recipes WHERE id = $1`
-        return db.query(query, [id])
+    async delete(id) {
+        try {
+            const query = `
+                DELETE FROM recipes
+                WHERE recipes.id = $1
+            `
+            await db.query(query, [id])
+
+        } catch (err) {
+            console.error(err)
+        }
     },
 
     chefFindOption() {
@@ -120,5 +129,18 @@ module.exports = {
             WHERE recipe_files.recipe_id = $1
         `
         return db.query(query, [id])
+    },
+
+    async recipe_files_delete(id) {
+        try {
+            const query = `
+                DELETE FROM recipe_files
+                WHERE recipe_files.recipe_id = $1
+            `
+            await db.query(query, [id])
+
+        } catch (err) {
+            console.error(err)
+        }
     }
 }

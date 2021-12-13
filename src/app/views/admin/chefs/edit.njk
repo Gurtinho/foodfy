@@ -20,7 +20,7 @@
         {% include 'templates/fields/fields-chefs.njk' %}
     </form>
 
-    <form class="form-delete" id="form-delete" action="/admin/chefs?_method=DELETE" method="POST" enctype="multipart/form-data">
+    <form class="form-delete" id="form-delete" action="/admin/chefs?_method=DELETE" method="POST">
         <input type="hidden" name="id" value="{{ chef.id }}">
     </form>
 {% endblock %}

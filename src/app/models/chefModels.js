@@ -35,6 +35,7 @@ module.exports = {
             LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
             WHERE chefs.id = $1
             GROUP BY chefs.id`
+        
         return db.query(select, [id])
     },
 

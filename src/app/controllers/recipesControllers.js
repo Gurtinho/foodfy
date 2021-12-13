@@ -184,16 +184,12 @@ module.exports = {
                 const removedFilesPromise = removedFiles.map(async id => {
                     let results = await RecipeFile.delete(id)
                     const file_id = results.file_id
-
-                    console.log(file_id)
-
                     await File.delete(file_id)
                 })
                 await Promise.all(removedFilesPromise)
             }
             
             return res.redirect(`/admin/recipes/${id}`)
-            return
             
         } catch (err) {
             console.error(err)
@@ -202,7 +198,15 @@ module.exports = {
 
     async delete(req, res) {
         try {
+            const recipe_file_results = await Recipe.recipe_files(req.body.id)
+            const recipe_file = recipe_file_results.rows[0].file_id
+
+            Recipe.recipe_files_delete(req.body.id)
+
+            await File.delete(recipe_file)
+
             await Recipe.delete(req.body.id)
+            
             return res.redirect(`/admin/recipes`)
             
         } catch (err) {

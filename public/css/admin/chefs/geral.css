@@ -90,22 +90,21 @@ color: white;
 .fields-info-chefs h2 {
   font-size: 18px;
   color: #111;
-  margin-bottom: 6px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .fields-info-chefs p {
-  font-size: 14px;
+  font-size: 12px;
   color: #777;
-  margin-bottom: 8px;
 }
 
 .fields-info-chefs a {
   font-size: 14px;
   color: #6558C3;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .div-mais-acessadas {

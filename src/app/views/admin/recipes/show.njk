@@ -24,7 +24,9 @@
     <section class="accessfood">
         <div class="receitas-content-food">
             <div class="food">
-                <img class="food-img-recipe" src="{{ recipe.image }}">
+                {% for recipe in recipe_files %}
+                    <img class="food-img-recipe" src="{{ recipe.src }}">
+                {% endfor %}
                 <h2 class="food-title-recipe">{{ recipe.title }}</h2>
                 <h3 class="food-author-recipe">Por {{ recipe.chefs_name }}</h3>
             </div>

@@ -136,8 +136,10 @@ module.exports = {
 
     async paginate(params) {
         try {
-             let { limit, offset } = params
+            let { limit, offset } = params
+
             let total = `(SELECT count(*) FROM recipes) AS total`
+
             let query = `
                 SELECT recipes.*, ${total},
                 chefs.name AS chefs_name
@@ -146,8 +148,7 @@ module.exports = {
                 ORDER BY id DESC
                 LIMIT $1 OFFSET $2
             `
-
-            return db.query(query, [limit, offset])
+            return await db.query(query, [limit, offset])
            
         } catch (err) {
             console.error(err)
@@ -181,5 +182,21 @@ module.exports = {
         } catch (err) {
             console.error(err)
         }
+    },
+
+    async all() {
+        try {
+            let query = `
+                SELECT recipes.*,
+                chefs.name AS chefs_name
+                FROM recipes
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                ORDER BY id DESC
+            `
+            return await db.query(query)
+           
+        } catch (err) {
+            console.error(err)
+       }
     }
 }

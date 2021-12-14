@@ -45,5 +45,37 @@ module.exports = {
         } catch (err) {
             console.error(err)
         }
-    }
+    },
+
+    async allFiles(params) {
+        try {    
+            // const select = `
+            //     SELECT recipe_files.file_id,
+            //     files.path AS path, files.name AS name
+            //     FROM recipe_files
+            //     LEFT JOIN files ON (recipe_files.file_id = files.id)
+            //     `
+            
+            // return db.query(select)
+
+            let { limit, offset } = params
+
+            let total = `(SELECT count(*) FROM recipes) AS total`
+
+            let files = `(SELECT count(path) FROM files) AS path`
+
+            let query = `
+                SELECT recipes.*, ${total}, ${files},
+                chefs.name AS chefs_name
+                FROM recipes
+                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                ORDER BY id DESC
+                LIMIT $1 OFFSET $2
+            `
+            return await db.query(query, [limit, offset])
+
+        } catch (err) {
+            console.error(err)
+        }
+    },
 }

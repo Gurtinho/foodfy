@@ -11,12 +11,24 @@ module.exports = {
             let offset = limit * (page - 1)
 
             const params = {
-                page,
                 limit,
                 offset
             }
-            const resultsRecipes = await Recipe.paginate(params)
-            const recipes = resultsRecipes.rows
+
+            let results = await Recipe.paginate(params)
+            let recipes_results = results.rows
+            
+            let files = recipes_results.map(async item => ({
+                ...item,
+                path: (await Recipe.recipe_files(item.id)).rows[0].path
+            }))
+
+            let recipes = await Promise.all(files)
+
+            recipes = recipes.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+            }))
 
             if (recipes[0] != null) {
                 const pagination = {
@@ -98,7 +110,17 @@ module.exports = {
             let results = await Recipe.recipe(req.params.id)
             const recipe = results.rows[0]
 
-            return res.render('admin/recipes/show', { recipe })
+            results = await Recipe.recipe_files(recipe.id)
+            let recipe_files = results.rows
+
+            recipe_files = recipe_files.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+            }))
+
+            console.log(recipe_files)
+
+            return res.render('admin/recipes/show', { recipe, recipe_files })
             
         } catch (err) {
             console.error(err)
@@ -126,8 +148,6 @@ module.exports = {
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
-
-            console.log(files)
 
             return res.render(`admin/recipes/edit`, { recipe, chefsOptions, files })
             

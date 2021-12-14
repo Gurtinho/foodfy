@@ -17,11 +17,11 @@
         <div class="fields-grid">
         {% for recipe in recipes %}
             <div class="fields-item">
-                <img class="fields-img" src="{{ recipe.image }}">
+                <img class="fields-img" src="{{ recipe.src }}">
                 <div class="fields-info">
                     <h2>{{ recipe.title }}</h2>
                     <p>Por {{ recipe.chefs_name }}</p>
-                    <a href="/admin/recipes/{{ recipe.id }}">visualizar</a>
+                    <a href="/admin/recipes/{{ recipe.id }}">Visualizar</a>
                 </div>
             </div>
         {% else %}
@@ -33,8 +33,7 @@
         <div class="container-pagination">
             <div class="pagination"  
                 data-page={{pagination.page}} 
-                data-total={{pagination.total}}
-                data-search={{search}}>
+                data-total={{pagination.total}}>
             </div>
         </div>
     </section>

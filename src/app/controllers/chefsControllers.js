@@ -15,8 +15,6 @@ module.exports = {
                 limit,
                 offset
             }
-            // results = await Chef.paginate(params)
-            // let chefs = results.rows
 
             results = await File.allFiles(params)
             let chefs = results.rows
@@ -25,8 +23,6 @@ module.exports = {
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
-
-            console.log(chefs)
 
             if (chefs[0] != null) {
                 const pagination = {
@@ -99,24 +95,40 @@ module.exports = {
                 limit,
                 offset
             }
-            const recipesResults = await Recipe.recipeFind(params)
-            const recipes = recipesResults.rows
+
+            // files chefs
+            let results = await Recipe.recipeFind(params)
+            let recipes_results = results.rows
 
             results = await Chef.files(chef.file_id)
-            let files = results.rows[0]
-            files = {
-                ...files,
-                src: `${req.protocol}://${req.headers.host}${files.path.replace('public', '')}`
+
+            let files_chefs = results.rows[0]
+            files_chefs = {
+                ...files_chefs,
+                src: `${req.protocol}://${req.headers.host}${files_chefs.path.replace('public', '')}`
             }
+
+            // files receitas
+            let files = recipes_results.map(async item => ({
+                ...item,
+                path: (await Recipe.recipe_files(item.id)).rows[0].path
+            }))
+
+            let recipes = await Promise.all(files)
+
+            recipes = recipes.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+            }))
 
             if (recipes[0] != null) {
                 const pagination = {
                     total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
-                return res.render('admin/chefs/show', { chef, recipes, files, pagination })
+                return res.render('admin/chefs/show', { chef, recipes, files, pagination, files_chefs })
             }
-            return res.render('admin/chefs/show', { chef, recipes, files })
+            return res.render('admin/chefs/show', { chef, recipes, files, files_chefs })
         
         } catch (err) {
             console.error(err)
@@ -155,9 +167,6 @@ module.exports = {
                 const { filename, path } = req.files[0]
                 await File.updateFile(chefs_id, { name: filename, path })
             }
-
-            // const { name, id } = req.body
-            // await Chef.update({ name, file_id: chefs_id || req.body.file_id, id })
 
             return res.redirect(`/admin/chefs/${req.body.id}`)
             

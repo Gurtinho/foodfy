@@ -15,8 +15,18 @@ module.exports = {
                 limit,
                 offset
             }
-            const chefPaginate = await Chef.paginate(params)
-            const chefs = chefPaginate.rows
+            // results = await Chef.paginate(params)
+            // let chefs = results.rows
+
+            results = await File.allFiles(params)
+            let chefs = results.rows
+
+            chefs = chefs.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+            }))
+
+            console.log(chefs)
 
             if (chefs[0] != null) {
                 const pagination = {
@@ -92,14 +102,21 @@ module.exports = {
             const recipesResults = await Recipe.recipeFind(params)
             const recipes = recipesResults.rows
 
+            results = await Chef.files(chef.file_id)
+            let files = results.rows[0]
+            files = {
+                ...files,
+                src: `${req.protocol}://${req.headers.host}${files.path.replace('public', '')}`
+            }
+
             if (recipes[0] != null) {
                 const pagination = {
                     total: Math.ceil(recipes[0].total / limit),
                     page,
                 }
-                return res.render('admin/chefs/show', { chef, recipes, pagination })
+                return res.render('admin/chefs/show', { chef, recipes, files, pagination })
             }
-            return res.render('admin/chefs/show', { chef, recipes })
+            return res.render('admin/chefs/show', { chef, recipes, files })
         
         } catch (err) {
             console.error(err)
@@ -139,11 +156,10 @@ module.exports = {
                 await File.updateFile(chefs_id, { name: filename, path })
             }
 
-            const { name, id } = req.body
-            await Chef.update({ name, file_id: chefs_id || req.body.file_id, id })
+            // const { name, id } = req.body
+            // await Chef.update({ name, file_id: chefs_id || req.body.file_id, id })
 
             return res.redirect(`/admin/chefs/${req.body.id}`)
-
             
         } catch (err) {
             console.error(err)

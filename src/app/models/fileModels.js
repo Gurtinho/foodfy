@@ -24,6 +24,33 @@ module.exports = {
         }
     },
 
+    async allFiles(params) {
+        try {
+            const { limit, offset } = params
+
+            const total = `(SELECT count(*) FROM chefs) AS total`
+            
+            const total_recipes = `
+                (SELECT count(*) 
+                FROM recipes 
+                WHERE chefs.id = recipes.chef_id)
+                AS total_recipes`
+
+            const select = `
+                SELECT chefs.*, ${total}, ${total_recipes},
+                files.path AS path
+                FROM chefs 
+                LEFT JOIN files ON (chefs.file_id = files.id)
+                LIMIT $1 OFFSET $2
+                `
+            
+            return db.query(select, [limit, offset])
+
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
     async findFiles(id) {
         try {
             const query = `

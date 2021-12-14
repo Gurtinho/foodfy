@@ -88,7 +88,6 @@ module.exports = {
         try {
             const { limit, offset } = params
 
-            // contar os registros
             let total = `(SELECT count(*) FROM chefs) AS total`
             
             const query = `

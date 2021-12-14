@@ -127,6 +127,8 @@ module.exports = {
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
 
+            console.log(files)
+
             return res.render(`admin/recipes/edit`, { recipe, chefsOptions, files })
             
         } catch (err) {

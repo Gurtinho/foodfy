@@ -83,8 +83,6 @@ module.exports = {
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
 
-            console.log(recipes)
-
             if (recipes[0] != null) {
                 const pagination = {
                         total: Math.ceil(recipes[0].total / limit),
@@ -234,8 +232,20 @@ module.exports = {
                 limit,
                 offset
             }
-            const recipesResults = await Search.paginate(params)
-            const recipes = recipesResults.rows
+            let recipes_results = await Search.paginate(params)
+            let recipes_files = recipes_results.rows
+
+            let files = recipes_files.map(async item => ({
+                ...item,
+                path: (await Recipe.recipe_files(item.id)).rows[0].path
+            }))
+
+            let recipes = await Promise.all(files)
+
+            recipes = recipes.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+            }))
 
             if (recipes[0] != null) {
                 const pagination = {
@@ -244,7 +254,7 @@ module.exports = {
                     }
                 return res.render('home/search', { search, recipes, pagination })
             }
-            return res.render('home/search', { search })
+            return res.render('home/search', { search, recipes })
             
         } catch (err) {
             console.error(err)

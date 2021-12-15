@@ -1,39 +1,39 @@
 const db = require('../../config/db')
 
 module.exports = {
-    async findRecipe(search) {
-        try {
-            const recipes = `
-                SELECT recipes.*,
-                chefs.name AS chefs_name
-                FROM recipes
-                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-                WHERE recipes.title ILIKE '%${search}%'
-                OR chefs.name ILIKE '%${search}%'
-                `
-            return db.query(recipes)
+    // async findRecipe(search) {
+    //     try {
+    //         const recipes = `
+    //             SELECT recipes.*,
+    //             chefs.name AS chefs_name
+    //             FROM recipes
+    //             LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+    //             WHERE recipes.title ILIKE '%${search}%'
+    //             OR chefs.name ILIKE '%${search}%'
+    //             `
+    //         return db.query(recipes)
 
-        } catch (err) {
-            console.error(err)
-        }
-    },
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // },
 
-    async findChef(search) {
-        try {
-            const chefs = `
-                SELECT chefs.*,
-                count(recipes) AS total_recipes
-                FROM chefs
-                LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
-                WHERE chefs.name ILIKE '%${search}%'
-                GROUP BY chefs.id
-                `
-            return db.query(chefs)
+    // async findChef(search) {
+    //     try {
+    //         const chefs = `
+    //             SELECT chefs.*,
+    //             count(recipes) AS total_recipes
+    //             FROM chefs
+    //             LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
+    //             WHERE chefs.name ILIKE '%${search}%'
+    //             GROUP BY chefs.id
+    //             `
+    //         return db.query(chefs)
             
-        } catch (err) {
-            console.error(err)
-        }
-    },
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // },
 
     async paginate(params) {
         try {

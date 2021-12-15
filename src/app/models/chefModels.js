@@ -1,21 +1,6 @@
 const db = require('../../config/db')
 
 module.exports = {
-    async all() {
-        try {
-            const select = `
-                SELECT chefs.*, count(recipes) AS total_recipes
-                FROM chefs 
-                LEFT JOIN recipes ON (chefs.id = recipes.chef_id)
-                GROUP BY chefs.id
-                ORDER BY total_recipes DESC`
-            return db.query(select)
-
-        } catch (err) {
-            console.error(err)
-        }
-    },
-
     async create(data) {
         try {
             const { name, file_id } = data
@@ -79,27 +64,6 @@ module.exports = {
             const query = `DELETE FROM chefs WHERE id = $1`
             return db.query(query, [id])
 
-        } catch (err) {
-            console.error(err)
-        }
-    },
-
-    async paginate(params) {
-        try {
-            const { limit, offset } = params
-
-            let total = `(SELECT count(*) FROM chefs) AS total`
-            
-            const query = `
-                SELECT chefs.*, ${total},
-                count(recipes) AS total_recipes
-                FROM chefs
-                LEFT JOIN recipes ON (recipes.chef_id = chefs.id)
-                GROUP BY chefs.id LIMIT $1 OFFSET $2
-            `
-
-            return db.query(query, [limit, offset])
-            
         } catch (err) {
             console.error(err)
         }

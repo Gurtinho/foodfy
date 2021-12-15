@@ -35,7 +35,6 @@ routes.post('/admin/chefs', multer.array('file_id', 1), chefs.post)
 routes.put('/admin/chefs', multer.array('file_id', 1), chefs.put)
 routes.delete('/admin/chefs', chefs.delete)
 
-
 //server error
 routes.use((req, res) => {
     res.status(404).render("error/not-found")

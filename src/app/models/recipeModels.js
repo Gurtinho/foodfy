@@ -2,22 +2,6 @@ const db = require('../../config/db')
 const fs = require('fs')
 
 module.exports = {
-    async recipe(id) {
-        try {
-            const select = `
-                SELECT recipes.*,
-                chefs.name AS chefs_name
-                FROM recipes
-                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-                WHERE recipes.id = $1
-                ORDER BY id DESC`
-            return db.query(select, [id])
-            
-        } catch (err) {
-            console.error(err)
-        }
-    },
-
     async create(data) {
         try {
             const { chef_id, title, ingredients, preparation, information } = data
@@ -156,7 +140,7 @@ module.exports = {
        }
     },
 
-    async recipe_files(id) {
+    async recipeFiles(id) {
         try {
             const query = `
                 SELECT recipe_files.*,
@@ -172,7 +156,7 @@ module.exports = {
         }
     },
 
-    async recipe_files_delete(id) {
+    async recipeFilesDelete(id) {
         try {
             const query = `
                 DELETE FROM recipe_files
@@ -183,21 +167,5 @@ module.exports = {
         } catch (err) {
             console.error(err)
         }
-    },
-
-    async all() {
-        try {
-            let query = `
-                SELECT recipes.*,
-                chefs.name AS chefs_name
-                FROM recipes
-                LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-                ORDER BY id DESC
-            `
-            return await db.query(query)
-           
-        } catch (err) {
-            console.error(err)
-       }
     }
 }

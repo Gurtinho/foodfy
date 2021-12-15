@@ -275,7 +275,6 @@ footer p {
 .acess-content {
   display: grid;
   width: 940px;
-  height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 0;
   grid-gap: 15px;
@@ -283,7 +282,6 @@ footer p {
 
 .comida {
   display: flex;
-  height: auto;
   width: 100%;
   margin-bottom: 20px;
   justify-content: center;

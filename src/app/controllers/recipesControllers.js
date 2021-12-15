@@ -20,7 +20,7 @@ module.exports = {
             
             let files = recipes_results.map(async item => ({
                 ...item,
-                path: (await Recipe.recipe_files(item.id)).rows[0].path
+                path: (await Recipe.recipeFiles(item.id)).rows[0].path
             }))
 
             let recipes = await Promise.all(files)
@@ -107,10 +107,10 @@ module.exports = {
     
     async show(req, res) {
         try {
-            let results = await Recipe.recipe(req.params.id)
+            let results = await Recipe.find(req.params.id)
             let recipe = results.rows[0]
 
-            results = await Recipe.recipe_files(recipe.id)
+            results = await Recipe.recipeFiles(recipe.id)
             let recipe_files = results.rows
 
             recipe_files = recipe_files.map(file => ({
@@ -139,7 +139,7 @@ module.exports = {
             const chefsOptions = results.rows
 
             // table files
-            results = await Recipe.recipe_files(recipe.id)
+            results = await Recipe.recipeFiles(recipe.id)
             let files = results.rows
 
             files = files.map(file => ({
@@ -218,10 +218,10 @@ module.exports = {
 
     async delete(req, res) {
         try {
-            const recipe_file_results = await Recipe.recipe_files(req.body.id)
+            const recipe_file_results = await Recipe.recipeFiles(req.body.id)
             const recipe_file = recipe_file_results.rows[0].file_id
 
-            Recipe.recipe_files_delete(req.body.id)
+            Recipe.recipeFilesDelete(req.body.id)
 
             await File.delete(recipe_file)
 

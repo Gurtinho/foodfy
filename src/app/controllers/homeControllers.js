@@ -31,7 +31,7 @@ module.exports = {
 
             let files = recipes_files.map(async item => ({
                 ...item,
-                path: (await Recipe.recipe_files(item.id)).rows[0].path
+                path: (await Recipe.recipeFiles(item.id)).rows[0].path
             }))
 
             let recipes = await Promise.all(files)
@@ -73,7 +73,7 @@ module.exports = {
 
             let files = recipes_files.map(async item => ({
                 ...item,
-                path: (await Recipe.recipe_files(item.id)).rows[0].path
+                path: (await Recipe.recipeFiles(item.id)).rows[0].path
             }))
 
             let recipes = await Promise.all(files)
@@ -102,15 +102,13 @@ module.exports = {
             let recipeResults = await Recipe.find(req.params.id)
             let recipe = recipeResults.rows[0]
 
-            results = await Recipe.recipe_files(recipe.id)
+            results = await Recipe.recipeFiles(recipe.id)
             let recipe_files = results.rows
 
             recipe_files = recipe_files.map(file => ({
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
-
-            console.log(recipe_files)
 
             if (!recipe) return res.send('recipe not found')
             
@@ -170,7 +168,6 @@ module.exports = {
             page = page || 1
             limit = limit || 6
             let offset = limit * (page - 1)
-            
 
             const params = {
                 id,
@@ -194,7 +191,7 @@ module.exports = {
             // files receitas
             let files = recipes_results.map(async item => ({
                 ...item,
-                path: (await Recipe.recipe_files(item.id)).rows[0].path
+                path: (await Recipe.recipeFiles(item.id)).rows[0].path
             }))
 
             let recipes = await Promise.all(files)
@@ -237,7 +234,7 @@ module.exports = {
 
             let files = recipes_files.map(async item => ({
                 ...item,
-                path: (await Recipe.recipe_files(item.id)).rows[0].path
+                path: (await Recipe.recipeFiles(item.id)).rows[0].path
             }))
 
             let recipes = await Promise.all(files)

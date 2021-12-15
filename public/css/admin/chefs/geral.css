@@ -89,6 +89,7 @@ color: white;
 
 .fields-info-chefs h2 {
   font-size: 18px;
+  margin-bottom: 5px;
   color: #111;
   overflow: hidden;
   white-space: nowrap;
@@ -540,6 +541,7 @@ color: white;
   font-size: 14px;
   color: #6558C3;
   text-decoration: none;
+  font-weight: bold;
 }
 
 

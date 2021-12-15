@@ -53,7 +53,8 @@ module.exports = {
                 chefs.name AS chefs_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id) 
-                WHERE recipes.id = $1`
+                WHERE recipes.id = $1
+                ORDER BY id DESC`
             
             return db.query(select, [id])
             

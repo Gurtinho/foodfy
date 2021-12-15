@@ -6,14 +6,39 @@
 
 {% block content %}
     <section class="accessfood">
-        <div class="receitas-content-food">
-            <div class="food-page">
-                <img class="food-img-page" src="{{ recipe.image }}">
+        <section>
+            <div class="food">
+                <div>
+                    {% if recipe_files[0] %}
+                        <img class="food-img"
+                            src="{{ recipe_files[0].src }}"
+                            onclick="lightbox.open()">
+                    {% endif %}
+                </div>
+                <div class="lightbox-target">
+                    <img src="{{ recipe_files[0].src }}" alt="{{ recipe_files[0].name }}">
+                    <a href="" class="lightbox-close"
+                        onclick="lightbox.close()">
+                        <span class="material-icons">close</span>
+                    </a>
+                </div>
+                <div class="image_preview_dad">
+                    <div class="image_preview">
+                        {% for recipe in recipe_files %}
+                            <img  
+                                src="{{ recipe.src }}" 
+                                alt="{{ recipe.name }}"
+                                {% if loop.index0 == 0 %}
+                                    class="first"
+                                {% endif %}
+                                onclick="imageGallery.setImage(event)">
+                        {% endfor %}
+                    </div>
+                </div>
                 <h2 class="food-title-page">{{ recipe.title }}</h2>
                 <h3 class="food-author-page">Por {{ recipe.chefs_name }}</h3>
             </div>
-        </div>
-
+        </section>
         <section class="descricao">
             <div class="ingredientes">
                 <div class="inf">

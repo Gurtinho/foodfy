@@ -27,7 +27,7 @@
             {% for recipe in recipes %}
                 <div class="comida">
                     <a type="hidden" href="/recipes/food/{{ recipe.id }}">
-                        <img class="img" src="{{ recipe.image }}">
+                        <img class="img" src="{{ recipe.src }}">
                         <h2 class="comidatitle">{{ recipe.title }}</h2>
                         <h3 class="comidaautor">{{ recipe.chefs_name }}</h3>
                     </a>

@@ -108,7 +108,7 @@ module.exports = {
     async show(req, res) {
         try {
             let results = await Recipe.recipe(req.params.id)
-            const recipe = results.rows[0]
+            let recipe = results.rows[0]
 
             results = await Recipe.recipe_files(recipe.id)
             let recipe_files = results.rows
@@ -117,8 +117,6 @@ module.exports = {
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
-
-            console.log(recipe_files)
 
             return res.render('admin/recipes/show', { recipe, recipe_files })
             

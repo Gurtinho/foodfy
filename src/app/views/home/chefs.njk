@@ -10,7 +10,7 @@
         {% for chef in chefs %}
             <div class="fields-item-chefs">
                 <a class="fields-item-chefs-a" type="hidden" href="/chefs/{{ chef.id }}">
-                    <img class="fields-img-chefs" src="{{ chef.avatar_url }}">
+                    <img class="fields-img-chefs" src="{{ chef.src }}">
                     <div class="fields-info-chefs">
                         <h2>{{ chef.name }}</h2>
                         {% if chef.total_recipes != 0 %}

@@ -1,5 +1,5 @@
 const imageGallery = {
-    highlight: document.querySelector('.food-img-recipe'),
+    highlight: document.querySelector('.food-img'),
 
     previews: document.querySelectorAll('.image_preview img'),
 

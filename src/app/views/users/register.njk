@@ -1,0 +1,16 @@
+{% extends 'templates/layouts/layout-users.njk' %}
+
+{% block content %}
+    <section class="users-register">
+        <form method="POST" action="/users/register">
+            <section class="users-title">
+                <h2>Crie uma conta</h2>
+            </section>
+            
+            {% include 'templates/fields/fields-users.njk' %}
+
+            <input type="hidden" name="id" value="id">
+        </form>
+    </section>
+{% endblock %}
+

@@ -1,8 +1,6 @@
 const Recipe = require('../models/recipeModels')
 const Chef = require('../models/chefModels')
-const Search = require('../models/searchModels')
 const File = require('../models/fileModels')
-const RecipeFile = require('../models/recipeFileModels')
 
 module.exports = {
     async about(req, res) {
@@ -209,49 +207,6 @@ module.exports = {
                 return res.render('home/chef-show', { chef, recipes, pagination, files_chefs })
             }
             return res.render('home/chef-show', { chef, recipes, files_chefs })
-            
-        } catch (err) {
-            console.error(err)
-        }
-    },
-
-    async search(req, res) {
-        try {
-            let { search, page, limit } = req.query
-
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
-
-            const params = {
-                search,
-                page,
-                limit,
-                offset
-            }
-            let recipes_results = await Search.paginate(params)
-            let recipes_files = recipes_results.rows
-
-            let files = recipes_files.map(async item => ({
-                ...item,
-                path: (await Recipe.recipeFiles(item.id)).rows[0].path
-            }))
-
-            let recipes = await Promise.all(files)
-
-            recipes = recipes.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            if (recipes[0] != null) {
-                const pagination = {
-                        total: Math.ceil(recipes[0].total / limit),
-                        page,
-                    }
-                return res.render('home/search', { search, recipes, pagination })
-            }
-            return res.render('home/search', { search, recipes })
             
         } catch (err) {
             console.error(err)

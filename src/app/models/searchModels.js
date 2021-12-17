@@ -1,7 +1,7 @@
 const db = require('../../config/db')
 
 module.exports = {
-    async paginate(params) {
+    async search(params) {
         try {
             const { search, limit, offset } = params
         

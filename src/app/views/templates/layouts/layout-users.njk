@@ -7,17 +7,25 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-        <link rel="stylesheet" href="/css/main-chefs.css">
+        <link rel="stylesheet" href="/css/main-users.css">
         <link rel="stylesheet" href="/css/messages.css">
     </head>
-    <body>
-        {% include 'templates/fields/fields-header-admin.njk' %}
+    <body> 
         
+        {% include 'parts/messages.njk' %}
+
+        <header>
+            <section>
+                <a href="/" class="linkhome-recipes"><img src="/assets/logo.png" alt=""></a>
+            </section>
+        </header>  
+
         {% block content %}
         
         {% endblock %}
 
         <script src="/js/script.js"></script>
         <script src="/js/paginate.js"></script>
+        <script src="/js/validate.js"></script>
     </body>
 </html>

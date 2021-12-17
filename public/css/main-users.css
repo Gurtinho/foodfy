@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+* {
+    margin: 0 auto;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* LAYOUT */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+}
+
+header section {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    width: 940px;
+    display: flex;
+    justify-content: center;
+}
+
+.users-register {
+    display: flex;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 15%;
+}
+
+/* TITLE */
+.users-title {
+    display: flex;
+    width: 100%;
+    color: #111;
+    font-size: 20px;
+}
+
+/* FIELDS */
+.fields-register {
+    margin-top: 30px;
+    width: 500px;
+}
+
+.div-fields-register div {
+    margin-bottom: 35px;
+}
+
+.div-fields-register div p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.div-fields-register div input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #DDD;
+    outline: none;
+    cursor: pointer;
+}
+
+.div-fields-submit {
+    display: flex;
+    margin-top: 40px;
+}
+
+.div-fields-submit a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    left: 0;
+    margin-left: 0;
+    color: #969696;
+    font-weight: bold;
+}
+
+.div-fields-submit button {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 40px;
+    right: 0;
+    margin-right: 0;
+    border-radius: 4px;
+    border: none;
+    background-color: #6558C3;
+}
+
+
+/* ERROR */
+.error {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}

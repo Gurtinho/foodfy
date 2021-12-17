@@ -1,1 +1,569 @@
-@import 'admin/chefs/geral.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+* {
+  margin: 0 auto;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  height: 100%;
+}
+
+/*========== HEADER ==========*/
+.header-recipes {
+  display: flex;
+  width: 100%;
+  height:80px;
+  font-family: 'Roboto', sans-serif;
+  background-color: black;
+}
+
+.div-header-recipes {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 940px;
+  background-color: black;
+}
+
+.linkhome-recipes {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  margin-left: 120px;
+  width: 150px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #999;
+  font-size: 16px;
+  margin-right: 25px;
+}
+
+.links a.active {
+font-weight: bold;
+color: white;
+}
+
+/*=========== INDEX ===========*/
+.fields-list-chefs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.fields-grid-chefs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 940px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 300px;
+}
+
+.fields-item-chefs {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  align-items: center;
+  width: 235px;
+  margin-bottom: 30px;
+  height: 80px;
+}
+
+.fields-img-chefs {
+  margin-left: 0;
+  border-radius: 50%;
+  height: 64px;
+  width: 64px;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.fields-info-chefs {
+  width: 100%;
+}
+
+.fields-info-chefs h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #111;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fields-info-chefs p {
+  font-size: 12px;
+  color: #777;
+}
+
+.fields-info-chefs a {
+  font-size: 14px;
+  color: #6558C3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.div-mais-acessadas {
+  height: 100px;
+  width: 100%;
+  align-items: center;
+}
+
+.sub-acessadas {
+  display: flex;
+  width: 940px;
+  height: 100%;
+  align-items: center;
+}
+
+.mais-acessadas {
+  display: flex;
+  margin-left: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.acessadas {
+  display: grid;
+  justify-content: center;
+  height: auto;
+  margin-bottom: 70px;
+}
+
+.acess-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width:940px;
+  grid-gap: 10px;
+}
+
+.comida {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.comida a {
+  text-decoration: none;
+  color: #111;
+}
+
+.img {
+  cursor:pointer;
+  height: auto;
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.comidatitle {
+  cursor: pointer;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.comidaautor {
+  cursor: pointer;
+  font-size: 14px;
+  color: #777777;
+  margin-bottom: 10px;
+}
+
+/*============ CREATE =============*/
+.chefs {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.create-chef,
+.index-chef,
+.edit-chef,
+.show-chef {
+  display: flex;
+  align-items: flex-end;
+  width: 940px;
+}
+
+.create-chef-p,
+.index-chef-p,
+.edit-chef-p,
+.show-chef-p {
+  left: 0;
+  margin-left: 0;
+  margin-bottom: 5px;
+}
+
+.create-chef-p p,
+.index-chef-p p,
+.edit-chef-p p,
+.show-chef-p p {
+  font-size: 24px;
+  color: #111111;
+  font-weight: bold;
+}
+
+.save-chef-create,
+.save-chef-index,
+.save-chef-edit,
+.save-chef-show {
+  right: 0;
+  margin-right: 0;
+}
+
+.save-chef-create a,
+.save-chef-index a,
+.save-chef-edit a,
+.save-chef-show a {
+  text-decoration: none;
+}
+
+.btn-save-chef {
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #6558C3;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-delete-chef {
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #dc4747;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancel-chef {
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #777777;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-save-chef:hover {
+  background-color: #5042bb;
+  transition: 200ms;
+}
+
+.btn-delete-chef:hover {
+  background-color: #cf3a3a;
+  transition: 200ms;
+}
+
+.btn-cancel-chef:hover {
+  background-color: #616161;
+  transition: 200ms;
+}
+
+/*============ FIELDS ===========*/
+.fields-creation {
+  display: flex;
+  width: 100%;
+}
+
+.div-fields-creation {
+  width: 940px;
+  margin-bottom: 200px;
+}
+
+.div-fields-creation {
+  margin-top: 30px;
+}
+
+.title {
+  margin-top: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #111;
+}
+
+.div-fields-creation input,
+.div-fields-creation select,
+.div-fields-creation textarea {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #dddddd;
+  resize: none;
+}
+
+
+.div-fields-creation input.active {
+  border-color: #e61f4a;
+  color: #e61f4a;
+}
+
+.div-fields-creation input.active::placeholder {
+  color: #e61f4a;
+}
+
+.image-preview {
+  margin-bottom: 20px;
+}
+
+.input-view-none {
+  display: none;
+}
+
+.avatar {
+  margin-top: 25px;
+}
+
+.input-file {
+  display: none;
+}
+
+.label-file {
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #6558C3;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/*============ CHEFS ============*/
+/* food page */
+.food {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  width:940px;
+  height:100%;
+}
+
+.food-img {
+  margin-top: 10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.food-img img {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.food-title {
+  font-family: "Roboto", regular;
+  font-size:36px;
+  color:#111111;
+  margin-top:25px;
+}
+
+.food-author {
+  font-family: "Roboto", regular;
+  font-size: 20px;
+  color:#777777;
+  margin-top:5px;
+}
+
+/*food*/
+.accessfood {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.content {
+  color:#5e5e5e;
+  height: 100%;
+  align-items: center;
+  font-size: 14px;
+  font-family: "Roboto", bold;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.content li {
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+/*=========== SHOW ===========*/
+/* food page */
+.food {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  width:940px;
+  height:100%;
+}
+
+.food-img-recipe {
+  margin-top: 10px;
+  width:100%;
+  height: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.food-title-recipe {
+  font-family: "Roboto", regular;
+  font-size:36px;
+  color:#111111;
+  margin-top:40px;
+}
+
+.food-author-recipe {
+  font-family: "Roboto", regular;
+  font-size: 20px;
+  color:#777777;
+  margin-top:5px;
+}
+
+/*food*/
+.descricao {
+  margin-top:40px;
+  margin-bottom: 40px;
+  width:940px;
+  height: 100%;
+}
+
+.inf {
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.ingredientes h1,
+.preparo h1,
+.adicionais h1 {
+  display: inline-block;
+  color:#111111;
+  font-size: 24px;
+  font-family: "Roboto", bold;
+}
+
+.show {
+  display: flex;
+  height: 100px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.show div {
+  display: flex;
+  width: 940px;
+  margin-top: 30px;
+  align-items: flex-end;
+}
+
+.show-chefs p {
+  box-sizing: border-box;
+  font-size: 24px;
+  color: #111111;
+}
+
+.fields-grid-show-chef {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 940px;
+  height: 300px;
+  margin-bottom: 30px;
+}
+
+.fields-item-show-chef {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  width: 470px;
+  margin-bottom: 20px;
+  height: 80px;
+}
+
+.fields-item-show-chef-p {
+  color: #777;
+  margin-left: 0;
+}
+
+.fields-img-show-chef {
+  margin-left: 0;
+  border-radius: 8.5px;
+  height: 80px;
+  width: 172px;
+  cursor: pointer;
+  object-position: center center;
+  object-fit: cover;
+}
+
+.fields-info-show-chef {
+  width: 100%;
+}
+
+.fields-info-show-chef h2 {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #111;
+  margin-bottom: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fields-info-show-chef p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.fields-info-show-chef a {
+  font-size: 14px;
+  color: #6558C3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+/*========= pagination =========*/
+.container-pagination {
+  display: flex;
+  bottom: 0;
+  margin-bottom: 0;
+  margin-top: auto;
+  justify-content: center;
+  width: 100%;
+  min-height: 62px;
+}
+
+.pagination a,
+.pagination span {
+  text-decoration: none;
+  color: #6558C3;
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+.pagination a:hover {
+  filter: brightness(0.3);
+}

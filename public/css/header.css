@@ -1,0 +1,58 @@
+.header-recipes {
+  display: flex;
+  width: 100%;
+  height:80px;
+  font-family: 'Roboto', sans-serif;
+  background-color: black;
+}
+
+.div-header-recipes {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 940px;
+  background-color: black;
+}
+
+.linkhome-recipes {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  margin-left: 120px;
+  width: 150px;
+}
+
+.links ul {
+  display: flex;
+}
+
+.links ul li {
+  list-style: none;
+}
+
+.links a {
+  text-decoration: none;
+  color: #999;
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 25px;
+}
+
+.links a.active {
+font-weight: bold;
+color: white;
+}
+
+.logout {
+  right: 0;
+  margin-right: 0;
+}
+
+.logout a {
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}

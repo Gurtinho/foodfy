@@ -24,7 +24,7 @@ async function post(req, res, next) {
         if (password != passwordrepeat) return res.render('users/register', {
             error: 'As senhas devem ser iguais!'
         })
-            
+        
         next()
 
     } catch (err) {

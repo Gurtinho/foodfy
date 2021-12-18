@@ -9,10 +9,11 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         <link rel="stylesheet" href="/css/main-users.css">
         <link rel="stylesheet" href="/css/messages.css">
+
     </head>
     <body> 
         
-        {% include 'parts/messages.njk' %}
+        {% include 'templates/parts/messages.njk' %}
 
         <header>
             <section>
@@ -21,7 +22,7 @@
         </header>  
 
         {% block content %}
-        
+            
         {% endblock %}
 
         <script src="/js/script.js"></script>

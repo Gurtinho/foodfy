@@ -26,22 +26,27 @@ module.exports = {
 
     async create(data) {
         try {
-            const { name, email, password } = data
+            let { name, email, password, is_admin } = data
             const query = `
                 INSERT INTO users (
                     name,
                     email,
-                    password
-                ) VALUES ( $1, $2, $3 )
+                    password, 
+                    is_admin
+                ) VALUES ( $1, $2, $3, $4 )
                 RETURNING id`
             
             // criptografia
             const passwordHash = await hash(password, 8)
 
+            if (is_admin != true) {
+                is_admin = false
+            }
             const values = [
                 name,
                 email,
-                passwordHash
+                passwordHash, 
+                is_admin
             ]
 
             const results = await db.query(query, values)

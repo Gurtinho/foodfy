@@ -1,13 +1,8 @@
 <section class="fields-register">
     <div class="div-fields-register">
         <div>
-            <p class="title">Nome</p>
-            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira um nome de usuário" required>
-        </div>
-
-        <div>
             <p class="title">Email</p>
-            <input type="email" name="email" placeholder="Insira um email" required 
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Insira um email" required 
             onblur="validate.apply(this, 'validEmail')">
         </div>
 
@@ -15,17 +10,13 @@
             <p class="title">Senha</p>
             <input type="password" name="password" placeholder="Digite uma senha" required>
         </div>
-
-        <div>
-            <p class="title">Repetir senha</p>
-            <input type="password" name="passwordrepeat" placeholder="Digite novamente a senha" required>
-        </div>
     </div>
     <div class="div-fields-submit">
-        <a href="">
+        <a href="/">
             <span class="material-icons">arrow_back_ios</span>
             <p>Voltar</p>
         </a>
-        <button type="submit">Registrar</button>
+        <a href="/admin/users/register">Registre-se</a>
+        <button type="submit">Entrar</button>
     </div>
 </section>

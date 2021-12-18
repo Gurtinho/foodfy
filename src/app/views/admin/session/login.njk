@@ -1,0 +1,15 @@
+{% extends 'templates/layouts/layout-users.njk' %}
+
+{% block content %}
+    <section class="users-register">
+        <form method="POST" action="/admin/session/login">
+            <section class="users-title">
+                <h2>Iniciar Sessão</h2>
+            </section>
+            
+            {% include 'templates/fields/users-login.njk' %}
+
+            <input type="hidden" name="id" value="id">
+        </form>
+    </section>
+{% endblock %}

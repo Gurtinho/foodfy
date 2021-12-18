@@ -37,9 +37,9 @@ module.exports = {
                         total: Math.ceil(recipes[0].total / limit),
                         page,
                     }
-                return res.render('search/search', { search, recipes, pagination })
+                return res.render('home/search', { search, recipes, pagination })
             }
-            return res.render('search/search', { search, recipes })
+            return res.render('home/search', { search, recipes })
             
         } catch (err) {
             console.error(err)

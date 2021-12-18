@@ -8,16 +8,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         <link rel="stylesheet" href="/css/main-home.css">
+        <link rel="stylesheet" href="/css/menu-accounts.css">
     </head>
     <body>
         <header class="header-home">
             <div class="div-header">
                 <a href="/" class="linkhome"><img src="/assets/logo.png"></a>
                 <div class="links">
-                    <a href="/about">Sobre</a>
-                    <a href="/recipes">Receitas</a>
-                    <a href="/chefs">Chefs</a>
-                    <a href="/accounts">Login</a>
+                    <ul>
+                        <li><a href="/about">Sobre</a></li>
+                        <li><a href="/recipes">Receitas</a></li>
+                        <li><a href="/chefs">Chefs</a></li>
+                        <li class="accounts">
+                            {% if session.userId %}
+                                <a>Minha Conta</a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="/admin/recipes">
+                                            <button>Minhas receitas</button>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <form action="/admin/session/logout" method="POST">
+                                            <button>Sair</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            {% else %}
+                                <a href="/admin/session/login">Login</a>
+                            {% endif %}
+                        </li>
+
+                    </ul>
                 </div>
                 <div class="search">
                     <form action="/search" method="GET">
@@ -34,9 +56,6 @@
         {% block content %}
             
         {% endblock %}
-        <footer>
-            <p>Todos os direitos reservados - Receitas Foodfy</p>
-        </footer>
         <script src="/js/script.js"></script>
         <script src="/js/fillsearch.js"></script>
         <script src="/js/paginate.js"></script>

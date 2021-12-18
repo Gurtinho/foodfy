@@ -37,7 +37,7 @@ module.exports = {
             recipes = recipes.map(file => ({
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
+            }))    
 
             if (recipes[0] != null) {
                 const pagination = {

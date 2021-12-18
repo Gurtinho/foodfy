@@ -12,7 +12,9 @@
   "keywords": [],
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-pg-simple": "^7.0.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "method-override": "^3.0.0",
     "multer": "^1.4.4",
     "nodemon": "^2.0.4",

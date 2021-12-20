@@ -56,7 +56,7 @@ module.exports = {
 
     async recipes(req, res) {
         try {
-             let { page, limit } = req.query
+            let { page, limit } = req.query
             page = page || 1
             limit = limit || 6
             let offset = limit * (page - 1)

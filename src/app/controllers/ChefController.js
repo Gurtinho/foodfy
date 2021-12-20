@@ -111,7 +111,7 @@ module.exports = {
             // files receitas
             let files = recipes_results.map(async item => ({
                 ...item,
-                path: (await Recipe.recipe_files(item.id)).rows[0].path
+                path: (await Recipe.recipeFiles(item.id)).rows[0].path
             }))
 
             let recipes = await Promise.all(files)

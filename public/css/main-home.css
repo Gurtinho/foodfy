@@ -325,7 +325,6 @@ footer p {
 }
 
 .comida {
-  display: flex;
   width: 100%;
   margin-bottom: 20px;
   justify-content: center;
@@ -523,7 +522,6 @@ footer p {
 }
 
 .food {
-  display: flex;
   text-align: center;
   flex-direction: column;
   width:100%;
@@ -541,7 +539,6 @@ footer p {
 
 .image_preview_dad {
   display: flex;
-  justify-content: flex-end;
   width: 100%;
   margin-bottom: 10px;
   margin-top: 5px;
@@ -549,6 +546,8 @@ footer p {
 
 .image_preview {
   display: flex;
+  margin-right: 0;
+  right: 0;
 }
 
 .image_preview img {

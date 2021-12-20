@@ -1,0 +1,23 @@
+<section class="fields-register">
+    <div class="div-fields-register">
+        <div>
+            <p class="title">Email</p>
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Insira seu email" required 
+            onblur="validate.apply(this, 'validEmail')">
+        </div>
+
+        <div>
+            <p class="title">Senha</p>
+            <input type="password" name="password" placeholder="Digite uma nova senha" required>
+        </div>
+
+        <div>
+            <p class="title">Repetir senha</p>
+            <input type="password" name="passwordrepeat" placeholder="Digite novamente a senha" required>
+        </div>
+    </div>
+    <div class="div-fields-submit">
+        <button type="submit">Nova Senha</button>
+    </div>
+</section>
+<input type="hidden" name="token" value="{{token}}">

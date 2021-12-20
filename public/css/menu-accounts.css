@@ -13,7 +13,7 @@
     position: absolute;
     left: 0;
     top: 30px;
-    width: 150px;
+    width: 165px;
     margin-top: 8px;
     background-color: white;
     box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.3);
@@ -25,18 +25,30 @@
 
 .accounts .submenu li,
 .accounts .submenu button {
-    font-size: 14px;
+    font-size: 16px;
     display: inline-block;
     border: none;
-    padding: 5px 12px;
+    padding: 0px 12px;
     cursor: pointer;
     background-color: white;
     color: rgb(58, 58, 58);
 }
 
-.accounts .submenu li:hover,
-.accounts .submenu button:hover {
+.accounts .submenu li .submenu-a {
+    padding-top: 20px;
+}
+
+.accounts .submenu li .submenu-b {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.accounts .submenu li .submenu-a:hover {
   color: #6558C3;
+}
+
+.accounts .submenu li .submenu-b:hover {
+  color: crimson;
 }
 
 .accounts:hover .submenu {

@@ -42,6 +42,7 @@ module.exports = {
             if (is_admin != true) {
                 is_admin = false
             }
+            
             const values = [
                 name,
                 email,
@@ -55,5 +56,22 @@ module.exports = {
         } catch (err) {
             console.error(err)
         }
+    },
+
+    async update(id, fields) {
+        let query = `UPDATE users SET`
+
+        Object.keys(fields).map((key, index, array) => {
+            if ((index + 1) < array.length) {
+                query = `${query}
+                ${key} = '${fields[key]}',`
+            } else {
+                query = `${query}
+                ${key} = '${fields[key]}'
+                WHERE id = ${id}`
+            }
+        })
+        await db.query(query)
+        return
     }
 }

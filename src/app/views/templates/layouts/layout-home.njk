@@ -21,16 +21,16 @@
                         <li><a href="/chefs">Chefs</a></li>
                         <li class="accounts">
                             {% if session.userId %}
-                                <a>Minha Conta</a>
+                                <a>Minha conta</a>
                                 <ul class="submenu">
                                     <li>
                                         <a href="/admin/recipes">
-                                            <button>Minhas receitas</button>
+                                            <button class="submenu-a" >Minhas receitas</button>
                                         </a>
                                     </li>
                                     <li>
                                         <form action="/admin/session/logout" method="POST">
-                                            <button>Sair</button>
+                                            <button class="submenu-b">Sair</button>
                                         </form>
                                     </li>
                                 </ul>

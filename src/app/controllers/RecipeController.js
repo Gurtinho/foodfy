@@ -59,13 +59,15 @@ module.exports = {
 
     async post(req, res) {
         try {
+            const { userId: user_id } = req.session
+
             const keys = Object.keys(req.body)
             for ( let key of keys ) {
                 if (req.body[key] == '') {
                     return res.send('Preencha todos os campos')
                 }
             }
-
+            
             const { chef: chef_id, title, ingredients, preparation, information } = req.body
 
             if (req.files.length == 0) {
@@ -74,6 +76,7 @@ module.exports = {
 
             const recipe_idResults = await Recipe.create({
                 chef_id,
+                user_id,
                 title,
                 ingredients,
                 preparation,

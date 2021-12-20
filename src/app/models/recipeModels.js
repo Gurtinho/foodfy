@@ -4,19 +4,21 @@ const fs = require('fs')
 module.exports = {
     async create(data) {
         try {
-            const { chef_id, title, ingredients, preparation, information } = data
+            const { chef_id, user_id, title, ingredients, preparation, information } = data
             const query = `
                 INSERT INTO recipes (
                     chef_id,
+                    user_id,
                     title,
                     ingredients,
                     preparation,
                     information
-                ) VALUES ( $1, $2, $3, $4, $5 )
+                ) VALUES ( $1, $2, $3, $4, $5, $6 )
                 RETURNING id`
             
             const values = [
                 chef_id,
+                user_id,
                 title,
                 ingredients,
                 preparation,
@@ -49,18 +51,20 @@ module.exports = {
 
     async update(id, data) {
         try {
-            const { chef_id, title, ingredients, preparation, information } = data
+            const { chef_id, user_id, title, ingredients, preparation, information } = data
             const query = `
                 UPDATE recipes SET
                     chef_id = ($1),
-                    title = ($2),
-                    ingredients = ($3),
-                    preparation = ($4),
-                    information = ($5)
+                    user_id = ($2),
+                    title = ($3),
+                    ingredients = ($4),
+                    preparation = ($5),
+                    information = ($6)
                 WHERE id = ${id}
             `
             const values = [
                 chef_id,
+                user_id,
                 title,
                 ingredients,
                 preparation,

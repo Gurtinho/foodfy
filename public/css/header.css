@@ -50,9 +50,11 @@ color: white;
   margin-right: 0;
 }
 
-.logout a {
+.logout button {
   font-size: 15px;
-  text-decoration: none;
+  background: none;
+  border: none;
   color: white;
   font-weight: bold;
+  cursor: pointer;
 }

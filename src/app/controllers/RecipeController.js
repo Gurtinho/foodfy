@@ -45,6 +45,50 @@ module.exports = {
         
     },
 
+    async indexUsersRecipes(req, res) {
+        try {
+            let { page, limit } = req.query
+            page = page || 1
+            limit = limit || 6
+            let offset = limit * (page - 1)
+
+            const { userId: id } = req.session
+
+            const params = {
+                id,
+                limit,
+                offset
+            }
+
+            let results = await Recipe.findRecipesId(params)
+            let recipes_results = results.rows
+            
+            let files = recipes_results.map(async item => ({
+                ...item,
+                path: (await Recipe.recipeFiles(item.id)).rows[0].path
+            }))
+
+            let recipes = await Promise.all(files)
+
+            recipes = recipes.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+            }))
+
+            if (recipes[0] != null) {
+                const pagination = {
+                    total: Math.ceil(recipes[0].total / limit),
+                    page,
+                }
+                return res.render('admin/recipes/index', { recipes, pagination })
+            }
+            return res.render('admin/recipes/index', { recipes })
+
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
     async create(req, res) {
         try {
             let findChef = await Recipe.chefFindOption()

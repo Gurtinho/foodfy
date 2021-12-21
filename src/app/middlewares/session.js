@@ -15,9 +15,21 @@ function onlyUsers(req, res, next) {
 
 // is users admin
 function onlyAdminUsers(req, res, next) {
+    try {
+        if (!req.session.isAdmin) {
+            return res.render('admin/session/login', {
+                error: 'Somente administradores tem esse acesso!'
+            })
+        }
 
+        next()
+        
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 module.exports = {
-    onlyUsers
+    onlyUsers,
+    onlyAdminUsers
 }

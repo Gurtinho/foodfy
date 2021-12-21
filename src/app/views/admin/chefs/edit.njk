@@ -3,11 +3,11 @@
 {% block content %}
     <form method="POST" action="/admin/chefs?_method=PUT" enctype="multipart/form-data">
         <section class="chefs">
-            <div class="edit-chef">
-                <div class="edit-chef-p">
+            <div class="chef">
+                <div class="chef-p">
                     <p>Editando chef</p>
                 </div>
-                <div class="save-chef-edit">
+                <div class="save-chef">
                     <a href="/admin/chefs/{{ chef.id }}">
                         <button type="button" class="btn-cancel-chef">Cancelar</button>
                     </a>                    

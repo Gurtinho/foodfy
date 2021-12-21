@@ -147,30 +147,45 @@ body {
   margin-bottom: 20px;
 }
 
-.chef {
+.create-chef,
+.index-chef,
+.edit-chef,
+.show-chef {
   display: flex;
   align-items: flex-end;
   width: 940px;
 }
 
-.chef-p {
+.create-chef-p,
+.index-chef-p,
+.edit-chef-p,
+.show-chef-p {
   left: 0;
   margin-left: 0;
   margin-bottom: 5px;
 }
 
-.chef-p p {
+.create-chef-p p,
+.index-chef-p p,
+.edit-chef-p p,
+.show-chef-p p {
   font-size: 24px;
   color: #111111;
   font-weight: bold;
 }
 
-.save-chef {
+.save-chef-create,
+.save-chef-index,
+.save-chef-edit,
+.save-chef-show {
   right: 0;
   margin-right: 0;
 }
 
-.save-chef a {
+.save-chef-create a,
+.save-chef-index a,
+.save-chef-edit a,
+.save-chef-show a {
   text-decoration: none;
 }
 
@@ -229,12 +244,19 @@ body {
 }
 
 .div-fields-creation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
   width: 940px;
   margin-bottom: 200px;
 }
 
 .div-fields-creation {
   margin-top: 30px;
+}
+
+.div-fields-creation div {
+  width: 100%;
 }
 
 .title {

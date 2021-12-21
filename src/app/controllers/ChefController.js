@@ -38,13 +38,8 @@ module.exports = {
         }
     },
 
-    async create(req, res) {
-        try {
-            return res.render('admin/chefs/create')
-            
-        } catch (err) {
-            console.error(err)
-        }
+    create(req, res) {
+        return res.render('admin/chefs/create')
     },
     
     async post(req, res) {

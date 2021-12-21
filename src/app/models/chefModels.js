@@ -40,6 +40,7 @@ module.exports = {
     },
 
     async update(data) {
+        const { name, file_id, id } = data
         try {
             const query = `
                 UPDATE chefs SET
@@ -48,9 +49,9 @@ module.exports = {
                 WHERE id = $3
             `
             const values = [
-                data.name,
-                data.file_id,
-                data.id
+                name,
+                file_id,
+                id
             ]
             
             return db.query(query, values)

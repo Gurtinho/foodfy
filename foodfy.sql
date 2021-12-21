@@ -93,3 +93,16 @@ BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
+-- to run seeds
+DELETE FROM recipe_files;
+DELETE FROM recipes;
+DELETE FROM chefs;
+DELETE FROM users;
+DELETE FROM files;
+
+-- restart sequence auto-increment from tables
+ALTER SEQUENCE recipe_files_id_seq RESTART WITH 1;
+ALTER SEQUENCE recipes_id_seq RESTART WITH 1;
+ALTER SEQUENCE chefs_id_seq RESTART WITH 1;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+ALTER SEQUENCE files_id_seq RESTART WITH 1;

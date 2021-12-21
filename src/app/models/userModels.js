@@ -39,9 +39,7 @@ module.exports = {
             // criptografia
             const passwordHash = await hash(password, 8)
 
-            if (is_admin != true) {
-                is_admin = false
-            }
+            is_admin = is_admin || false
             
             const values = [
                 name,
@@ -59,19 +57,24 @@ module.exports = {
     },
 
     async update(id, fields) {
-        let query = `UPDATE users SET`
+        try {
+            let query = `UPDATE users SET`
 
-        Object.keys(fields).map((key, index, array) => {
-            if ((index + 1) < array.length) {
-                query = `${query}
-                ${key} = '${fields[key]}',`
-            } else {
-                query = `${query}
-                ${key} = '${fields[key]}'
-                WHERE id = ${id}`
-            }
-        })
-        await db.query(query)
-        return
-    }
+            Object.keys(fields).map((key, index, array) => {
+                if ((index + 1) < array.length) {
+                    query = `${query}
+                    ${key} = '${fields[key]}',`
+                } else {
+                    query = `${query}
+                    ${key} = '${fields[key]}'
+                    WHERE id = ${id}`
+                }
+            })
+            await db.query(query)
+            return
+
+        } catch (err) {
+            console.error(err)
+        }
+    },
 }

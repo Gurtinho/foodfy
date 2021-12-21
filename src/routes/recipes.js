@@ -4,10 +4,12 @@ const routes = express.Router()
 const multer = require('../app/middlewares/multer')
 const recipes = require('../app/controllers/RecipeController')
 
-const { onlyUsers } = require('../app/middlewares/session')
+const { onlyUsers, onlyAdminUsers } = require('../app/middlewares/session')
 
 // recipes
-routes.get('/', onlyUsers, recipes.index)
+routes.get('/', onlyUsers, recipes.indexUsersRecipes)
+routes.get('/all', onlyUsers, onlyAdminUsers, recipes.index)
+
 routes.get('/create', onlyUsers, recipes.create)
 routes.get('/:id', onlyUsers, recipes.show)
 routes.get('/:id/edit', onlyUsers, recipes.edit)

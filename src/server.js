@@ -10,7 +10,6 @@ const server = express()
 //middlewares
 server.use(session)
 server.use((req, res, next) => {
-    // global session
     res.locals.session = req.session
     next()
 })

@@ -171,5 +171,27 @@ module.exports = {
         } catch (err) {
             console.error(err)
         }
+    },
+
+    async findRecipesId(params) {
+        try {
+            let { id, limit, offset } = params
+
+            const total = `(SELECT count(*) FROM recipes WHERE recipes.user_id = users.id) AS total`
+
+            const chefs = `(SELECT name FROM chefs WHERE recipes.chef_id = chefs.id) AS chefs_name`
+            
+            const query = `
+                SELECT recipes.*, ${total}, ${chefs}
+                FROM recipes
+                LEFT JOIN users ON (recipes.user_id = users.id)
+                WHERE user_id = ${id}
+                LIMIT $1 OFFSET $2
+            `
+            return await db.query(query, [limit, offset])
+            
+        } catch (err) {
+            console.error(err)
+        }
     }
 }

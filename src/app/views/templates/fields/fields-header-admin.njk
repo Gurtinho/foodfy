@@ -3,13 +3,29 @@
         <a href="/" class="linkhome-recipes"><img src="/assets/logowhite.png" alt=""></a>
         <div class="links">
             <ul>
-                <li><a href="/admin/recipes">RECEITAS</a></li>
+                <li class="accounts">
+                    <a href="/admin/recipes">RECEITAS</a>
+                    {% if session.isAdmin %}
+                        <ul class="submenu">
+                            <li class="submenu-a"><a href="/admin/recipes">MINHAS RECEITAS</a></li>
+                            <li class="submenu-b"><a href="/admin/recipes/all">TODAS AS RECEITAS</a></li>
+                        </ul>
+                    {% endif %}
+                </li>
                 <li><a href="/admin/chefs">CHEFS</a></li>
-                <li><a href="/admin/users">USUÁRIOS</a></li>
+                {% if not session.isAdmin %}
+                    <li><a href="/admin/admins/index">USUÁRIO</a></li>
+                {% else %}
+                    <li><a href="/admin/admins/index">USUÁRIOS</a></li>
+                {% endif %}
             </ul> 
         </div>
         <form class="logout" action="/admin/session/logout" method="POST">
-            <button>SAIR</button>
+            <a>SAIR</a>
+            <ul class="submenu-logout">
+                <li class="submenu-a"><a href="/">VOLTAR AO HOME</a></li>
+                <li class="submenu-b"><button>SAIR DA CONTA</button></li>
+            </ul>
         </form>
     </div>
 </header>

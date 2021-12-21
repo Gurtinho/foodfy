@@ -2,14 +2,20 @@
 
 {% block content %}
     <section class="chefs">
-        <div class="index-chef">
-            <div class="index-chef-p">
-                <p>Gerenciar chefs</p>
+        <div class="chef">
+            <div class="chef-p">
+                {% if session.isAdmin %}
+                    <p>Gerenciar chefs</p>
+                {% else %}
+                    <p>Listagem de chefs</p>
+                {% endif %}
             </div>
-            <div class="save-chef-index">
-                <a href="/admin/chefs/create">
-                    <button class="btn-save-chef" type="submit">Criar novo chef</button>
-                </a>
+            <div class="save-chef">
+                {% if session.isAdmin %}
+                    <a href="/admin/chefs/create">
+                        <button class="btn-save-chef" type="submit">Criar novo chef</button>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </section>
@@ -20,7 +26,9 @@
                 <img class="fields-img-chefs" src="{{ chef.src }}">
                 <div class="fields-info-chefs">
                     <h2>{{ chef.name }}</h2>
-                    <a href="/admin/chefs/{{ chef.id }}">Visualizar</a>
+                    {% if session.isAdmin %}
+                        <a href="/admin/chefs/{{ chef.id }}">Visualizar</a>
+                    {% endif %}
                 </div>
             </div>
         {% else %}

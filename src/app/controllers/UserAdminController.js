@@ -1,11 +1,11 @@
 const User = require('../models/userModels')
 
 module.exports = {
-    registerForm(req, res) {
-        return res.render('admin/users/register')
+    index(req, res) {
+        return res.render('admin/admins/index')
     },
     
-    async post(req, res) {
+    async put(req, res) {
         try {
             const userId = await User.create(req.body)
             req.session.userId = userId
@@ -16,8 +16,4 @@ module.exports = {
             console.error(err)
         }
     },
-
-    async put(req, res) {
-
-    }
 }

@@ -10,7 +10,7 @@ routes.get('/list', onlyUsers, onlyAdminUsers, UserAdminController.list)
 routes.get('/create', onlyUsers, onlyAdminUsers, UserAdminController.create)
 routes.post('/create', onlyUsers, onlyAdminUsers, UserAdminController.post)
 routes.get('/:id/edit', onlyUsers, onlyAdminUsers, UserAdminController.edit)
-routes.post('/', onlyUsers, onlyAdminUsers, UserAdminController.put)
-routes.post('/', onlyUsers, onlyAdminUsers, UserAdminController.delete)
+routes.put('/', onlyUsers, onlyAdminUsers, UserAdminController.put)
+routes.delete('/', onlyUsers, onlyAdminUsers, UserAdminController.delete)
 
 module.exports = routes

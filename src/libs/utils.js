@@ -12,5 +12,33 @@ module.exports = {
             iso: `${year}-${month}-${day}`,
             format: `${day}/${month}/${year}`
         }
-    }
+    },
+
+    emailTemplate(field) {
+        return `
+        <body style="margin:0; padding:0; font-family:helvetica; color:#444;">
+            <section style="width:100%; cellpadding:0; cellspacing:0; max-width:600px;">
+                <header style="width: 100%; text-align: center; background-color:#111;">
+                    <div style="padding:20px 0; align-items: center; text-align: center;">
+                        <p style="color: #fff; font-size: 18px;">Foodfy</p>
+                    </div>
+                </header>
+                <section style="width: 100%; cellpadding: 0; cellspacing: 0;">
+                    <div style="padding: 20px;">
+                        <div style="padding:30px 0;">
+                            ${field}
+                        </div>
+                    </div>
+                </section>
+                <footer style="width: 100%; background-color: #eee; text-align: center;">
+                    <div style="padding:20px 0; text-align: center; align-items: center;">
+                        <p style="color:#aaa;">
+                            <strong>Foodfy</strong>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+        </body>
+        `
+    },
 }

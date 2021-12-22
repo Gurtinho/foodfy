@@ -3,7 +3,7 @@
 * {
   margin: 0 auto;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Helvetica', sans-serif;
 }
 
 body {
@@ -192,7 +192,7 @@ body {
 .btn-save-chef {
   color: white;
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 10px 50px;
   background-color: #6558C3;
   border: none;
   font-weight: bold;
@@ -203,7 +203,7 @@ body {
 .btn-delete-chef {
   color: white;
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 10px 50px;
   background-color: #dc4747;
   border: none;
   font-weight: bold;
@@ -214,7 +214,7 @@ body {
 .btn-cancel-chef {
   color: white;
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 10px 45px;
   background-color: #777777;
   border: none;
   font-weight: bold;
@@ -253,9 +253,8 @@ body {
 .div-fields-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 150px;
+  grid-gap: 80px 150px;
   width: 940px;
-  margin-bottom: 200px;
   margin-top: 30px;
 }
 
@@ -554,14 +553,13 @@ body {
 
 
 /*========= pagination =========*/
-.container-pagination {
+.users-register .container-pagination {
   display: flex;
+  position: absolute;
+  justify-content: center;
   bottom: 0;
   margin-bottom: 0;
-  margin-top: auto;
-  justify-content: center;
   width: 100%;
-  min-height: 62px;
 }
 
 .pagination a,
@@ -576,14 +574,12 @@ body {
   filter: brightness(0.3);
 }
 
-
 .adm {
   width: 940px;
   font-style: italic;
   font-weight: normal;
   color: #777777;
 }
-
 
 .isadmin {
   margin-top: 30px;

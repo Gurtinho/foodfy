@@ -2,7 +2,7 @@
 
 {% block content %}
     <section class="users-register">
-        <form method="POST" action="/admin/admins/edit">
+        <form action="/admin/admins?_method=PUT" method="POST">
             <section class="chefs">
                 <div class="chef">
                     <div class="chef-p">
@@ -16,7 +16,7 @@
             </section>    
             {% include 'admin/admins/fields/admins-create.njk' %}
 
-            <input type="hidden" name="id" value="id">
+            <input type="hidden" name="id" value="{{ user.id }}">
         </form>
 
         <form class="form-delete" id="form-delete" action="/admin/admins?_method=DELETE" method="POST">

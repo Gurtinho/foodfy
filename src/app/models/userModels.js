@@ -92,7 +92,11 @@ module.exports = {
         }
     },
 
-    async delete(data) {
+    async delete(id) {
+        // get all recipes
 
+        // get all files
+
+        //
     }
 }

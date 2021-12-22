@@ -1,0 +1,14 @@
+<section class="fields-creation">
+    <div class="div-fields-list">
+        {% for user in users %}
+        <div class="list">
+            <p class="name">{{ user.name }}</p>
+            <p class="email">{{ user.email }}</p>
+            <div class="list-links">
+                <a class="list-links-a" href="/admin/admins/{{ user.id }}/edit">Editar</a>
+                <a class="list-links-b" href="">Remover</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>

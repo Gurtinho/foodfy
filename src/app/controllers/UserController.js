@@ -15,9 +15,5 @@ module.exports = {
         } catch (err) {
             console.error(err)
         }
-    },
-
-    async put(req, res) {
-
     }
 }

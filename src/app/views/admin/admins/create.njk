@@ -2,25 +2,21 @@
 
 {% block content %}
     <section class="users-register">
-        <form method="POST" action="/admin/admins/edit">
+        <form method="POST" action="/admin/admins/create">
             <section class="chefs">
                 <div class="chef">
                     <div class="chef-p">
-                        <p>Atualizar Usuário</p>
+                        <p>Criar Usuário</p>
                     </div>
                     <div class="save-chef">
-                        <button form="form-delete" class="btn-delete-chef" type="submit">Deletar</button>
                         <button class="btn-save-chef" type="submit">Salvar</button>
                     </div>
                 </div>
-            </section>    
+            </section>
+            
             {% include 'admin/admins/fields/admins-create.njk' %}
 
             <input type="hidden" name="id" value="id">
-        </form>
-
-        <form class="form-delete" id="form-delete" action="/admin/admins?_method=DELETE" method="POST">
-            <input type="hidden" name="id" value="{{ user.id }}">
         </form>
     </section>
 {% endblock %}

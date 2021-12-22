@@ -11,7 +11,6 @@ async function post(req, res, next) {
             }
         }
 
-        // check if email already exists
         const { email, password, passwordrepeat } = req.body
         const user = await User.findOne({ where: { email } })
         
@@ -19,8 +18,6 @@ async function post(req, res, next) {
             error: 'Esse email já existe, tente outro!'
         })
 
-
-        
         next()
 
     } catch (err) {

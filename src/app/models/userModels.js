@@ -24,6 +24,25 @@ module.exports = {
         } 
     },
 
+    async findAll(params) {
+        try {
+            let { limit, offset } = params
+
+            let total = `(SELECT count(*) FROM users) AS total`
+
+            let query = `
+                SELECT users.*, ${total}
+                FROM users
+                ORDER BY updated_at DESC
+                LIMIT $1 OFFSET $2
+            `
+            return await db.query(query, [limit, offset])
+           
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
     async create(data) {
         try {
             let { name, email, password, is_admin } = data
@@ -35,16 +54,11 @@ module.exports = {
                     is_admin
                 ) VALUES ( $1, $2, $3, $4 )
                 RETURNING id`
-            
-            // criptografia
-            const passwordHash = await hash(password, 8)
-
-            is_admin = is_admin || false
-            
+           
             const values = [
                 name,
                 email,
-                passwordHash, 
+                password, 
                 is_admin
             ]
 
@@ -77,4 +91,8 @@ module.exports = {
             console.error(err)
         }
     },
+
+    async delete(data) {
+
+    }
 }

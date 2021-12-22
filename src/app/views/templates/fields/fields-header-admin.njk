@@ -13,11 +13,15 @@
                     {% endif %}
                 </li>
                 <li><a href="/admin/chefs">CHEFS</a></li>
-                {% if not session.isAdmin %}
-                    <li><a href="/admin/admins/index">USUÁRIO</a></li>
-                {% else %}
-                    <li><a href="/admin/admins/index">USUÁRIOS</a></li>
-                {% endif %}
+                <li class="accounts">
+                    <a href="/admin/profile/index">USUÁRIO</a>
+                    {% if session.isAdmin %}
+                        <ul class="submenu">
+                            <li  class="submenu-a"><a href="/admin/admins/list">USUÁRIOS</a></li>
+                            <li  class="submenu-b"><a href="/admin/profile/index">MEU PERFIL</a></li>
+                        </ul>
+                    {% endif %}
+                </li>
             </ul> 
         </div>
         <form class="logout" action="/admin/session/logout" method="POST">

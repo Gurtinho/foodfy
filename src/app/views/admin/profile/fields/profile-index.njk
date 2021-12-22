@@ -1,0 +1,17 @@
+<section class="fields-creation">
+    <div class="div-fields-creation">
+        <div>
+            <p class="title">Nome</p>
+            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira seu nome" required>
+        </div>
+        <div>
+            <p class="title">Email</p>
+            <input type="text" name="email" value="{{ user.email }}" disabled placeholder="Digite seu email" required>
+            <input type="hidden" name="email" value="{{ user.email }}">
+        </div>
+        <div>
+            <p class="title">Senha</p>
+            <input type="text" name="password" placeholder="Digite sua senha" required>
+        </div>
+    </div>
+</section>

@@ -2,11 +2,11 @@
 
 {% block content %}
     <section class="users-register">
-        <form method="POST" action="/admin/users/register">
+        <form method="POST" action="/admin/profile/index">
             <section class="chefs">
                 <div class="chef">
                     <div class="chef-p">
-                        <p>Bem vindo {{ session }}</p>
+                        <p>Bem Vindo {{ user.name }}</p>
                     </div>
                     <div class="save-chef">
                         <button class="btn-save-chef" type="submit">Salvar</button>
@@ -14,7 +14,7 @@
                 </div>
             </section>
             
-            {% include 'admin/admins/fields/admins-index.njk' %}
+            {% include 'admin/profile/fields/profile-index.njk' %}
 
             <input type="hidden" name="id" value="id">
         </form>

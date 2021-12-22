@@ -41,8 +41,7 @@ module.exports = {
 
         } catch (err) {
             console.error(err)
-        }
-        
+        } 
     },
 
     async indexUsersRecipes(req, res) {

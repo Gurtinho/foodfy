@@ -239,7 +239,6 @@ body {
 
 /*============ FIELDS ===========*/
 .fields-creation {
-  display: flex;
   width: 100%;
 }
 
@@ -249,6 +248,47 @@ body {
   grid-gap: 20px;
   width: 940px;
   margin-bottom: 200px;
+}
+
+.div-fields-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 150px;
+  width: 940px;
+  margin-bottom: 200px;
+  margin-top: 30px;
+}
+
+.list {
+  width: 100%;
+}
+
+.name {
+  color: #111;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.email {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.list-links {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.list-links-a {
+  text-decoration: none;
+  color: #6558C3;
+  margin-right: 15px;
+}
+
+.list-links-b {
+  text-decoration: none;
+  color: #f55a5f;
 }
 
 .div-fields-creation {
@@ -534,4 +574,28 @@ body {
 
 .pagination a:hover {
   filter: brightness(0.3);
+}
+
+
+.adm {
+  width: 940px;
+  font-style: italic;
+  font-weight: normal;
+  color: #777777;
+}
+
+
+.isadmin {
+  margin-top: 30px;
+  align-items: center;
+}
+
+.isadmin input[type="checkbox"] {
+  width: 20px;
+}
+
+.isadmin p {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
 }

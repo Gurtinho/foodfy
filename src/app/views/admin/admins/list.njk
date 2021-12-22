@@ -1,0 +1,23 @@
+{% extends 'templates/layouts/layout-admins.njk' %}
+
+{% block content %}
+    <section class="users-register">
+        
+        <section class="chefs">
+            <div class="chef">
+                <div class="chef-p">
+                    <p>Usuários</p>
+                </div>
+                <div class="save-chef">
+                    <a href="/admin/admins/create">
+                        <button class="btn-save-chef" type="submit">Novo</button>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        {% include 'admin/admins/fields/admins-list.njk' %}
+
+        <input type="hidden" name="id" value="id">
+    </section>
+{% endblock %}

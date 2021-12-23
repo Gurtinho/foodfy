@@ -21,10 +21,13 @@
                         <li><a href="/chefs">Chefs</a></li>
                         <li class="accounts">
                             {% if session.userId %}
-                                <a>Minha conta</a>
+                                <a class="accounts-expand">
+                                    <span class="material-icons">expand_more</span>
+                                    <p>Minha conta</p>
+                                </a>
                                 <ul class="submenu">
                                     <li>
-                                        <a href="/admin/profile/index">
+                                        <a href="/admin/admins/index">
                                             <button class="submenu-a" >Minhas receitas</button>
                                         </a>
                                     </li>

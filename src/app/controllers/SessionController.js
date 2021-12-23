@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const User = require('../models/userModels')
 const mailer = require('../../libs/mailer')
 const { hash } = require('bcryptjs')
+const { emailTemplate } = require('../../libs/utils')
 
 module.exports = {
     loginForm(req, res) {
@@ -34,33 +35,37 @@ module.exports = {
 
             // expirar token
             let now = new Date()
-            now = now.setMinutes(now.getMinutes() + 600)
+            now = now.setMinutes(now.getMinutes() + 10)
 
             await User.update(user.id, {
                 reset_token: token,
                 reset_token_expires: now,
             })
 
+            const sendingEmail = `
+                <h2 style=" padding-left: 20px; padding-bottom: 20px; font-size: 24px; font-weight: normal; border-bottom: 2px solid #ccc;">Olá <strong>${user.name}</strong></h2>
+                <br>
+
+                <h2>Perdeu a senha?</h2>
+                <p>Clique no link abaixo para recuperar.</p>
+                <br>
+                <p>
+                <a href="http://localhost:3000/admin/session/reset-password?token=${token}" target="_blank" style="text-align: center; font-weight: bold; padding: 16px; color: #fff; background-color: #6558C3; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">
+                Criar Nova Senha</a>
+                </p>
+                <br>
+                <p>O link irá expirar em 10 minutos.</p>
+                <p>Caso não recupere a tempo, solicite o link novamente.</p>
+                `
+
             // enviar email com link
             await mailer.sendMail({
                 to: user.email,
                 from: 'no-reply@foodfy.com',
                 subject: 'Recuperação de senha.',
-                html: `
-                    <h2>Perdeu a senha?</h2>
-                    <p>Clique no link abaixo para recuperar.</p>
-                    <p>
-                        <a href="http://localhost:3000/admin/session/reset-password?token=${token}" target="_blank">
-                            recuperar senha
-                        </a>
-                    </p>
-                    <p>O link é válido por 10 minutos para recuperar a senha.</p>
-                    <p>Caso não recupere a tempo, solicite uma nova recuperação.</p>
-
-                `
+                html: emailTemplate( sendingEmail )
             })
 
-            // avisar usuário q enviamos o email
             return res.render('admin/session/forgot-password', {
                 success: 'Verifique seu email pra recuperar a senha'
             })

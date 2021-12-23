@@ -14,7 +14,7 @@ routes.use('/admin/chefs', chefs)
 routes.use('/admin/recipes', recipes)
 routes.use('/admin/users', users)
 routes.use('/admin/session', session)
-routes.use('/admin/profile', profile)
+routes.use('/admin/admins', profile)
 routes.use('/admin/admins', admins)
 
 routes.use((req, res) => res.status(404).render("error/not-found"))

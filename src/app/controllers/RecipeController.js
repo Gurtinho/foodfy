@@ -1,6 +1,7 @@
 const Recipe = require('../models/recipeModels')
 const File = require('../models/fileModels')
 const RecipeFile = require('../models/recipeFileModels')
+const { renderString } = require('nunjucks')
 
 module.exports = {
     async index(req, res) {
@@ -41,6 +42,9 @@ module.exports = {
 
         } catch (err) {
             console.error(err)
+            return res.render('admin/recipes/index', {
+                error: 'Ocorreu um erro na listagem de receitas'
+            })
         } 
     },
 
@@ -85,6 +89,9 @@ module.exports = {
 
         } catch (err) {
             console.error(err)
+            return res.render('admin/recipes/index', {
+                error: 'Ocorreu um erro na listagem de receitas'
+            })
         }
     },
 
@@ -97,25 +104,17 @@ module.exports = {
 
         } catch (err) {
             console.error(err)
+            return res.render('admin/admins/index', {
+                error: 'Não consegui localizar a pagina de criação de receitas'
+            })
         }
     },
 
     async post(req, res) {
         try {
             const { userId: user_id } = req.session
-
-            const keys = Object.keys(req.body)
-            for ( let key of keys ) {
-                if (req.body[key] == '') {
-                    return res.send('Preencha todos os campos')
-                }
-            }
             
             const { chef: chef_id, title, ingredients, preparation, information } = req.body
-
-            if (req.files.length == 0) {
-                return res.send('Adicione ao menos uma imagem')
-            }
 
             const recipe_idResults = await Recipe.create({
                 chef_id,
@@ -144,10 +143,15 @@ module.exports = {
 
             await Promise.all(filePromise)
 
-            return res.redirect(`/admin/recipes/${recipe_id}`)
+            return res.render(`admin/recipes/create`, {
+                success: 'Receita criada com sucesso'
+            })
 
         } catch (err) {
             console.error(err)
+            return res.render('admin/recipes/create', {
+                error: 'Ocorreu um erro ao criar a receita'
+            })
         }
     },
     
@@ -168,6 +172,9 @@ module.exports = {
             
         } catch (err) {
             console.error(err)
+            return res.render('admin/recipes/show', {
+                error: 'Ocorreu um erro ao localizar a receita'
+            })
         } 
     },
 
@@ -179,12 +186,10 @@ module.exports = {
             if (!recipe) {
                 return res.send('recipes not found!')
             }
-            
-            // chefs list
+
             results = await Recipe.chefFindOption()
             const chefsOptions = results.rows
 
-            // table files
             results = await Recipe.recipeFiles(recipe.id)
             let files = results.rows
 
@@ -197,18 +202,16 @@ module.exports = {
             
         } catch (err) {
             console.error(err)
+            return res.render('admin/recipes/index', {
+                error: 'Ocorreu um erro. Tente novamente'
+            })
         }
     },
 
     async put(req, res) {
         try {
-            const keys = Object.keys(req.body)
+            const { userId: user_id } = req.session
 
-            for ( let key of keys ) {
-                if (req.body[key] == '' && key != 'removed_files') {
-                    return res.send('Preencha todos os campos')
-                }
-            }
             const {
                 id,
                 removed_files,
@@ -221,6 +224,7 @@ module.exports = {
 
             await Recipe.update(id, {
                 chef_id,
+                user_id,
                 title,
                 ingredients,
                 preparation,
@@ -259,24 +263,27 @@ module.exports = {
             
         } catch (err) {
             console.error(err)
+            return res.render('admin/recipes/index', {
+                error: 'Ocorreu um erro. Tente novamente'
+            })
         }
     },
 
     async delete(req, res) {
-        try {
+        try { 
             const recipe_file_results = await Recipe.recipeFiles(req.body.id)
             const recipe_file = recipe_file_results.rows[0].file_id
-
             Recipe.recipeFilesDelete(req.body.id)
-
             await File.delete(recipe_file)
-
             await Recipe.delete(req.body.id)
-            
-            return res.redirect(`/admin/recipes`)
-            
+
+            return res.redirect(`/admin/recipes/myrecipes`)
+    
         } catch (err) {
             console.error(err)
+            return res.render('admin/recipes/index', {
+                error: 'Ocorreu um erro. Tente novamente'
+            })
         }
     },
 }

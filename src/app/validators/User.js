@@ -18,6 +18,10 @@ async function post(req, res, next) {
             error: 'Esse email já existe, tente outro!'
         })
 
+        if (password != passwordrepeat) return res.render('admin/users/register', {
+            error: 'As senhas devem ser iguais'
+        })
+
         next()
 
     } catch (err) {

@@ -1,24 +1,20 @@
 const { compare } = require('bcryptjs')
 const User = require('../models/userModels')
 
-async function checkFields(body) {
-    const keys = Object.keys(body)
-
-    for ( let key of keys ) {
-        if (body[key] == '') {
-            return {
-                user: body,
-                error: 'Preencha todos os campos!'
-            }
-        }
-    }
-}
 
 async function update(req, res, next) {
     try {
-        // const allFields = checkFields(req.body)
-        // if(allFields) return res.render('admin/profile/index', allFields)
+        const keys = Object.keys(body)
 
+        for ( let key of keys ) {
+            if (body[key] == '') {
+                return {
+                    user: body,
+                    error: 'Preencha todos os campos!'
+                }
+            }
+        }
+        
         const { userId: id } = req.session
         const user = await User.findOne({ where: { id } })
         const { email, password } = req.body

@@ -4,28 +4,45 @@
         <div class="links">
             <ul>
                 <li class="accounts">
-                    <a href="/admin/recipes">RECEITAS</a>
                     {% if session.isAdmin %}
+                        <a href="/admin/recipes">
+                            <span class="material-icons">expand_more</span>
+                            <p>RECEITAS</p>
+                        </a>
                         <ul class="submenu">
-                            <li class="submenu-a"><a href="/admin/recipes">MINHAS RECEITAS</a></li>
+                            <li class="submenu-a"><a href="/admin/recipes/myrecipes">MINHAS RECEITAS</a></li>
                             <li class="submenu-b"><a href="/admin/recipes/all">TODAS AS RECEITAS</a></li>
                         </ul>
+                    {% else %}
+                        <a href="/admin/recipes/myrecipes">
+                            <p>RECEITAS</p>
+                        </a>
                     {% endif %}
                 </li>
-                <li><a href="/admin/chefs">CHEFS</a></li>
+                <li class="accounts"><a href="/admin/chefs">CHEFS</a></li>
                 <li class="accounts">
-                    <a href="/admin/profile/index">USUÁRIO</a>
                     {% if session.isAdmin %}
+                    <a href="/admin/admins">
+                        <span class="material-icons">expand_more</span>
+                        <p>USUÁRIO</p>
+                    </a>
                         <ul class="submenu">
                             <li  class="submenu-a"><a href="/admin/admins/list">USUÁRIOS</a></li>
-                            <li  class="submenu-b"><a href="/admin/profile/index">MEU PERFIL</a></li>
+                            <li  class="submenu-b"><a href="/admin/admins/index">MEU PERFIL</a></li>
                         </ul>
+                    {% else %}
+                        <a href="/admin/admins/index">
+                            <p>USUÁRIO</p>
+                        </a>
                     {% endif %}
                 </li>
             </ul> 
         </div>
         <form class="logout" action="/admin/session/logout" method="POST">
-            <a>SAIR</a>
+            <a>
+                <span class="material-icons">expand_more</span>
+                <p>SAIR</p>
+            </a>
             <ul class="submenu-logout">
                 <li class="submenu-a"><a href="/">VOLTAR AO HOME</a></li>
                 <li class="submenu-b"><button>SAIR DA CONTA</button></li>

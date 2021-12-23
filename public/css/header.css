@@ -26,6 +26,7 @@
 
 .links ul {
   display: flex;
+  align-items: center;
 }
 
 .links ul li {
@@ -41,10 +42,9 @@
 }
 
 .links a.active {
-font-weight: bold;
-color: white;
+  font-weight: bold;
+  color: white;
 }
-
 
 /* LOGOUT */
 .logout {
@@ -53,8 +53,13 @@ color: white;
   margin-right: 0;
 }
 
+.logout a {
+  display: flex;
+}
+
 .logout a,
 .logout button {
+  align-items: center;
   text-decoration: none;
   font-size: 15px;
   background: none;
@@ -64,20 +69,26 @@ color: white;
   cursor: pointer;
 }
 
+.logout span {
+  font-size: 18px;
+  color: #999;
+}
+
 .submenu-logout {
-    flex-direction: column;
-    position: absolute;
-    left: 0;
-    top: 30px;
-    width: 180px;
-    margin-top: 8px;
-    background-color: black;
-    box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-    transition: all 200ms;
-    opacity: 0;
-    visibility: hidden;
-    list-style: none;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 30px;
+  width: 180px;
+  margin-top: 8px;
+  background-color: black;
+  box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  transition: all 200ms;
+  opacity: 0;
+  visibility: hidden;
+  list-style: none;
+  border: 1px solid white;
 }
 
 .logout .submenu-logout li {
@@ -85,54 +96,62 @@ color: white;
 }
 
 .logout .submenu-logout .submenu-a {
-    padding-top: 15px;
+  padding-top: 15px;
 }
 
 .logout .submenu-logout .submenu-b {
-    padding-top: 15px;
-    padding-bottom: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .logout:hover .submenu-logout {
-    top: 13px;
-    opacity: 1;
-    visibility: visible;
+  top: -22px;
+  opacity: 1;
+  visibility: visible;
 }
 
 
 /* ACCOUNTS */
 .accounts {
-    position: relative;
+  position: relative;
 }
 
 .accounts a {
-    cursor: pointer;
-    text-decoration: none;
+  display: flex;
+  cursor: pointer;
+  text-decoration: none;
+  align-items: center;
+}
+
+.accounts span {
+  color: #999;
+  font-size: 18px;
 }
 
 .accounts .submenu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 0;
-    top: 30px;
-    width: 180px;
-    margin-top: 8px;
-    background-color: black;
-    box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-    transition: all 200ms;
-    opacity: 0;
-    visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 200px;
+  margin-top: 8px;
+  background-color: black;
+  box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  transition: all 200ms;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .accounts .submenu {
-    font-size: 15px;
-    display: inline-block;
-    border: none;
-    cursor: pointer;
-    background-color: black;
-    color: white;
+  font-size: 15px;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
 }
 
 .accounts .submenu li {
@@ -140,16 +159,17 @@ color: white;
 }
 
 .accounts .submenu .submenu-a {
-    padding-top: 15px;
+  padding-top: 15px;
 }
 
 .accounts .submenu .submenu-b {
-    padding-top: 15px;
-    padding-bottom: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .accounts:hover .submenu {
-    top: 13px;
-    opacity: 1;
-    visibility: visible;
+  z-index: 2000;
+  top: -22px;
+  opacity: 1;
+  visibility: visible;
 }

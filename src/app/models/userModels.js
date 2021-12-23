@@ -1,5 +1,7 @@
 const db = require('../../config/db')
 const { hash } = require('bcryptjs')
+const fs = require('fs')
+const Recipes = require('../models/recipeModels')
 
 module.exports = {
     async findOne(filters) {
@@ -50,7 +52,7 @@ module.exports = {
                 INSERT INTO users (
                     name,
                     email,
-                    password, 
+                    password,
                     is_admin
                 ) VALUES ( $1, $2, $3, $4 )
                 RETURNING id`
@@ -85,7 +87,6 @@ module.exports = {
                 }
             })
             await db.query(query)
-            return
 
         } catch (err) {
             console.error(err)
@@ -93,10 +94,21 @@ module.exports = {
     },
 
     async delete(id) {
-        // get all recipes
+        const results = await db.query(`SELECT * FROM recipes WHERE user_id = $1`, [id])
+        const recipes = results.rows
 
-        // get all files
+        const allFilesPromise = recipes.map(async recipe => {
+            return await Recipes.recipeFiles(recipe.id)
+        })
 
-        //
+        let promiseResults = await Promise.all(allFilesPromise)
+
+        promiseResults.map(results => {
+            results.rows.map(file => {
+                fs.unlinkSync(file.path)
+            })
+        })
+
+        await db.query(`DELETE FROM users WHERE ID = $1`, [id])
     }
 }

@@ -79,7 +79,7 @@ async function reset(req, res, next) {
 
         // verificar se token expirou
         let now = new Date()
-        now = now.setMinutes(now.getMinutes())
+        now = now.setMinutes(now.getMinutes() + 60)
         if(now > user.reset_token_expires) return res.render('admin/session/reset-password', {
             user: req.body,
             token,

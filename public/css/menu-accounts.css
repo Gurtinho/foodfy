@@ -7,6 +7,15 @@
     text-decoration: none;
 }
 
+.accounts-expand {
+    display: flex;
+    align-items: center;
+}
+
+.accounts span {
+    font-size: 18px;
+}
+
 .accounts .submenu {
     display: flex;
     flex-direction: column;

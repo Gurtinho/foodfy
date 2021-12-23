@@ -1,4 +1,5 @@
 const User = require('../models/userModels')
+const { hash } = require('bcryptjs')
 
 module.exports = {
     registerForm(req, res) {
@@ -7,13 +8,28 @@ module.exports = {
     
     async post(req, res) {
         try {
-            const userId = await User.create(req.body)
+            let { name, email, password, is_admin } = req.body
+
+            is_admin = is_admin || false
+
+            password = await hash(password, 8)
+            
+            const userId = await User.create({
+                name,
+                email,
+                password,
+                is_admin
+            })
+
             req.session.userId = userId
 
             return res.redirect('/')
             
         } catch (err) {
             console.error(err)
+            return res.render('admin/session/login', {
+                error: 'Ocorreu um erro. Tente novamente'
+            })
         }
     }
 }

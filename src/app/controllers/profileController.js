@@ -7,10 +7,13 @@ module.exports = {
             const { userId: id } = req.session
             const user = await User.findOne({ where: { id } })
 
-            return res.render('admin/profile/index', { user })
+            return res.render('admin/admins/index', { user })
             
         } catch (err) {
             console.error(err)
+            return res.render('admin/admins/index', {
+                error: 'Ocorreu um erro. Tente novamente'
+            })
         }
     },
 
@@ -21,13 +24,16 @@ module.exports = {
 
             await User.update(user.id, { name })
 
-            return res.render('admin/profile/index', {
+            return res.render('admin/admins/index', {
                 user: req.body,
-                success: 'Nome atualizado com sucesso!'
+                success: 'Perfil atualizado com sucesso'
             })
             
         } catch (err) {
             console.error(err)
+            return res.render('admin/admins/index', {
+                error: 'Ocorreu um erro ao atualizar. Tente novamente'
+            })
         }
     },
 }

@@ -43,6 +43,9 @@ module.exports = {
             
         } catch (err) {
             console.error(err)
+            return res.render('home/search', {
+                error: 'Ocorreu um erro. Tente novamente'
+            })
         }
     }
 }

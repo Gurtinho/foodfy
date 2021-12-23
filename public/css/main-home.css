@@ -76,6 +76,7 @@
 
 .links ul {
   display: flex;
+  align-items: center;
 }
 
 .links ul li {

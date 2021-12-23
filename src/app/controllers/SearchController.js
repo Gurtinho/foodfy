@@ -1,5 +1,5 @@
-const Recipe = require('../models/recipeModels')
-const Search = require('../models/searchModels')
+const Recipe = require('../models/Recipe')
+const Search = require('../models/Search')
 
 module.exports = {
     async search(req, res) {

@@ -1,5 +1,5 @@
 const { captureRejectionSymbol } = require('nodemailer/lib/xoauth2')
-const User = require('../models/userModels')
+const User = require('../models/User')
 
 module.exports = {
     async index(req, res) {

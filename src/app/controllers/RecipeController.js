@@ -1,7 +1,6 @@
-const Recipe = require('../models/recipeModels')
-const File = require('../models/fileModels')
-const RecipeFile = require('../models/recipeFileModels')
-const { renderString } = require('nunjucks')
+const Recipe = require('../models/Recipe')
+const File = require('../models/File')
+const RecipeFile = require('../models/RecipeFile')
 
 module.exports = {
     async index(req, res) {

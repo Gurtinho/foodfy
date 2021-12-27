@@ -1,6 +1,7 @@
 const Chef = require('../models/Chef')
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
+const fs = require('fs')
 
 module.exports = {
     async index(req, res) {
@@ -16,14 +17,14 @@ module.exports = {
                 offset
             }
 
-            results = await File.allFiles(params)
+            results = await Chef.paginate(params)
             let chefs = results.rows
 
             chefs = chefs.map(file => ({
                 ...file,
                 src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
             }))
-            
+
             if (chefs[0] != null) {
                     const pagination = {
                         total: Math.ceil(chefs[0].total / limit),
@@ -48,17 +49,15 @@ module.exports = {
     async post(req, res) {
         try {
             const { filename, path } = req.files[0]
-            const file_idResults = await File.create({ name: filename, path })
-            
-            const file_id = file_idResults.rows[0].id
+            const file_id = await File.create({ name: filename, path })
+        
             const { name } = req.body
             let results = await Chef.create({ name, file_id })
         
-            results = await Chef.find(results.rows[0].id)
-
+            results = await Chef.find(results)
             const chef = results.rows[0]
 
-            return res.render(`admin/chefs/edit`, {
+            return res.render(`admin/chefs/index`, {
                 chef,
                 success: 'Chef criado com sucesso'
             })
@@ -75,7 +74,8 @@ module.exports = {
         try {
             const id = req.params.id
 
-            const chef = await Chef.find(id)
+            const chef_id = await Chef.find(id)
+            const chef = chef_id.rows[0]
                 
             if (!chef) return res.render('admin/admins/index', {
                 error: 'Chef não encontrado'
@@ -137,16 +137,15 @@ module.exports = {
 
     async edit(req, res) {
         try {
-            const chef = await Chef.find(req.params.id)
-
-            console.log(chef)
+            const chef_id = await Chef.find(req.params.id)
+            const chef = chef_id.rows[0]
 
             if (!chef) return res.render('admin/admins/index', {
                 error: 'Chef não encontrado'
             })
 
-            chefFind = await Chef.files(chef.file_id)
-            let files = chefFind.rows[0]
+            let chef_files = await Chef.files(chef.file_id)
+            let files = chef_files.rows[0]
             
             return res.render('admin/chefs/edit', { chef, files })
                 
@@ -163,10 +162,16 @@ module.exports = {
             const chef_results = await File.findFiles(req.body.id)
             const chefs_id = chef_results.rows[0].file_id
 
-            if (req.files.length != 0) {
-                const { filename, path } = req.files[0]
-                await File.updateFile(chefs_id, { name: filename, path })
-            }
+            // if (req.files.length != 0) {
+            //     const { filename, path } = req.files[0]
+            //     await File.updateFile(chefs_id, { name: filename, path })
+            // }
+
+            console.log(chefs_id)
+
+            const { name } = req.body
+            // await Chef.update()
+
 
             return res.render(`admin/chefs/edit`, {
                 chef: req.body.id,
@@ -193,9 +198,13 @@ module.exports = {
                     error: 'Esse chef possui receitas e não pode ser deletado'
                 })
             }
-            
-            Chef.delete(id)
-            await File.delete(chef.file_id)
+
+            const results = await File.findFiles(chef.id)
+            const chef_id = results.rows[0]
+
+            await Chef.delete({ id: id })
+            await File.delete({ id: chef.file_id })
+            fs.unlinkSync(chef_id.path)
 
             return res.render(`admin/chefs/index`, {
                 success: 'Chef deletado com sucesso'

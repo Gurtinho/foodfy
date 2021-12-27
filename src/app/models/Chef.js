@@ -35,56 +35,30 @@ module.exports = {
         }
     },
 
-    // async create(data) {
-    //     try {
-    //         const { name, file_id } = data
-    //         const query = `
-    //             INSERT INTO chefs (
-    //                 name,
-    //                 file_id
-    //             ) VALUES ( $1, $2 )
-    //             RETURNING id`
+    async paginate(params) {
+        try {
+            const { limit, offset } = params
+
+            const total = `(SELECT count(*) FROM chefs) AS total`
             
-    //         const values = [
-    //             name,
-    //             file_id
-    //         ]
+            const total_recipes = `
+                (SELECT count(*) 
+                FROM recipes 
+                WHERE chefs.id = recipes.chef_id)
+                AS total_recipes`
 
-    //         return db.query(query, values)
+            const select = `
+                SELECT chefs.*, ${total}, ${total_recipes},
+                files.path AS path
+                FROM chefs 
+                LEFT JOIN files ON (chefs.file_id = files.id)
+                LIMIT $1 OFFSET $2
+                `
             
-    //     } catch (err) {
-    //         console.error(err)
-    //     }
-    // },
+            return db.query(select, [limit, offset])
 
-    // async update(data) {
-    //     const { name, file_id, id } = data
-    //     try {
-    //         const query = `
-    //             UPDATE chefs SET
-    //                 name = ($1),
-    //                 file_id = ($2)
-    //             WHERE id = $3
-    //         `
-    //         const values = [
-    //             name,
-    //             file_id,
-    //             id
-    //         ]
-            
-    //         return db.query(query, values)
-    //     } catch (err) {
-    //         console.error(err)
-    //     }
-    // },
-
-    // async delete(id) {
-    //     try {
-    //         const query = `DELETE FROM chefs WHERE id = $1`
-    //         return db.query(query, [id])
-
-    //     } catch (err) {
-    //         console.error(err)
-    //     }
-    // },
+        } catch (err) {
+            console.error(err)
+        }
+    },
 }

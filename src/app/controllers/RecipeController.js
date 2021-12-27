@@ -115,7 +115,7 @@ module.exports = {
             
             const { chef: chef_id, title, ingredients, preparation, information } = req.body
 
-            const recipe_idResults = await Recipe.create({
+            const recipe_id = await Recipe.create({
                 chef_id,
                 user_id,
                 title,
@@ -124,15 +124,11 @@ module.exports = {
                 information
             })
 
-            const recipe_id = recipe_idResults.rows[0].id
-
             const filePromise = req.files.map(async file => {
-                const file_id_results = File.create({
+                const file_id = await File.create({
                     name: file.filename,
                     path: file.path
                 })
-
-                const file_id = (await file_id_results).rows[0].id
 
                 await RecipeFile.create({
                     recipe_id,
@@ -156,10 +152,10 @@ module.exports = {
     
     async show(req, res) {
         try {
-            let results = await Recipe.find(req.params.id)
-            let recipe = results.rows[0]
+            const recipe_id = await Recipe.find(req.params.id)
+            const recipe = recipe_id.rows[0]
 
-            results = await Recipe.recipeFiles(recipe.id)
+            let results = await Recipe.recipeFiles(recipe.id)
             let recipe_files = results.rows
 
             recipe_files = recipe_files.map(file => ({
@@ -179,11 +175,13 @@ module.exports = {
 
     async edit(req, res) {
         try {
-            let results = await Recipe.find(req.params.id)
-            const recipe = results.rows[0]
+            const recipe_id = await Recipe.find(req.params.id)
+            const recipe = recipe_id.rows[0]
 
             if (!recipe) {
-                return res.send('recipes not found!')
+                return res.render('admin/admins/myrecipes', {
+                    error: 'Ocorreu um erro'
+                })
             }
 
             results = await Recipe.chefFindOption()
@@ -232,11 +230,10 @@ module.exports = {
 
             if (req.files.length != 0) {
                 const newFilesPromise = req.files.map(async file => {
-                    const file_id_results = await File.create({
+                    const file_id = await File.create({
                         name: file.filename,
                         path: file.path
                     })
-                    const file_id = file_id_results.rows[0].id
                     await RecipeFile.create({
                         recipe_id: id,
                         file_id
@@ -272,8 +269,9 @@ module.exports = {
         try { 
             const recipe_file_results = await Recipe.recipeFiles(req.body.id)
             const recipe_file = recipe_file_results.rows[0].file_id
-            Recipe.recipeFilesDelete(req.body.id)
-            await File.delete(recipe_file)
+
+            // Recipe.recipeFilesDelete(req.body.id)
+            // await File.delete(recipe_file)
             await Recipe.delete(req.body.id)
 
             return res.redirect(`/admin/recipes/myrecipes`)

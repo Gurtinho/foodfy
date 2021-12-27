@@ -1,28 +1,33 @@
 const db = require('../../config/db')
 const fs = require('fs')
+const Base = require('./Base')
+
+Base.init({ table: 'files' })
 
 module.exports = {
-    async create(data) {
-        try {
-            const { name, path } = data
-            const query = `
-                INSERT INTO files (
-                    name,
-                    path
-                ) VALUES ( $1, $2 )
-                RETURNING id`
-            
-            const values = [
-                name,
-                path
-            ]
+    ...Base,
 
-            return db.query(query, values)
+    // async create(data) {
+    //     try {
+    //         const { name, path } = data
+    //         const query = `
+    //             INSERT INTO files (
+    //                 name,
+    //                 path
+    //             ) VALUES ( $1, $2 )
+    //             RETURNING id`
             
-        } catch (err) {
-            console.error(err)
-        }
-    },
+    //         const values = [
+    //             name,
+    //             path
+    //         ]
+
+    //         return db.query(query, values)
+            
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // },
 
     async allFiles(params) {
         try {

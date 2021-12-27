@@ -1,4 +1,4 @@
-const User = require('../models/userModels')
+const User = require('../models/User')
 
 async function post(req, res, next) {
     try {

@@ -1,7 +1,13 @@
 const db = require('../../config/db')
 const fs = require('fs')
 
+const Base = require('./Base')
+
+Base.init({ table: 'recipe_files' })
+
 module.exports = {
+    ...Base,
+    
     async create(data) {
         try {
             const { recipe_id, file_id } = data
@@ -49,15 +55,6 @@ module.exports = {
 
     async allFiles(params) {
         try {    
-            // const select = `
-            //     SELECT recipe_files.file_id,
-            //     files.path AS path, files.name AS name
-            //     FROM recipe_files
-            //     LEFT JOIN files ON (recipe_files.file_id = files.id)
-            //     `
-            
-            // return db.query(select)
-
             let { limit, offset } = params
 
             let total = `(SELECT count(*) FROM recipes) AS total`

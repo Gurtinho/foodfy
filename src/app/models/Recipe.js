@@ -1,37 +1,13 @@
 const db = require('../../config/db')
 const fs = require('fs')
 
-module.exports = {
-    async create(data) {
-        try {
-            const { chef_id, user_id, title, ingredients, preparation, information } = data
-            const query = `
-                INSERT INTO recipes (
-                    chef_id,
-                    user_id,
-                    title,
-                    ingredients,
-                    preparation,
-                    information
-                ) VALUES ( $1, $2, $3, $4, $5, $6 )
-                RETURNING id`
-            
-            const values = [
-                chef_id,
-                user_id,
-                title,
-                ingredients,
-                preparation,
-                information
-            ]
+const Base = require('./Base')
 
-            return db.query(query, values)
-            
-        } catch (err) {
-            console.error(err)
-        }
-    },
-    
+Base.init({ table: 'recipes' })
+
+module.exports = {
+    ...Base,
+
     async find(id) {
         try {
             const select = `
@@ -49,46 +25,76 @@ module.exports = {
         }
     },
 
-    async update(id, data) {
-        try {
-            const { chef_id, user_id, title, ingredients, preparation, information } = data
-            const query = `
-                UPDATE recipes SET
-                    chef_id = ($1),
-                    user_id = ($2),
-                    title = ($3),
-                    ingredients = ($4),
-                    preparation = ($5),
-                    information = ($6)
-                WHERE id = ${id}
-            `
-            const values = [
-                chef_id,
-                user_id,
-                title,
-                ingredients,
-                preparation,
-                information
-            ]
-            return db.query(query, values)
+    // async create(data) {
+    //     try {
+    //         const { chef_id, user_id, title, ingredients, preparation, information } = data
+    //         const query = `
+    //             INSERT INTO recipes (
+    //                 chef_id,
+    //                 user_id,
+    //                 title,
+    //                 ingredients,
+    //                 preparation,
+    //                 information
+    //             ) VALUES ( $1, $2, $3, $4, $5, $6 )
+    //             RETURNING id`
             
-        } catch (err) {
-            console.error(err)
-        }
-    },
+    //         const values = [
+    //             chef_id,
+    //             user_id,
+    //             title,
+    //             ingredients,
+    //             preparation,
+    //             information
+    //         ]
 
-    async delete(id) {
-        try {
-            const query = `
-                DELETE FROM recipes
-                WHERE recipes.id = $1
-            `
-            await db.query(query, [id])
+    //         return db.query(query, values)
+            
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // },
 
-        } catch (err) {
-            console.error(err)
-        }
-    },
+    // async update(id, data) {
+    //     try {
+    //         const { chef_id, user_id, title, ingredients, preparation, information } = data
+    //         const query = `
+    //             UPDATE recipes SET
+    //                 chef_id = ($1),
+    //                 user_id = ($2),
+    //                 title = ($3),
+    //                 ingredients = ($4),
+    //                 preparation = ($5),
+    //                 information = ($6)
+    //             WHERE id = ${id}
+    //         `
+    //         const values = [
+    //             chef_id,
+    //             user_id,
+    //             title,
+    //             ingredients,
+    //             preparation,
+    //             information
+    //         ]
+    //         return db.query(query, values)
+            
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // },
+
+    // async delete(id) {
+    //     try {
+    //         const query = `
+    //             DELETE FROM recipes
+    //             WHERE recipes.id = $1
+    //         `
+    //         await db.query(query, [id])
+
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // },
 
     async chefFindOption() {
         try {

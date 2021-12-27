@@ -75,8 +75,7 @@ module.exports = {
         try {
             const id = req.params.id
 
-            const chefResults = await Chef.find(id)
-            const chef = chefResults.rows[0]
+            const chef = await Chef.find(id)
                 
             if (!chef) return res.render('admin/admins/index', {
                 error: 'Chef não encontrado'
@@ -138,8 +137,9 @@ module.exports = {
 
     async edit(req, res) {
         try {
-            let chefFind = await Chef.find(req.params.id)
-            const chef = chefFind.rows[0]
+            const chef = await Chef.find(req.params.id)
+
+            console.log(chef)
 
             if (!chef) return res.render('admin/admins/index', {
                 error: 'Chef não encontrado'
@@ -148,7 +148,7 @@ module.exports = {
             chefFind = await Chef.files(chef.file_id)
             let files = chefFind.rows[0]
             
-            return res.render('admin/chefs/edit', { chef, files, })
+            return res.render('admin/chefs/edit', { chef, files })
                 
         } catch (err) {
             console.error(err)

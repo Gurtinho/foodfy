@@ -1,5 +1,4 @@
 const User = require('../models/User')
-
 const crypto = require('crypto')
 const { hash } = require('bcryptjs')
 const mailer = require('../../libs/mailer')
@@ -18,7 +17,7 @@ module.exports = {
                 offset
             }
 
-            let results = await User.findAll(params)
+            let results = await User.paginate(params)
             let users = results.rows
 
             if (users[0] != null) {

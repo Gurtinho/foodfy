@@ -3,7 +3,7 @@ const Chef = require('../models/Chef')
 const File = require('../models/File')
 
 module.exports = {
-    async about(req, res) {
+    about(req, res) {
         try {
             return res.render("home/about")
             
@@ -98,8 +98,10 @@ module.exports = {
 
     async recipeShow(req, res) {
         try {
-            let recipeResults = await Recipe.find(req.params.id)
-            let recipe = recipeResults.rows[0]
+            const recipe_id = await Recipe.find(req.params.id)
+            const recipe = recipe_id.rows[0]
+
+            console.log(recipe)
 
             results = await Recipe.recipeFiles(recipe.id)
             let recipe_files = results.rows
@@ -157,10 +159,12 @@ module.exports = {
         try {
             const id = req.params.id
 
-            const chefResults = await Chef.find(id)
-            const chef = chefResults.rows[0]
+            const chef_id = await Chef.find(id)
+            const chef = chef_id.rows[0]
 
-            if ( !chef ) return res.send('chef not found')
+            if (!chef) return res.render('home/chefs', {
+                error: 'Ocorreu um erro'
+            })
 
             let { page, limit } = req.query
 

@@ -1,5 +1,5 @@
-const Recipe = require('../models/recipeModels')
-const File = require('../models/fileModels')
+const Recipe = require('../models/Recipe')
+const File = require('../models/File')
 
 async function post(req, res, next) {
     try {

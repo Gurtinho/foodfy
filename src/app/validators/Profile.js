@@ -1,5 +1,5 @@
 const { compare } = require('bcryptjs')
-const User = require('../models/userModels')
+const User = require('../models/User')
 
 
 async function update(req, res, next) {

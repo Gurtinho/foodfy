@@ -24,8 +24,13 @@ async function put(req, res, next) {
         const keys = Object.keys(req.body)
 
         for ( let key of keys ) {
-            if (req.body[key] == '') return res.send('Preencha todos os campos')
+            if (req.body[key] == '') return res.render('admin/chefs/edit', {
+                chef: req.body,
+                error: 'Preencha todos os campos'
+            })
         }
+        
+        next() 
         
     } catch (err) {
         console.error(err)

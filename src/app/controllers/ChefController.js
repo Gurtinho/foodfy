@@ -159,20 +159,22 @@ module.exports = {
 
     async put(req, res) {
         try {
+            const { id, name } = req.body
+
             const chef_results = await File.findFiles(req.body.id)
-            const chefs_id = chef_results.rows[0].file_id
-
-            // if (req.files.length != 0) {
-            //     const { filename, path } = req.files[0]
-            //     await File.updateFile(chefs_id, { name: filename, path })
-            // }
-
-            console.log(chefs_id)
-
-            const { name } = req.body
-            // await Chef.update()
-
-
+            const chefs_id = chef_results.rows[0]
+     
+            if (req.files.length != 0) {
+                const { filename: name, path } = req.files[0]
+                console.log(chefs_id.file_id)
+                fs.unlinkSync(chefs_id.path)
+                await File.update( chefs_id.file_id, { name, path })
+            }
+            
+            await Chef.update(id, {
+                name,
+            })
+            
             return res.render(`admin/chefs/edit`, {
                 chef: req.body.id,
                 success: 'Chef atualizado com sucesso'

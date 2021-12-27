@@ -61,20 +61,18 @@ const Base = {
             let update = []
 
             Object.keys(fields).map( key => {
-                let line
+                let where
                 if (Array.isArray(fields[key])) {
-                    line = `${ key } = '{"${fields[key].join('","')}"}'`
+                    where = `${ key } = '{"${fields[key].join('","')}"}'`
                 } else {
-                    line = `${ key } = '${fields[key]}'`
+                    where = `${ key } = '${fields[key]}'`
                 }
-                update.push(line)
+                update.push(where)
             })
 
             let query = `UPDATE ${this.table} SET
             ${update.join(',')} WHERE id = ${id}`
-
-            await db.query(query)
-            return
+            return await db.query(query)
 
         } catch (error) {
             console.error(error)

@@ -5,14 +5,14 @@
             <input type="text" name="name" value="{{ chef.name }}" placeholder="Nome do chef" required>
         </div>
         <div>
-            <p class="title">Imagem do chef</p>
+            {# <p class="title">Imagem do chef</p>
             <div class="image-preview">
                 {% if files %}
                     <input class="input-view" type="text" disabled value="{{ files.name }}">
                 {% else %}
                     <input class="input-view input-view-none" type="text" disabled value="{{ files.name }}">
                 {% endif %}
-            </div>
+            </div> #}
 
             <div class="avatar">
                     <input
@@ -21,6 +21,7 @@
                         type="file"
                         name="file_id"
                         accept="image/*"
+                        value="{{ files.name }}"
                         onchange="imageUploadChef(event)">
                 {% if files %}
                     <label class="label-file" for="file">Enviar novo avatar</label>

@@ -102,25 +102,25 @@ module.exports = {
         }
     },
 
-    async delete(id) {
-        try {
-            const query_results = `
-                SELECT * FROM files
-                WHERE id = $1
-            `
-            const results = await db.query(query_results, [id])
-            const file = results.rows[0]
+    // async delete(id) {
+    //     try {
+    //         const query_results = `
+    //             SELECT * FROM files
+    //             WHERE id = $1
+    //         `
+    //         const results = await db.query(query_results, [id])
+    //         const file = results.rows[0]
 
-            fs.unlinkSync(file.path)
+    //         fs.unlinkSync(file.path)
 
-            const query = `
-                DELETE FROM files
-                WHERE id = $1
-            `
-            return db.query(query, [id])
+    //         const query = `
+    //             DELETE FROM files
+    //             WHERE id = $1
+    //         `
+    //         return db.query(query, [id])
 
-        } catch (err) {
-            console.error(err)
-        }
-    }
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // }
 }

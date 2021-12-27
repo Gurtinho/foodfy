@@ -1,6 +1,7 @@
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
 const RecipeFile = require('../models/RecipeFile')
+const fs = require('fs')
 
 module.exports = {
     async index(req, res) {
@@ -268,11 +269,14 @@ module.exports = {
     async delete(req, res) {
         try { 
             const recipe_file_results = await Recipe.recipeFiles(req.body.id)
-            const recipe_file = recipe_file_results.rows[0].file_id
+            const recipe_file = recipe_file_results.rows
 
-            // Recipe.recipeFilesDelete(req.body.id)
-            // await File.delete(recipe_file)
-            await Recipe.delete(req.body.id)
+            const recipeDeletePromise = recipe_file.map( async file => {
+                await File.delete({ id: file.file_id })
+                fs.unlinkSync(file.path)
+            })
+            await Promise.all(recipeDeletePromise)
+            await Recipe.delete({ id: req.body.id })
 
             return res.redirect(`/admin/recipes/myrecipes`)
     

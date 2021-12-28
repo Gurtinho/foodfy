@@ -81,9 +81,8 @@ const Base = {
                 del = `${key} = ${fields[key]}`
             })
 
-            // const query = `DELETE FROM ${this.table} WHERE ${del}`
-            // await db.query(query)
-            console.log(del)
+            const query = `DELETE FROM ${this.table} WHERE ${del}`
+            await db.query(query)
             
         } catch (error) {
             console.error(error)

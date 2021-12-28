@@ -190,7 +190,7 @@ module.exports = {
                 })
             }
             
-            await User.delete(user.id)
+            await User.delete({ id })
 
             return res.render('admin/admins/index', {
                 success: 'Conta deletada com sucesso'

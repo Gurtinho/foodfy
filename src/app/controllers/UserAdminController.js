@@ -167,7 +167,7 @@ module.exports = {
    
             return res.render(`admin/admins/edit`, {
                 user,
-                success: 'Usuário atualizado com sucesso'
+                success: 'Usuário atualizado com sucesso. Um link com a nova senha foi enviado no email cadastrado'
             })
             
         } catch (err) {

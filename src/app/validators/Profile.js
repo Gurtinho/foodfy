@@ -3,36 +3,26 @@ const User = require('../models/User')
 
 
 async function update(req, res, next) {
-    try {
-        const keys = Object.keys(body)
-
-        for ( let key of keys ) {
-            if (body[key] == '') {
-                return {
-                    user: body,
-                    error: 'Preencha todos os campos!'
-                }
-            }
-        }
-        
+    try {  
         const { userId: id } = req.session
-        const user = await User.findOne({ where: { id } })
+        const user = await User.findOne( id )
+        
         const { email, password } = req.body
 
-        if (email != user.email) return res.render('admin/profile/index', {
+        if (email != user.email) return res.render('admin/admins/index', {
             user: req.body,
-            error: 'O email por algum motivo está errado!'
+            error: 'Ocorreu um erro com o seu email'
         })
 
-        if (!password) return res.render('admin/profile/index', {
+        if (!password) return res.render('admin/admins/index', {
             user: req.body,
             error: 'Insira sua senha'
         })
 
         const passed = await compare(password, user.password)
-        if (!passed) return res.render('admin/profile/index', {
+        if (!passed) return res.render('admin/admins/index', {
             user: req.body,
-            error: 'A senha está incorreta!'
+            error: 'A senha está incorreta'
         })
 
         req.user = user

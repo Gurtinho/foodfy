@@ -1,6 +1,4 @@
 const db = require('../../config/db')
-const fs = require('fs')
-const Recipes = require('../models/Recipe')
 const Base = require('./Base')
 
 Base.init({ table: 'users' })

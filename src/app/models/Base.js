@@ -9,23 +9,18 @@ const Base = {
     },
 
     async findOne(filters) {
-        try {
-            let query = `SELECT * FROM ${this.table}`
+        let query = `SELECT * FROM ${this.table}`
 
-            Object.keys(filters).map(key => {
-                query += `${key}`
+        Object.keys(filters).map(key => {
+            query += ` ${key}`
 
-                Object.keys(filters[key]).map(field => {
-                    query += `${field} = '${filters[key][field]}'`
-                })
+            Object.keys(filters[key]).map(field => {
+                query += ` ${field} = '${filters[key][field]}'`
             })
+        })
 
-            const results = await db.query(query)
-            return results.rows[0]
-
-        } catch (error) {
-            console.error(error)
-        } 
+        const results = await db.query(query)
+        return results.rows[0]
     },
 
     async create(fields) {
@@ -86,8 +81,9 @@ const Base = {
                 del = `${key} = ${fields[key]}`
             })
 
-            const query = `DELETE FROM ${this.table} WHERE ${del}`
-            await db.query(query)
+            // const query = `DELETE FROM ${this.table} WHERE ${del}`
+            // await db.query(query)
+            console.log(del)
             
         } catch (error) {
             console.error(error)

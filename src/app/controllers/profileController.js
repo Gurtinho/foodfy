@@ -1,4 +1,3 @@
-const { captureRejectionSymbol } = require('nodemailer/lib/xoauth2')
 const User = require('../models/User')
 
 module.exports = {
@@ -6,6 +5,8 @@ module.exports = {
         try {
             const { userId: id } = req.session
             const user = await User.findOne({ where: { id } })
+            
+            console.log(id)
 
             return res.render('admin/admins/index', { user })
             

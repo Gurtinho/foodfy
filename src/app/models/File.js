@@ -19,28 +19,4 @@ module.exports = {
             console.error(err)
        }
     },
-
-    async updateFile(files_id, data) {
-        try {
-            const { name, path } = data
-
-            const query = `
-                UPDATE files SET
-                    name = ($1),
-                    path = ($2)
-                WHERE files.id = ${files_id}
-                `
-            
-            const values = [
-                name,
-                path
-            ]
-
-            const results = await db.query(query, values)
-            return results.rows[0]
-
-        } catch (err) {
-            console.error(err)
-        }
-    },
 }

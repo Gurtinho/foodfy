@@ -114,7 +114,13 @@ module.exports = {
         try {
             const { userId: user_id } = req.session
             
-            const { chef: chef_id, title, ingredients, preparation, information } = req.body
+            const {
+                chef: chef_id,
+                title,
+                ingredients,
+                preparation,
+                information
+            } = req.body
 
             const recipe_id = await Recipe.create({
                 chef_id,
@@ -249,9 +255,9 @@ module.exports = {
                 removedFiles.splice(lastIndex, 1)
 
                 const removedFilesPromise = removedFiles.map(async id => {
-                    let results = await RecipeFile.delete(id)
+                    let results = await RecipeFile.delete({ id })
                     const file_id = results.file_id
-                    await File.delete(file_id)
+                    await File.delete({ file_id })
                 })
                 await Promise.all(removedFilesPromise)
             }

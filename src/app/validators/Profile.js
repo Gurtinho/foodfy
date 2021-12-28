@@ -5,7 +5,7 @@ const User = require('../models/User')
 async function update(req, res, next) {
     try {  
         const { userId: id } = req.session
-        const user = await User.findOne( id )
+        const user = await User.findOne({ where: { id } })
         
         const { email, password } = req.body
 

@@ -1,19 +1,19 @@
 <section class="fields-creation">
     <div class="div-fields-list">
         {% for user in users %}
-        <div class="list">
-            <p class="name">{{ user.name }}</p>
-            <p class="email">{{ user.email }}</p>
-            <div class="list-links">
-                <form class="form-delete list-form-delete" id="form-delete" action="/admin/admins?_method=DELETE" method="POST">
-                    <a class="list-links-a" href="/admin/admins/{{ user.id }}/edit">Editar</a>
-                    <input type="hidden" name="id" value="{{ user.id }}">
-                    {% if user.id != session.userId %}
-                    <button class="list-links-b" type="submit">Remover</button>
-                    {% endif %} 
-                </form>
+            <div class="list">
+                <p class="name">{{ user.name }}</p>
+                <p class="email">{{ user.email }}</p>
+                <div class="list-links">
+                    <form class="form-delete list-form-delete" id="form-delete" action="/admin/admins?_method=DELETE" method="POST">
+                        <a class="list-links-a" href="/admin/admins/{{ user.id }}/edit">Editar</a>
+                        <input type="hidden" name="id" value="{{ user.id }}">
+                        {% if user.id != session.userId %}
+                        <button class="list-links-b" type="submit">Remover</button>
+                        {% endif %} 
+                    </form>
+                </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 </section>

@@ -133,7 +133,7 @@ module.exports = {
                 offset
             }
 
-            results = await File.allFiles(params)
+            results = await Chef.paginate(params)
             let chefs = results.rows
 
             chefs = chefs.map(file => ({

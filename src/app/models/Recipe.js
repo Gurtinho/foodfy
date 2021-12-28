@@ -69,7 +69,7 @@ module.exports = {
                 chefs.name AS chefs_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-                ORDER BY id DESC
+                ORDER BY updated_at DESC
                 LIMIT $1 OFFSET $2
             `
             return await db.query(query, [limit, offset])
@@ -92,19 +92,6 @@ module.exports = {
 
         } catch (err) {
            console.error(err)
-        }
-    },
-
-    async recipeFilesDelete(id) {
-        try {
-            const query = `
-                DELETE FROM recipe_files
-                WHERE recipe_files.recipe_id = $1
-            `
-            await db.query(query, [id])
-
-        } catch (err) {
-            console.error(err)
         }
     },
 

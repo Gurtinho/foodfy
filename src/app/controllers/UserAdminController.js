@@ -122,6 +122,10 @@ module.exports = {
 
             is_admin = Boolean(is_admin) || false
 
+            if (req.session.userId == id && req.session.isAdmin) {
+                is_admin = true
+            }
+
             const user_password = crypto.randomBytes(4).toString('hex')
 
             const sendingEmail = `

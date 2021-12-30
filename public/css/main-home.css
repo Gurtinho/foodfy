@@ -83,11 +83,16 @@
   list-style:none;
 }
 
-.links ul li a {
+.links ul li {
   text-decoration: none;
   color: rgb(48, 48, 48);
   font-size: 16px;
   padding-right: 30px;
+}
+
+.links ul li a {
+  text-decoration: none;
+  color: black;
 }
 
 .links a:hover {

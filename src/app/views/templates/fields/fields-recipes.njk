@@ -12,7 +12,8 @@
                         name="image"
                         multiple="multiple"
                         accept="image/*"
-                        onchange="imageUpload.handleFileInput(event)">
+                        onchange="imageUpload.handleFileInput(event)"
+                        required>
 
                     <label class="label-file" for="file">
                         <span class="material-icons">add</span>
@@ -66,7 +67,8 @@
                             type="text" 
                             name="ingredients[]" 
                             value="{{ ingredient }}"
-                            placeholder="Adicione um ingrediente">
+                            placeholder="Adicione um ingrediente"
+                            required>
                     </div>
                 {% else %}
                     <div class="div-ingredients">
@@ -74,7 +76,8 @@
                             type="text" 
                             name="ingredients[]" 
                             value="{{ ingredient }}"
-                            placeholder="Adicione um ingrediente">
+                            placeholder="Adicione um ingrediente"
+                            required>
                     </div>
                 {% endfor %}
             </div>

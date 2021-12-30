@@ -28,10 +28,28 @@ module.exports = {
                 WHERE chefs.id = $1
                 GROUP BY chefs.id`
             
-            return db.query(select, [id])
+            let results = await db.query(select, [id])
+            return results.rows[0]
             
         } catch (err) {
             console.error(err)
+        }
+    },
+
+    async findRecipes(id) {
+        try {
+            const query = `
+            SELECT recipes.*
+            FROM recipes
+            LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
+            WHERE chefs.id = $1
+            ORDER BY recipes.created_at DESC`
+
+        const results = await db.query(query, [id])
+        return results.rows
+            
+        } catch (error) {
+            console.log(error)
         }
     },
 

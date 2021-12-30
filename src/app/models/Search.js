@@ -5,16 +5,15 @@ module.exports = {
         try {
             const { search, limit, offset } = params
         
-            let searchQuery = `
+            const searchQuery = `
                 WHERE recipes.title ILIKE '%${search}%'
-                OR  chefs.name ILIKE '%${search}%'
+                OR chefs.name ILIKE '%${search}%'
                 `
 
-            let total = `(SELECT count(*) FROM recipes ${searchQuery}) AS total`
+            const total = `(SELECT count(*) FROM recipes ${searchQuery}) AS total`
 
-            let query = `
-                SELECT recipes.*,
-                ${total},
+            const query = `
+                SELECT recipes.*, ${total},
                 chefs.name AS chefs_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)

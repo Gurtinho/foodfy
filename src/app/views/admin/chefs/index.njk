@@ -23,7 +23,7 @@
         <div class="fields-grid-chefs">
         {% for chef in chefs %}
             <div class="fields-item-chefs">
-                <img class="fields-img-chefs" src="{{ chef.src }}">
+                <img class="fields-img-chefs" src="{{ chef.image }}">
                 <div class="fields-info-chefs">
                     <h2>{{ chef.name }}</h2>
                     {% if session.isAdmin %}

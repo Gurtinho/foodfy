@@ -25,7 +25,7 @@
         <div class="receitas-content-food">
             <div class="food">
                 <div class="food-img">
-                    <img src="{{ files_chefs.src }}">
+                    <img src="{{ chef.file.src }}">
                 </div>
                 <h2 class="food-title">{{ chef.name }}</h2>
                 {% if chef.total_recipes != 0 %}
@@ -47,7 +47,7 @@
 
     <section class="fields-list">
         <div class="fields-grid-show-chef">
-        {% for recipe in recipes %}
+        {% for recipe in chef.recipes %}
             <div class="fields-item-show-chef">
                 <img class="fields-img-show-chef" src="{{ recipe.src }}">
                 <div class="fields-info-show-chef">

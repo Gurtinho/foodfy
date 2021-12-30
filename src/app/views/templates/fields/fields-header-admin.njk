@@ -5,7 +5,7 @@
             <ul>
                 <li class="accounts">
                     {% if session.isAdmin %}
-                        <a href="/admin/recipes">
+                        <a href="/admin/recipes" {% if session.isAdmin %}class="disabled"{% endif %}>
                             <span class="material-icons">expand_more</span>
                             <p>RECEITAS</p>
                         </a>
@@ -22,10 +22,10 @@
                 <li class="accounts"><a href="/admin/chefs">CHEFS</a></li>
                 <li class="accounts">
                     {% if session.isAdmin %}
-                    <a href="/admin/admins">
-                        <span class="material-icons">expand_more</span>
-                        <p>USUÁRIO</p>
-                    </a>
+                        <a href="/admin/admins" {% if session.isAdmin %}class="disabled"{% endif %}>
+                            <span class="material-icons">expand_more</span>
+                            <p>USUÁRIOS</p>
+                        </a>
                         <ul class="submenu">
                             <li  class="submenu-a"><a href="/admin/admins/list">USUÁRIOS</a></li>
                             <li  class="submenu-b"><a href="/admin/admins/index">MEU PERFIL</a></li>

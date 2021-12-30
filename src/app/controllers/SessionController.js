@@ -38,6 +38,8 @@ module.exports = {
             let now = new Date()
             now = now.setMinutes(now.getMinutes() + 10)
 
+            console.log(now)
+
             await User.update(user.id, {
                 reset_token: token,
                 reset_token_expires: now,
@@ -59,7 +61,6 @@ module.exports = {
                 <p>Caso não recupere a tempo, solicite o link novamente.</p>
                 `
 
-            // enviar email com link
             await mailer.sendMail({
                 to: user.email,
                 from: 'no-reply@foodfy.com',
@@ -88,7 +89,6 @@ module.exports = {
         const { password, token } = req.body
 
         try {
-            // criar um novo hash de senha
             const newPassword = await hash(password, 8)
 
             await User.update(user.id, {

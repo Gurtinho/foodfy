@@ -1,3 +1,5 @@
+const Recipe = require('../app/models/Recipe')
+
 module.exports = {
     date(timeStamp) {
         const date = new Date(timeStamp)
@@ -12,6 +14,20 @@ module.exports = {
             iso: `${year}-${month}-${day}`,
             format: `${day}/${month}/${year}`
         }
+    },
+
+    paramsPagination(query, limit){
+        let { page } = query
+
+        page = page || 1
+        let offset = limit * (page - 1)
+
+        const params = {
+            limit,
+            offset,
+            page
+        }
+        return params
     },
 
     emailTemplate(field) {
@@ -40,5 +56,14 @@ module.exports = {
             </section>
         </body>
         `
+    },
+
+    async getImages(recipeId) {
+        let files = await Recipe.recipeFiles(recipeId)
+        files = files.rows.map(file => ({
+            ...file,
+            src: `${file.path.replace('public', '')}`
+        }))
+        return files
     },
 }

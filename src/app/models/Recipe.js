@@ -18,7 +18,8 @@ module.exports = {
                 WHERE recipes.id = $1
                 ORDER BY id DESC`
             
-            return db.query(select, [id])
+            const results = await db.query(select, [id])
+            return results.rows[0]
             
         } catch (err) {
             console.error(err)
@@ -35,9 +36,9 @@ module.exports = {
         }
     },
 
-    async recipeFind(params) {
+    async recipeFind(id, params) {
         try {
-            let { id, limit, offset } = params
+            let { limit, offset } = params
 
             let total = `(SELECT count(*) FROM recipes WHERE recipes.chef_id = ${id}) AS total`
 

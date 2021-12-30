@@ -8,7 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         <link rel="stylesheet" href="/css/main-home.css">
-        <link rel="stylesheet" href="/css/menu-accounts.css">
     </head>
     <body>
         <header class="header-home">
@@ -21,22 +20,7 @@
                         <li><a href="/chefs">Chefs</a></li>
                         <li class="accounts">
                             {% if session.userId %}
-                                <a class="accounts-expand">
-                                    <span class="material-icons">expand_more</span>
-                                    <p>Minha conta</p>
-                                </a>
-                                <ul class="submenu">
-                                    <li>
-                                        <a href="/admin/admins/index">
-                                            <button class="submenu-a" >Minhas receitas</button>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <form action="/admin/session/logout" method="POST">
-                                            <button class="submenu-b">Sair</button>
-                                        </form>
-                                    </li>
-                                </ul>
+                                <a href="/admin/admins/index">Minha conta</a>
                             {% else %}
                                 <a href="/admin/session/login">Login</a>
                             {% endif %}

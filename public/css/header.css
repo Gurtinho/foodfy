@@ -14,6 +14,11 @@
   background-color: black;
 }
 
+
+.disabled {
+  pointer-events: none;
+}
+
 .linkhome-recipes {
   margin: 0;
 }
@@ -31,6 +36,7 @@
 
 .links ul li {
   list-style: none;
+  cursor: pointer;
 }
 
 .links a {
@@ -39,6 +45,11 @@
   font-size: 15px;
   font-weight: bold;
   margin-right: 25px;
+}
+
+.links a:hover {
+  transition: all 400ms;
+  color: rgb(230, 230, 230);
 }
 
 .links a.active {
@@ -64,7 +75,7 @@
   font-size: 15px;
   background: none;
   border: none;
-  color: white;
+  color: #999;
   font-weight: bold;
   cursor: pointer;
 }
@@ -78,21 +89,26 @@
   flex-direction: column;
   position: absolute;
   left: 0;
-  top: 30px;
+  top: 10px;
   width: 180px;
   margin-top: 8px;
   background-color: black;
   box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  transition: all 200ms;
+  border-radius: 8px;
+  transition: all 400ms;
   opacity: 0;
   visibility: hidden;
   list-style: none;
-  border: 1px solid white;
+  padding-left: 10px;
 }
 
 .logout .submenu-logout li {
   padding-left: 10px;
+}
+
+.logout .submenu-logout a:hover {
+  transition: all 400ms;
+  color: rgb(230, 230, 230);
 }
 
 .logout .submenu-logout .submenu-a {
@@ -104,8 +120,12 @@
   padding-bottom: 15px;
 }
 
+.logout .submenu-logout button:hover {
+  transition: all 400ms;
+  color: #dc4747;
+}
+
 .logout:hover .submenu-logout {
-  top: -22px;
   opacity: 1;
   visibility: visible;
 }
@@ -129,29 +149,22 @@
 }
 
 .accounts .submenu {
-  display: flex;
-  flex-direction: column;
+  font-size: 16px;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
   position: absolute;
   left: 0;
-  top: 20px;
+  top: 10px;
   width: 200px;
   margin-top: 8px;
   background-color: black;
   box-shadow: 0px 0px 4px -2px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  transition: all 200ms;
+  border-radius: 8px;
+  transition: all 400ms;
   opacity: 0;
   visibility: hidden;
-}
-
-.accounts .submenu {
-  font-size: 15px;
-  display: inline-block;
-  border: none;
-  cursor: pointer;
-  background-color: black;
-  color: white;
-  border: 1px solid white;
+  padding-left: 10px;
 }
 
 .accounts .submenu li {
@@ -169,7 +182,6 @@
 
 .accounts:hover .submenu {
   z-index: 2000;
-  top: -22px;
   opacity: 1;
   visibility: visible;
 }

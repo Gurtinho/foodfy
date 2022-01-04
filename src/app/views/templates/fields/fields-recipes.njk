@@ -1,6 +1,6 @@
 <section class="fields-creation">
     <div class="div-fields-creation">
-        <div>
+        <div class="item">
             <p class="title">Imagem da receita</p>
             <div class="container-image">
 
@@ -10,10 +10,9 @@
                         id="file"
                         type="file" 
                         name="image"
-                        multiple="multiple"
+                        multiple
                         accept="image/*"
-                        onchange="imageUpload.handleFileInput(event)"
-                        required>
+                        onchange="imageUpload.handleFileInput(event)">
 
                     <label class="label-file" for="file">
                         <span class="material-icons">add</span>
@@ -21,8 +20,8 @@
                 </div>
 
                 <div class="image-preview">
-                    {% if files %}
-                        {% for file in files %}
+                    {% if recipe.files %}
+                        {% for file in recipe.files %}
                             <div class="input-image" id="{{ file.id }}">
                                 <img src="{{ file.src }}" alt="{{ file.name }}">
                                  <span 
@@ -31,34 +30,33 @@
                                  close</span>
                             </div>
                         {% endfor %}
-                        <input type="hidden" name="removed_files">
+                        <input type="hidden" name="removed_files" class="removed_files">
                     {% endif %}
                 </div>
             </div>
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Nome da receita</p>
             <input 
                 type="text" 
                 name="title" 
                 value="{{ recipe.title }}" 
-                placeholder="Nome da receita" 
-                required>
+                placeholder="Nome da receita">
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Selecione o chef</p>
             <select name="chef">
-                {% for chef in chefsOptions %}
-                <option class="option" value="{{ chef.id }}" {% if recipes.chef_id == chef.id %} selected {% endif %}>
-                    {{ chef.name }}
-                </option>
+                {% for chef in chefs %}
+                    <option class="option" value="{{ chef.id }}" {% if recipes.chef_id == chef.id %} selected {% endif %}>
+                        {{ chef.name }}
+                    </option>
                 {% endfor %}
             </select>
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Ingredientes</p>
             <div class="ingredients">
                 {% for ingredient in recipe.ingredients %}
@@ -67,8 +65,7 @@
                             type="text" 
                             name="ingredients[]" 
                             value="{{ ingredient }}"
-                            placeholder="Adicione um ingrediente"
-                            required>
+                            placeholder="Adicione um ingrediente">
                     </div>
                 {% else %}
                     <div class="div-ingredients">
@@ -76,8 +73,7 @@
                             type="text" 
                             name="ingredients[]" 
                             value="{{ ingredient }}"
-                            placeholder="Adicione um ingrediente"
-                            required>
+                            placeholder="Adicione um ingrediente">
                     </div>
                 {% endfor %}
             </div>
@@ -97,7 +93,7 @@
             </div>
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Modo de preparo</p>
             <div class="preparation">
                 {% for prep in recipe.preparation %}
@@ -106,8 +102,7 @@
                             type="text" 
                             name="preparation[]" 
                             value="{{ prep }}" 
-                            placeholder="Adicione um passo"
-                            required>
+                            placeholder="Adicione um passo">
                     </div>
                 {% else %}
                     <div class="div-preparation">
@@ -115,8 +110,7 @@
                             type="text" 
                             name="preparation[]" 
                             value="{{ prep }}" 
-                            placeholder="Adicione um passo" 
-                            required>
+                            placeholder="Adicione um passo" >
                     </div>
                 {% endfor %}
             </div>
@@ -136,14 +130,15 @@
             </div>
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Informações adicionais</p>
             <textarea 
                 name="information" 
                 cols="30" rows="10" 
-                placeholder="Escreva algo sobre a receita :)" required>{{ recipe.information }}</textarea>
+                placeholder="Escreva algo sobre a receita :)" >{{ recipe.information }}</textarea>
         </div>
     </div>
 </section>
 <script src="/js/addnew.js"></script>
 <script src="/js/imageUploadRecipe.js"></script>
+<script src="/js/removeColorInput.js"></script>

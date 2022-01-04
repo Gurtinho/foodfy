@@ -15,7 +15,6 @@ const validate = {
         divError.classList.add('error')
         divError.innerHTML = error
         input.parentNode.appendChild(divError)
-
         input.focus()
     },
 
@@ -35,5 +34,44 @@ const validate = {
         }
         
         return { error, value }
+    },
+
+    items: document.querySelectorAll('.item input, .item select, .item textarea'),
+
+    label: document.querySelector('.item label'),
+
+    inputimg: document.querySelector('.image-preview'),
+    
+    removedfiles: document.querySelector('.removed_files'),
+
+    runError(params, event) {
+        for (let item of params) {
+            if (item.value == '' && item.classList != 'removed_files' && item.classList != 'input-file') {
+                const message = document.createElement('div')
+                message.classList.add('messages')
+                message.classList.add('error-messages')
+                message.style.position = 'fixed'
+                message.innerHTML = 'Preencha todos os campos'
+                document.querySelector('body').append(message)
+                item.classList.add('color-error')
+                event.preventDefault()
+            }
+        }
+    },
+
+    validateFieldsRecipes(event) {
+        if (validate.inputimg.children.length == 0 || validate.inputimg.children[0] == validate.removedfiles) {
+            validate.label.children[0].classList.add('color-error')
+            event.preventDefault()         
+        }
+        validate.runError(validate.items, event)
+    },
+
+    validateFieldsChefs(event) {
+        if (validate.inputimg.children[0].value == '') {
+            validate.label.classList.add('color-error', 'backerror')
+            event.preventDefault()
+        }
+        validate.runError(validate.items, event)
     }
 }

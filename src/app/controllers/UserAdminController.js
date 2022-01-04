@@ -2,32 +2,20 @@ const User = require('../models/User')
 const crypto = require('crypto')
 const { hash } = require('bcryptjs')
 const mailer = require('../../libs/mailer')
+
 const { emailTemplate } = require('../../libs/utils')
+const { paramsPagination } = require('../../libs/utils')
 
 module.exports = {
     async list(req, res) {
         try {
-            let { page, limit } = req.query
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
-
-            const params = {
-                limit,
-                offset
-            }
-
-            let results = await User.paginate(params)
+            const pagination = paramsPagination(req.query, 6)
+            let results = await User.paginate(pagination)
             let users = results.rows
-
-            if (users[0] != null) {
-                const pagination = {
-                    total: Math.ceil(users[0].total / limit),
-                    page,
-                }
-                return res.render('admin/admins/list', { users, pagination })
-            }
-            return res.render('admin/admins/list', { users })
+            users.length != 0
+            ? pagination.total = Math.ceil(users[0].total / pagination.limit)
+            : pagination.total = 1
+            return res.render('admin/admins/list', { users, pagination })
 
         } catch (err) {
             console.error(err)
@@ -44,9 +32,7 @@ module.exports = {
     async post(req, res) {
         try {
             let { name, email, is_admin } = req.body
-
             is_admin = Boolean(is_admin) || false
-
             const user_password = crypto.randomBytes(4).toString('hex')
 
             const sendingEmail = `
@@ -88,7 +74,6 @@ module.exports = {
                 password,
                 is_admin
             })
-
             req.session.success = 'Usuário cadastrado com sucesso'
             
             return res.redirect(`/admin/admins/list`)
@@ -105,7 +90,6 @@ module.exports = {
         try {
             const id = req.params.id
             const user = await User.findOne({ where: { id } })
-
             return res.render(`admin/admins/edit`, { user })
             
         } catch (err) {
@@ -119,13 +103,10 @@ module.exports = {
     async put(req, res) {
         try {
             let { id, name, email, is_admin } = req.body
-
             is_admin = Boolean(is_admin) || false
-
             if (req.session.userId == id && req.session.isAdmin) {
                 is_admin = true
             }
-
             const user_password = crypto.randomBytes(4).toString('hex')
 
             const sendingEmail = `
@@ -157,7 +138,6 @@ module.exports = {
                 subject: 'Bem-vindo ao Foodfy',
                 html: emailTemplate( sendingEmail )
             })
-
             const password = await hash(user_password, 8)
 
             await User.update(id, {
@@ -166,7 +146,6 @@ module.exports = {
                 password,
                 is_admin
             })
-
             const user = await User.findOne({ where: { id } })
    
             return res.render(`admin/admins/edit`, {

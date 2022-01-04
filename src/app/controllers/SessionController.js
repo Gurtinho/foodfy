@@ -30,15 +30,9 @@ module.exports = {
     async forgot(req, res) {
         try {
             const user = req.user
-        
-            // criar token
             const token = crypto.randomBytes(20).toString('hex')
-
-            // expirar token
             let now = new Date()
             now = now.setMinutes(now.getMinutes() + 10)
-
-            console.log(now)
 
             await User.update(user.id, {
                 reset_token: token,
@@ -90,7 +84,6 @@ module.exports = {
 
         try {
             const newPassword = await hash(password, 8)
-
             await User.update(user.id, {
                 password: newPassword,
                 reset_token: '',

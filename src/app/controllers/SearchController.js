@@ -1,45 +1,19 @@
 const Recipe = require('../models/Recipe')
-const Search = require('../models/Search')
+
+const { paramsPagination } = require('../../libs/utils')
+const LoadService = require('../services/LoadRecipeService')
 
 module.exports = {
     async search(req, res) {
         try {
-            let { search, page, limit } = req.query
-
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
-
-            const params = {
-                search,
-                page,
-                limit,
-                offset
-            }
-
-            let recipes_results = await Search.search(params)
-            let recipes_files = recipes_results.rows
-
-            let files = recipes_files.map(async item => ({
-                ...item,
-                path: (await Recipe.recipeFiles(item.id)).rows[0].path
-            }))
-
-            let recipes = await Promise.all(files)
-
-            recipes = recipes.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            if (recipes[0] != null) {
-                const pagination = {
-                        total: Math.ceil(recipes[0].total / limit),
-                        page,
-                    }
-                return res.render('home/search', { search, recipes, pagination })
-            }
-            return res.render('home/search', { search, recipes })
+            let { search } = req.query
+            let pagination = paramsPagination(req.query, 6)
+            pagination = { ...pagination, search }
+            const recipes = await LoadService.load('recipes', pagination)
+            recipes.length != 0
+            ? pagination.total = Math.ceil(recipes[0].total / pagination.limit)
+            : pagination.total = 1
+            return res.render('home/search', { search, recipes, pagination })
             
         } catch (err) {
             console.error(err)

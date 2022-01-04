@@ -1,3 +1,4 @@
+// display description on show home page
 function showDesc() {
     const mostrar = document.querySelectorAll(".mostrar")
 
@@ -15,7 +16,7 @@ function showDesc() {
 }
 showDesc()
 
-
+// confirm delete chef and recipes
 function confirmation() {
     const confirmDelete = document.querySelectorAll('.form-delete')
     confirmDelete.forEach((item) => {
@@ -29,7 +30,7 @@ function confirmation() {
 }
 confirmation()
 
-
+// link colors
 function current() {
     const currentPage = location.pathname
     const menuItems = document.querySelectorAll('.links ul li a')

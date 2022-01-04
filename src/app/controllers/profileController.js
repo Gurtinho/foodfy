@@ -19,7 +19,6 @@ module.exports = {
         try {
             const user = req.user
             const { name } = req.body
-
             await User.update(user.id, { name })
 
             return res.render('admin/admins/index', {

@@ -10,7 +10,7 @@
         {% for chef in chefs %}
             <div class="fields-item-chefs">
                 <a class="fields-item-chefs-a" type="hidden" href="/chefs/{{ chef.id }}">
-                    <img class="fields-img-chefs" src="{{ chef.src }}">
+                    <img class="fields-img-chefs" src="{{ chef.image }}">
                     <div class="fields-info-chefs">
                         <h2>{{ chef.name }}</h2>
                         {% if chef.total_recipes != 0 %}
@@ -30,7 +30,9 @@
         {% endfor %}
         </div>
         <div class="container-pagination">
-            <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></div>
+            <div class="pagination" 
+            data-page={{pagination.page}} 
+            data-total={{pagination.total}}></div>
         </div>
     </section>
     {% include 'templates/parts/footer.njk' %}

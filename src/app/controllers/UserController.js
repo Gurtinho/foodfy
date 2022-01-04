@@ -18,9 +18,7 @@ module.exports = {
     async post(req, res) {
         try {
             let { name, email, password, is_admin } = req.body
-
             is_admin = is_admin || false
-
             password = await hash(password, 8)
             
             const userId = await User.create({
@@ -29,7 +27,6 @@ module.exports = {
                 password,
                 is_admin
             })
-
             req.session.userId = userId
 
             return res.redirect('/')

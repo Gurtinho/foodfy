@@ -1,13 +1,11 @@
 {% if error %}
     <div class="messages error-messages">
-        <span class="material-icons">priority_high</span>
-        <div>{{ error }}</div>
+       {{ error }}
     </div>
 {% endif %}
 
 {% if success %}
     <div class="messages success-messages">
-        <span class="material-icons">done</span>
-        <div>{{ success }}</div>
+        {{ success }}
     </div>
 {% endif %}

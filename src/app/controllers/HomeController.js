@@ -1,6 +1,7 @@
-const Recipe = require('../models/Recipe')
-const Chef = require('../models/Chef')
-const File = require('../models/File')
+const { paramsPagination } = require('../../libs/utils')
+const LoadRecipeService = require('../services/LoadRecipeService')
+const LoadChefService = require('../services/LoadChefService')
+
 
 module.exports = {
     about(req, res) {
@@ -14,40 +15,12 @@ module.exports = {
 
     async home(req, res) {
         try {
-            let { page, limit } = req.query
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
-
-            const params = {
-                page,
-                limit,
-                offset
-            }
-            let recipe_results = await Recipe.paginate(params)
-            let recipes_files = recipe_results.rows
-
-            let files = recipes_files.map(async item => ({
-                ...item,
-                path: (await Recipe.recipeFiles(item.id)).rows[0].path
-            }))
-
-            let recipes = await Promise.all(files)
-
-            recipes = recipes.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))    
-
-            if (recipes[0] != null) {
-                const pagination = {
-                    total: Math.ceil(recipes[0].total / limit),
-                    page,
-                }
-                return res.render('home/home', { recipes, pagination })
-            }
-
-            return res.render('home/home', { recipes })
+            const pagination = paramsPagination(req.query, 6)
+            const recipes = await LoadRecipeService.load('recipes', pagination)
+            recipes.length != 0
+            ? pagination.total = Math.ceil(recipes[0].total / pagination.limit)
+            : pagination.total = 1
+            return res.render('home/home', { recipes, pagination })
             
         } catch (err) {
             console.error(err)
@@ -56,40 +29,12 @@ module.exports = {
 
     async recipes(req, res) {
         try {
-            let { page, limit } = req.query
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
-
-            const params = {
-                page,
-                limit,
-                offset
-            }
-
-            let recipes_results = await Recipe.paginate(params)
-            let recipes_files = recipes_results.rows
-
-            let files = recipes_files.map(async item => ({
-                ...item,
-                path: (await Recipe.recipeFiles(item.id)).rows[0].path
-            }))
-
-            let recipes = await Promise.all(files)
-
-            recipes = recipes.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            if (recipes[0] != null) {
-                const pagination = {
-                        total: Math.ceil(recipes[0].total / limit),
-                        page,
-                    }
-                return res.render('home/recipes', { recipes, pagination })
-            }
-            return res.render('home/recipes', { recipes })
+            const pagination = paramsPagination(req.query, 6)
+            const recipes = await LoadRecipeService.load('recipes', pagination)
+            recipes.length != 0
+            ? pagination.total = Math.ceil(recipes[0].total / pagination.limit)
+            : pagination.total = 1
+            return res.render('home/recipes', { recipes, pagination })
             
         } catch (err) {
             console.error(err)
@@ -98,23 +43,10 @@ module.exports = {
 
     async recipeShow(req, res) {
         try {
-            const recipe_id = await Recipe.find(req.params.id)
-            const recipe = recipe_id.rows[0]
+            const recipe = await LoadRecipeService.load('recipe', req.params.id)
+            if (!recipe) return res.render('home/recipes', { error: 'Receita não encontrada' })
+            return res.render('home/recipe-show', { recipe })
 
-            console.log(recipe)
-
-            results = await Recipe.recipeFiles(recipe.id)
-            let recipe_files = results.rows
-
-            recipe_files = recipe_files.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            if (!recipe) return res.send('recipe not found')
-            
-            return res.render('home/recipe-show', { recipe, recipe_files })
-            
         } catch (err) {
             console.error(err)
         }
@@ -122,33 +54,12 @@ module.exports = {
 
     async chefs(req, res) {
         try {
-            let { page, limit } = req.query
-            page = page || 1
-            limit = limit || 12
-            let offset = limit * (page - 1)
-
-            const params = {
-                page,
-                limit,
-                offset
-            }
-
-            results = await Chef.paginate(params)
-            let chefs = results.rows
-
-            chefs = chefs.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            if (chefs[0] != null) {
-                const pagination = {
-                        total: Math.ceil(chefs[0].total / limit),
-                        page,
-                    }
-                return res.render('home/chefs', { chefs, pagination })
-            }
-            return res.render('home/chefs', { chefs })
+            const pagination = paramsPagination(req.query, 12)
+            const chefs = await LoadChefService.load('chefs', pagination)
+            chefs.length != 0
+            ? pagination.total = Math.ceil(chefs[0].total / pagination.limit)
+            : pagination.total = 1
+            return res.render('home/chefs', { chefs, pagination })
 
         } catch (err) {
             console.error(err)
@@ -157,61 +68,13 @@ module.exports = {
 
     async chefShow(req, res) {
         try {
-            const id = req.params.id
-
-            const chef_id = await Chef.find(id)
-            const chef = chef_id.rows[0]
-
-            if (!chef) return res.render('home/chefs', {
-                error: 'Ocorreu um erro'
-            })
-
-            let { page, limit } = req.query
-
-            page = page || 1
-            limit = limit || 6
-            let offset = limit * (page - 1)
-
-            const params = {
-                id,
-                page,
-                limit,
-                offset
-            }
-
-            // files chefs
-            let results = await Recipe.recipeFind(params)
-            let recipes_results = results.rows
-
-            results = await Chef.files(chef.file_id)
-
-            let files_chefs = results.rows[0]
-            files_chefs = {
-                ...files_chefs,
-                src: `${req.protocol}://${req.headers.host}${files_chefs.path.replace('public', '')}`
-            }
-
-            // files receitas
-            let files = recipes_results.map(async item => ({
-                ...item,
-                path: (await Recipe.recipeFiles(item.id)).rows[0].path
-            }))
-
-            let recipes = await Promise.all(files)
-
-            recipes = recipes.map(file => ({
-                ...file,
-                src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
-            }))
-
-            if (recipes[0] != null) {
-                const pagination = {
-                        total: Math.ceil(recipes[0].total / limit),
-                        page,
-                    }
-                return res.render('home/chef-show', { chef, recipes, pagination, files_chefs })
-            }
-            return res.render('home/chef-show', { chef, recipes, files_chefs })
+            const pagination = paramsPagination(req.query, 6)
+            const chef = await LoadChefService.load('chef', { id: req.params.id, pagination })
+            if (!chef) return res.render('home/chef-show', { error: 'Chef não encontrado' })
+            chef.recipes.length != 0
+            ? pagination.total = Math.ceil(chef.recipes[0].total / pagination.limit)
+            : pagination.total = null
+            return res.render('home/chef-show', { chef, pagination })
             
         } catch (err) {
             console.error(err)

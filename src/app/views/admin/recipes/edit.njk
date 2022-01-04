@@ -13,7 +13,7 @@
                     </a>    
                     <button class="btn-delete-recipe" type="submit" form="form-delete">Deletar</button>
                     <input type="hidden" name="id" value="{{ recipe.id }}">
-                    <button class="btn-save-recipe" type="submit">Salvar receita</button>
+                    <button class="btn-save-recipe" type="submit" onclick="validate.validateFieldsRecipes(event)">Salvar receita</button>
                 </div>
             </div>
         </section>

@@ -7,25 +7,21 @@
 }
 
 .messages {
-    z-index: 1000;
+    z-index: 5000;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
     margin-top: 10px;
     margin-right: 10px;
     right: 0;
+    top: 0;
     border-radius: 4px;
     padding: 50px 30px;
     color: white;
     font-size: 16px;
     font-weight: bold;
-    opacity: 1;
     animation: hidemessage 300ms 3s ease-out forwards;
-}
-
-.messages span {
-    margin-right: 10px;
 }
 
 .messages.error-messages {
@@ -34,4 +30,18 @@
 
 .messages.success-messages {
     background-color: rgb(44, 206, 98);
+}
+
+.color-error {
+    color: #DC4747 !important;
+    border-color:#DC4747 !important;
+}
+
+.color-error::placeholder {
+    color: #DC4747 !important;
+}
+
+.backerror {
+    background-color:  #DC4747;
+    color: white !important;
 }

@@ -36,16 +36,19 @@ module.exports = {
         }
     },
 
-    async findRecipes(id) {
+    async findRecipes(params) {
+        const { id, limit, offset } = params
         try {
+            const total = `(SELECT count(*) FROM recipes WHERE chefs.id = recipes.chef_id) AS total`
+
             const query = `
-            SELECT recipes.*
+            SELECT recipes.*, ${total}
             FROM recipes
             LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
-            WHERE chefs.id = $1
-            ORDER BY recipes.created_at DESC`
+            WHERE chefs.id = ${id}
+            LIMIT $1 OFFSET $2`
 
-        const results = await db.query(query, [id])
+        const results = await db.query(query, [limit, offset])
         return results.rows
             
         } catch (error) {

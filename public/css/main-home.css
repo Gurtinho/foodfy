@@ -6,6 +6,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  position: relative;
+}
+
 /* ===========ERROR=========== */
 .container-error {
   display: flex;
@@ -177,22 +181,6 @@
   color: #777;
 }
 
-/*==========FOOTER==========*/
-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #EEEEEE;
-  width:100%;
-  height:62px;
-}
-
-footer p {
-  font-size: 14px;
-  color:#999;
-  text-align: center;
-}
-
 
 /*==========SOBRE==============*/
 .sobre {
@@ -345,6 +333,12 @@ footer p {
   color: #777;
 }
 
+.no-recipes {
+  width: 940px;
+  margin-bottom: 45px;
+  color: #999;
+}
+
 .img {
   cursor:pointer;
   height: 140px;
@@ -464,6 +458,7 @@ footer p {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 75vh;
 }
 
 .fields-grid-chefs {
@@ -696,7 +691,7 @@ footer p {
   margin-top: auto;
   justify-content: center;
   width: 100%;
-  min-height: 62px;
+  height: 62px;
 }
 
 .pagination a,
@@ -713,4 +708,23 @@ footer p {
 
 .active {
   font-weight: bold;
+}
+
+
+/*==========FOOTER==========*/
+body > footer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  justify-content: center;
+  background-color: #EEEEEE;
+  width:100%;
+  height:62px;
+}
+
+footer p {
+  font-size: 14px;
+  color:#999;
+  text-align: center;
 }

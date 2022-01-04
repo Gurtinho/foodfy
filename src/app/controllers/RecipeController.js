@@ -1,6 +1,7 @@
 const Recipe = require('../models/Recipe')
 const File = require('../models/File')
 const RecipeFile = require('../models/RecipeFile')
+
 const fs = require('fs')
 const { paramsPagination } = require('../../libs/utils')
 const LoadService = require('../services/LoadRecipeService')
@@ -10,13 +11,9 @@ module.exports = {
         try {
             const pagination = paramsPagination(req.query, 6)
             const recipes = await LoadService.load('recipes', pagination)
-
-            if (recipes.length != 0) {
-                pagination.total = Math.ceil(recipes[0].total / pagination.limit)
-            } else {
-                pagination.total = 1
-            }
-
+            recipes.length != 0
+            ? pagination.total = Math.ceil(recipes[0].total / pagination.limit)
+            : pagination.total = 1
             return res.render('admin/recipes/index', { recipes, pagination })
 
         } catch (err) {
@@ -32,12 +29,9 @@ module.exports = {
             const pagination = paramsPagination(req.query, 6)
             pagination.id = req.session.userId
             const recipes = await LoadService.load('userRecipes', pagination)
-
-            if (recipes.length != 0) {
-                pagination.total = Math.ceil(recipes[0].total / pagination.limit)
-            } else {
-                pagination.total = 1
-            }
+            recipes.length != 0
+            ? pagination.total = Math.ceil(recipes[0].total / pagination.limit)
+            : pagination.total = 1
             return res.render('admin/recipes/index', { recipes, pagination })
 
         } catch (err) {
@@ -50,10 +44,8 @@ module.exports = {
 
     async create(req, res) {
         try {
-            let findChef = await Recipe.chefFindOption()
-            const chefsOptions = findChef.rows
-
-            return res.render('admin/recipes/create', { chefsOptions })
+            const chefs = await Recipe.chefFindOption()
+            return res.render('admin/recipes/create', { chefs })
 
         } catch (err) {
             console.error(err)
@@ -89,13 +81,11 @@ module.exports = {
                     name: file.filename,
                     path: file.path
                 })
-
                 await RecipeFile.create({
                     recipe_id,
                     file_id
                 })
             })
-
             await Promise.all(filePromise)
 
             return res.render(`admin/recipes/create`, {
@@ -113,7 +103,6 @@ module.exports = {
     async show(req, res) {
         try {
             const recipe = await LoadService.load('recipe', req.params.id)
-
             return res.render('admin/recipes/show', { recipe })
             
         } catch (err) {
@@ -127,17 +116,16 @@ module.exports = {
     async edit(req, res) {
         try {
             const recipe = await LoadService.load('recipe', req.params.id)
-
             if (!recipe) {
                 return res.render('admin/admins/myrecipes', {
                     error: 'Ocorreu um erro'
                 })
             }
+            const chefs = await Recipe.chefFindOption()
 
-            results = await Recipe.chefFindOption()
-            const chefsOptions = results.rows
-
-            return res.render(`admin/recipes/edit`, { recipe, chefsOptions })
+            console.log(recipe.files)
+            
+            return res.render(`admin/recipes/edit`, { recipe, chefs })
             
         } catch (err) {
             console.error(err)
@@ -149,8 +137,6 @@ module.exports = {
 
     async put(req, res) {
         try {
-            const { userId: user_id } = req.session
-
             const {
                 id,
                 removed_files,
@@ -160,15 +146,6 @@ module.exports = {
                 preparation,
                 information
             } = req.body
-
-            await Recipe.update(id, {
-                chef_id,
-                user_id,
-                title,
-                ingredients,
-                preparation,
-                information
-            })
 
             if (req.files.length != 0) {
                 const newFilesPromise = req.files.map(async file => {
@@ -188,14 +165,25 @@ module.exports = {
                 const removedFiles = removed_files.split(',')
                 const lastIndex = removedFiles.length - 1
                 removedFiles.splice(lastIndex, 1)
-
                 const removedFilesPromise = removedFiles.map(async id => {
-                    let results = await RecipeFile.delete({ id })
-                    const file_id = results.file_id
-                    await File.delete({ file_id })
+                    await RecipeFile.delete({ file_id: id })
+                    const file = await File.findOne({ where: { id } })
+                    await File.delete({ id })
+
+                    if (file.path != 'public/images/recipe_placeholder.png') {
+                        fs.unlinkSync(file.path)
+                    }
                 })
                 await Promise.all(removedFilesPromise)
             }
+
+            await Recipe.update(id, {
+                chef_id,
+                title,
+                ingredients,
+                preparation,
+                information
+            })
             
             return res.redirect(`/admin/recipes/${id}`)
             
@@ -209,16 +197,17 @@ module.exports = {
 
     async delete(req, res) {
         try { 
-            const recipe_file_results = await Recipe.recipeFiles(req.body.id)
-            const recipe_file = recipe_file_results.rows
-
-            const recipeDeletePromise = recipe_file.map( async file => {
-                await File.delete({ id: file.file_id })
-                fs.unlinkSync(file.path)
-            })
-            await Promise.all(recipeDeletePromise)
+            const recipe_file = await Recipe.recipeFiles(req.body.id)
+            if (recipe_file.rows.length != 0) {
+                const recipeDeletePromise = recipe_file.rows.map( async file => {
+                    await File.delete({ id: file.file_id })
+                    if (file.path != 'public/images/recipe_placeholder.png') {
+                        fs.unlinkSync(file.path)
+                    }
+                })
+                await Promise.all(recipeDeletePromise)
+            }
             await Recipe.delete({ id: req.body.id })
-
             return res.redirect(`/admin/recipes/myrecipes`)
     
         } catch (err) {

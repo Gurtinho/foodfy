@@ -1,16 +1,16 @@
 <section class="fields-creation">
     <div class="div-fields-creation">
-        <div>
+        <div class="item">
             <p class="title">Nome</p>
-            <input type="text" name="name" value="{{ chef.name }}" placeholder="Nome do chef" required>
+            <input type="text" name="name" value="{{ chef.name }}" placeholder="Nome do chef">
         </div>
-        <div>
+        <div class="item">
             <p class="title">Imagem do chef</p>
             <div class="image-preview">
-                {% if files %}
-                    <input class="input-view" type="text" disabled value="{{ files.name }}">
+                {% if chef.file %}
+                    <input class="input-view" type="text" disabled value="{{ chef.file.name }}">
                 {% else %}
-                    <input class="input-view input-view-none" type="text" disabled value="{{ files.name }}">
+                    <input class="input-view input-view-none" type="text" disabled value="{{ chef.file.name }}">
                 {% endif %}
             </div>
 
@@ -21,9 +21,8 @@
                         type="file"
                         name="file_id"
                         accept="image/*"
-                        value="{{ files.name }}"
                         onchange="imageUploadChef(event)">
-                {% if files %}
+                {% if chef.file %}
                     <label class="label-file" for="file">Enviar novo avatar</label>
                 {% else %}
                     <label class="label-file" for="file">Enviar avatar</label>
@@ -33,3 +32,4 @@
     </div>
 </section>
 <script src="/js/imageUploadChef.js"></script>
+<script src="/js/removeColorInput.js"></script>

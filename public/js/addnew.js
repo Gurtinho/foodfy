@@ -8,21 +8,17 @@ function addInfo() {
     const buttonRemoveIngredient = document.querySelector('.remove-ingredient')
     const buttonRemovePreparation = document.querySelector('.remove-preparation')
 
-
+    // ADD FIELDS
     function addNewFields(field) {
         const fChild = field.lastElementChild
         if (fChild.lastElementChild.value == '') {
-                fChild.lastElementChild.classList.add('active')
-                setTimeout(() => {
-                    fChild.lastElementChild.classList.remove('active')
-                }, 1000)
+                fChild.lastElementChild.classList.add('color-error')
                 return false
         }
         const fieldClone = fChild.cloneNode(true)
         field.appendChild(fieldClone)
         fieldClone.lastElementChild.value = ''
     }
- 
 
     // REMOVE FIELDS
     function removeNewFields(field) {
@@ -34,10 +30,7 @@ function addInfo() {
             }
         } else if (field.children.length == 1) {
             for (let fChild of field.children) {
-                fChild.children[0].classList.add('active')
-                setTimeout(() => {
-                    fChild.children[0].classList.remove('active')
-                }, 1000)
+                fChild.children[0].classList.add('color-error')
             }
         }
     }

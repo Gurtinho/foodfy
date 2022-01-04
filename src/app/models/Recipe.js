@@ -29,7 +29,8 @@ module.exports = {
     async chefFindOption() {
         try {
             const chef = `SELECT name, id FROM chefs`
-            return db.query(chef)
+            const results = await db.query(chef)
+            return results.rows
 
         } catch (err) {
             console.error(err)
@@ -61,7 +62,7 @@ module.exports = {
 
     async paginate(params) {
         try {
-            let { limit, offset } = params
+            let { search, limit, offset } = params
 
             let total = `(SELECT count(*) FROM recipes) AS total`
 
@@ -73,6 +74,25 @@ module.exports = {
                 ORDER BY updated_at DESC
                 LIMIT $1 OFFSET $2
             `
+
+            if (search) {
+                const searchQuery = `
+                    WHERE recipes.title ILIKE '%${search}%'
+                    OR chefs.name ILIKE '%${search}%'
+                `
+                const total = `(SELECT count(*) FROM recipes ${searchQuery}) AS total`
+
+                query = `
+                    SELECT recipes.*, ${total},
+                    chefs.name AS chefs_name
+                    FROM recipes
+                    LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+                    ${searchQuery}
+                    ORDER BY updated_at DESC
+                    LIMIT $1 OFFSET $2
+                `
+            }
+
             return await db.query(query, [limit, offset])
            
         } catch (err) {
@@ -83,13 +103,13 @@ module.exports = {
     async recipeFiles(id) {
         try {
             const query = `
-                SELECT recipe_files.*,
+                SELECT files.*,
                 files.name AS name, files.path AS path, files.id AS file_id
-                FROM recipe_files
-                LEFT JOIN files ON (recipe_files.file_id = files.id)
+                FROM files
+                LEFT JOIN recipe_files ON (recipe_files.file_id = files.id)
                 WHERE recipe_files.recipe_id = $1
             `
-            return db.query(query, [id])
+            return await db.query(query, [id])
 
         } catch (err) {
            console.error(err)

@@ -1,17 +1,18 @@
 <section class="fields-creation">
     <div class="div-fields-creation">
-        <div>
+        <div class="item">
             <p class="title">Nome</p>
-            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira seu nome" required>
+            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira seu nome">
         </div>
-        <div>
+        <div class="item">
             <p class="title">Email</p>
-            <input type="text" name="email" value="{{ user.email }}" disabled placeholder="Digite seu email" required>
+            <input type="text" name="email" value="{{ user.email }}" disabled placeholder="Digite seu email">
             <input type="hidden" name="email" value="{{ user.email }}">
         </div>
-        <div>
+        <div class="item">
             <p class="title">Senha</p>
-            <input type="text" name="password" placeholder="Digite sua senha" required>
+            <input type="password" name="password" placeholder="Digite sua senha">
         </div>
     </div>
 </section>
+<script src="/js/removeColorInput.js"></script>

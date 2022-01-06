@@ -1,12 +1,13 @@
 <section class="fields-register">
     <div class="div-fields-register">
-        <div>
+        <div class="item">
             <p class="title">Email</p>
-            <input type="email" name="email" value="{{ user.email }}" placeholder="Digite o seu email" required 
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Digite o seu email" 
             onblur="validate.apply(this, 'validEmail')">
         </div>
     </div>
     <div class="div-fields-submit">
-        <button type="submit">Enviar Email</button>
+        <button type="submit" onclick="validate.validateFields(event)">Enviar Email</button>
     </div>
 </section>
+<script src="/js/removeColorInput.js"></script>

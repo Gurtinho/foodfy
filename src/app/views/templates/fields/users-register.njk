@@ -1,24 +1,24 @@
 <section class="fields-register">
     <div class="div-fields-register">
-        <div>
+        <div class="item">
             <p class="title">Nome</p>
-            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira um nome de usuário" required>
+            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira um nome de usuário">
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Email</p>
-            <input type="email" name="email" value="{{ user.email }}" placeholder="Insira um email" required 
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Insira um email" 
             onblur="validate.apply(this, 'validEmail')">
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Senha</p>
-            <input type="password" name="password" placeholder="Digite uma senha" required>
+            <input type="password" name="password" placeholder="Digite uma senha">
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Repetir senha</p>
-            <input type="password" name="passwordrepeat" placeholder="Digite novamente a senha" required>
+            <input type="password" name="passwordrepeat" placeholder="Digite novamente a senha">
         </div>
     </div>
     <div class="div-fields-submit">
@@ -26,6 +26,7 @@
             <span class="material-icons">arrow_back_ios</span>
             <p>Voltar</p>
         </a>
-        <button type="submit">Registrar</button>
+        <button type="submit" onclick="validate.validateFields(event)">Registrar</button>
     </div>
 </section>
+<script src="/js/removeColorInput.js"></script>

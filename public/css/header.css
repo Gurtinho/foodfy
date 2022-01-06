@@ -47,11 +47,6 @@
   margin-right: 25px;
 }
 
-.links a:hover {
-  transition: all 400ms;
-  color: rgb(230, 230, 230);
-}
-
 .links a.active {
   font-weight: bold;
   color: white;
@@ -89,7 +84,7 @@
   z-index: 2000;
   flex-direction: column;
   position: absolute;
-  left: 0;
+  left: -10px;
   top: 10px;
   width: 180px;
   margin-top: 8px;
@@ -100,7 +95,6 @@
   opacity: 0;
   visibility: hidden;
   list-style: none;
-  padding-left: 10px;
 }
 
 .logout .submenu-logout li {
@@ -156,7 +150,7 @@
   border: none;
   cursor: pointer;
   position: absolute;
-  left: 0;
+  left: -10px;
   top: 10px;
   width: 200px;
   margin-top: 8px;
@@ -166,11 +160,16 @@
   transition: all 200ms;
   opacity: 0;
   visibility: hidden;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 
 .accounts .submenu li {
   padding-left: 10px;
+}
+
+.accounts .submenu a:hover {
+  transition: all 200ms;
+  color: rgb(230, 230, 230);
 }
 
 .accounts .submenu .submenu-a {

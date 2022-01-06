@@ -11,7 +11,7 @@
                     <a href="/admin/recipes/myrecipes">
                         <button type="button" class="btn-cancel-recipe">Cancelar</button>
                     </a>
-                    <button class="btn-save-recipe" type="submit" onclick="validate.validateFieldsRecipes(event)">Salvar receita</button>
+                    <button class="btn-save-recipe" type="submit" onclick="validate.validateFields(event)">Salvar receita</button>
                 </div>
             </div>
         </section>
@@ -19,6 +19,5 @@
         {% include 'templates/fields/fields-recipes.njk' %}
         <input type="hidden" name="id" value="id">
     </form>
-
 {% endblock %}
 

@@ -1,23 +1,24 @@
 <section class="fields-register">
     <div class="div-fields-register">
-        <div>
+        <div class="item">
             <p class="title">Email</p>
-            <input type="email" name="email" value="{{ user.email }}" placeholder="Insira seu email" required 
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Insira seu email" 
             onblur="validate.apply(this, 'validEmail')">
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Senha</p>
-            <input type="password" name="password" placeholder="Digite uma nova senha" required>
+            <input type="password" name="password" placeholder="Digite uma nova senha">
         </div>
 
-        <div>
+        <div class="item">
             <p class="title">Repetir senha</p>
-            <input type="password" name="passwordrepeat" placeholder="Digite novamente a senha" required>
+            <input type="password" name="passwordrepeat" placeholder="Digite novamente a senha">
         </div>
     </div>
     <div class="div-fields-submit">
-        <button type="submit">Nova Senha</button>
+        <button type="submit" onclick="validate.validateFields(event)">Nova Senha</button>
     </div>
 </section>
 <input type="hidden" name="token" value="{{token}}">
+<script src="/js/removeColorInput.js"></script>

@@ -6,7 +6,6 @@
                 <li class="accounts">
                     {% if session.isAdmin %}
                         <a href="/admin/recipes" {% if session.isAdmin %}class="disabled"{% endif %}>
-                            <span class="material-icons">expand_more</span>
                             <p>RECEITAS</p>
                         </a>
                         <ul class="submenu">
@@ -23,7 +22,6 @@
                 <li class="accounts">
                     {% if session.isAdmin %}
                         <a href="/admin/admins" {% if session.isAdmin %}class="disabled"{% endif %}>
-                            <span class="material-icons">expand_more</span>
                             <p>USUÁRIO</p>
                         </a>
                         <ul class="submenu">
@@ -39,12 +37,9 @@
             </ul> 
         </div>
         <form class="logout" action="/admin/session/logout" method="POST">
-            <a>
-                <span class="material-icons">expand_more</span>
-                <p>SAIR</p>
-            </a>
+            <a><p>SAIR</p></a>
             <ul class="submenu-logout">
-                <li class="submenu-a"><a href="/">VOLTAR AO HOME</a></li>
+                <li class="submenu-a"><a href="/">HOME</a></li>
                 <li class="submenu-b"><button>SAIR DA CONTA</button></li>
             </ul>
         </form>

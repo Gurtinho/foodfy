@@ -12,7 +12,7 @@
                         {% if user.id != session.userId %}
                             <button form="form-delete" class="btn-delete-chef" type="submit">Deletar</button>
                         {% endif %}
-                        <button class="btn-save-chef" type="submit">Salvar</button>
+                        <button class="btn-save-chef" type="submit" onclick="validate.validateFields(event)">Salvar</button>
                     </div>
                 </div>
             </section>    

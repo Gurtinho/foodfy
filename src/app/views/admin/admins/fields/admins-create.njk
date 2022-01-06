@@ -1,12 +1,12 @@
 <section class="fields-creation">
     <div class="div-fields-creation">
-        <div>
+        <div class="item">
             <p class="title">Nome</p>
-            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira seu nome" required>
+            <input type="text" name="name" value="{{ user.name }}" placeholder="Insira seu nome">
         </div>
-        <div>
+        <div class="item">
             <p class="title">Email</p>
-            <input type="text" name="email" value="{{ user.email }}" placeholder="Digite seu email" required>
+            <input type="text" name="email" value="{{ user.email }}" placeholder="Digite seu email">
         </div>
 
         {% if user.id != session.userId %}
@@ -17,3 +17,4 @@
         {% endif %}
     </div>
 </section>
+<script src="/js/removeColorInput.js"></script>

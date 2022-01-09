@@ -31,8 +31,8 @@ module.exports = {
 
             return res.redirect('/')
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
             return res.render('admin/session/login', {
                 error: 'Ocorreu um erro. Tente novamente'
             })

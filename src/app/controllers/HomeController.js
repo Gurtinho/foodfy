@@ -8,8 +8,8 @@ module.exports = {
         try {
             return res.render("home/about")
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
         }
     },
 
@@ -17,13 +17,11 @@ module.exports = {
         try {
             const pagination = paramsPagination(req.query, 6)
             const recipes = await LoadRecipeService.load('recipes', pagination)
-            recipes.length != 0
-            ? pagination.total = Math.ceil(recipes[0].total / pagination.limit)
-            : pagination.total = 1
-            return res.render('home/home', { recipes, pagination })
+            recipes.splice(6, recipes.length)
+            return res.render('home/home', { recipes })
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
         }
     },
 
@@ -36,8 +34,8 @@ module.exports = {
             : pagination.total = 1
             return res.render('home/recipes', { recipes, pagination })
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
         }
     },
 
@@ -47,8 +45,8 @@ module.exports = {
             if (!recipe) return res.render('home/recipes', { error: 'Receita não encontrada' })
             return res.render('home/recipe-show', { recipe })
 
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
         }
     },
 
@@ -61,8 +59,8 @@ module.exports = {
             : pagination.total = 1
             return res.render('home/chefs', { chefs, pagination })
 
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
         }
     },
 
@@ -76,8 +74,8 @@ module.exports = {
             : pagination.total = null
             return res.render('home/chef-show', { chef, pagination })
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
         }
     }
 }

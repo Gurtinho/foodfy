@@ -1,0 +1,53 @@
+.card {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.card-lottie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: auto;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.animation {
+    height: 80px;
+    margin-top: 20px;
+}
+
+.card-lottie h2 {
+    margin-top: 20px;
+    font-size: 32px;
+}
+
+.card-lottie p {
+    font-size: 18px;
+    margin-top: 15px;
+    color: #777;
+}
+
+.card-lottie button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 50px;
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.success {
+    background-color: #2CDA94;
+}
+
+.error {
+    background-color: #D12D2D;
+}

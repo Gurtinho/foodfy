@@ -16,19 +16,6 @@ function showDesc() {
 }
 showDesc()
 
-// confirm delete chef and recipes
-function confirmation() {
-    const confirmDelete = document.querySelectorAll('.form-delete')
-    confirmDelete.forEach((item) => {
-        item.addEventListener('submit', (event) => {
-            const confirmation = confirm('Deseja deletar?')
-            if (!confirmation) {
-                event.preventDefault()
-            }
-        })
-    })
-}
-confirmation()
 
 // link colors
 function current() {
@@ -44,6 +31,18 @@ function current() {
 current()
 
 
-
-
-
+// confirm delete
+function confirmation() {
+    const form = document.querySelectorAll('#form-delete') || ''
+    if (form) {
+        form.forEach((item) => {
+            item.addEventListener('submit', (event) => {
+                const confirm = window.confirm('Deseja deletar?')
+                if (!confirm) {
+                    event.preventDefault()
+                }
+            })
+        })
+    }
+}
+confirmation()

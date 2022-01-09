@@ -17,10 +17,10 @@ module.exports = {
             : pagination.total = 1
             return res.render('admin/admins/list', { users, pagination })
 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/admins/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente'
             })
         }
     },
@@ -74,14 +74,17 @@ module.exports = {
                 password,
                 is_admin
             })
-            req.session.success = 'Usuário cadastrado com sucesso'
             
-            return res.redirect(`/admin/admins/list`)
+            return res.render(`cards/success`, {
+                card_success: 'Usuário cadastrado com sucesso',
+                link: '/admin/admins/list'
+            })
             
-        } catch (err) {
-            console.log(err)
-            return res.render('admin/admins/list', {
-                error: 'Não foi possível cadastrar esse usuário'
+        } catch (error) {
+            console.log(error)
+            return res.render('cards/error', {
+                card_error: 'Não foi possível cadastrar esse usuário',
+                link: '/admin/admins/list'
             })
         }
     },
@@ -92,10 +95,10 @@ module.exports = {
             const user = await User.findOne({ where: { id } })
             return res.render(`admin/admins/edit`, { user })
             
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/admins/index', {
-                error: 'Não foi possível achar esse usuário'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Não foi possível achar esse usuário'
             })
         }
     },
@@ -148,15 +151,15 @@ module.exports = {
             })
             const user = await User.findOne({ where: { id } })
    
-            return res.render(`admin/admins/edit`, {
-                user,
-                success: 'Usuário atualizado com sucesso. Um link com a nova senha foi enviado no email cadastrado'
+            return res.render(`cards/success`, {
+                card_success: 'Usuário atualizado com sucesso. <p>Um link com a nova senha foi enviado no email cadastrado</p>',
+                link: `/admin/admins/${id}/edit`
             })
             
-        } catch (err) {
-            console.error(err)
-            return res.render(`admin/admins/list`, {
-                error: 'Ocorreu um erro ao atualizar perfil'
+        } catch (error) {
+            console.error(error)
+            return res.render(`cards/error`, {
+                card_error: 'Ocorreu um erro ao atualizar perfil'
             })
         }
     },
@@ -165,7 +168,6 @@ module.exports = {
         try {
             const { id } = req.body
             const user = await User.findOne({ where: { id } })
-
             if (user.id == req.session.userId) {
                 return res.render(`admin/admins/edit`, {
                     user,
@@ -175,14 +177,15 @@ module.exports = {
             
             await User.delete({ id })
 
-            return res.render('admin/admins/index', {
-                success: 'Conta deletada com sucesso'
+            return res.render('cards/success', {
+                card_success: 'Conta deletada com sucesso',
+                link: `/admin/admins/list`
             })
 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/admins/list', {
-                error: 'Ocorreu um erro ao deletar essa conta'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro ao deletar essa conta'
             })
         }
     }

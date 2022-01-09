@@ -76,6 +76,7 @@ header section {
     margin-left: 0;
     color: #969696;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .div-fields-submit a:hover {

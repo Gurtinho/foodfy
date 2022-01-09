@@ -62,12 +62,13 @@ module.exports = {
                 html: emailTemplate( sendingEmail )
             })
 
-            return res.render('admin/session/forgot-password', {
-                success: 'Verifique seu email pra recuperar a senha'
+            return res.render('cards/success', {
+                card_success: 'Verifique seu email pra recuperar a senha',
+                link: `/admin/session/reset-password`
             })
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
             return res.render('admin/session/forgot-password', {
                 error: 'Erro inesperado, tente novamente'
             })
@@ -90,13 +91,13 @@ module.exports = {
                 reset_token_expires: '',
             })
 
-            return res.render('admin/session/login', {
-                user: req.body,
-                success: 'Senha atualizada com sucesso! faça seu login'
+            return res.render('cards/success', {
+                card_success: 'Senha atualizada com sucesso! faça seu login',
+                link: `/admin/session/login`
             })
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
             return res.render('admin/session/reset-password', {
                 user: req.body,
                 token,

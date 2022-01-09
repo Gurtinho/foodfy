@@ -1,0 +1,26 @@
+{% extends 'templates/layouts/layout-chefs.njk' %}
+
+{% block content %}
+
+<section class="card">
+    <div class="card-lottie">
+        <div class="animation"></div>
+        <h2>Sucesso</h2>
+        <p>{{ card_success }}</p>
+        <a href="{{ link }}"><button class="success">Continuar</button></a>
+    </div>
+</section>
+
+<script src="/lottie/lottie.min.js"></script>
+<script>
+    const element = document.querySelector('.animation')
+    lottie.loadAnimation({
+    container: element,
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '/lottie/success-check.json'
+    })
+</script>
+
+{% endblock %}

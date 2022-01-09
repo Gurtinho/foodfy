@@ -45,3 +45,20 @@
     background-color:  #DC4747;
     color: white !important;
 }
+
+
+
+
+.confirm {
+    z-index: 10000;
+    position: fixed;
+    height: 40%;
+    width: 40%;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #DC4747;
+    border-radius: 10px;
+}

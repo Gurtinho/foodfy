@@ -15,10 +15,11 @@ module.exports = {
             : pagination.total = 1
             return res.render('admin/chefs/index', { chefs, pagination })
 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/chefs/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente',
+                link: 'admin/chefs'
             })
         }
     },
@@ -34,15 +35,16 @@ module.exports = {
             const { name } = req.body
             let results = await Chef.create({ name, file_id })
             const chef = await Chef.find(results)
-            return res.render(`admin/chefs/index`, {
-                chef,
-                success: 'Chef criado com sucesso'
+            return res.render(`cards/success`, {
+                card_success: 'Chef criado com sucesso',
+                link: `/admin/chefs/${chef}`
             })
 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/chefs/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente',
+                link: '/admin/chefs'
             })
         }
     },
@@ -57,10 +59,11 @@ module.exports = {
             : pagination.total = 1
             return res.render('admin/chefs/show', { chef, pagination })
         
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/chefs/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                error: 'Ocorreu um erro. Tente novamente',
+                link: '/admin/chefs'
             })
         }
     },
@@ -68,13 +71,17 @@ module.exports = {
     async edit(req, res) {
         try {
             const chef = await LoadService.load('chef', {id: req.params.id})
-            if (!chef) return res.render('admin/admins/index', { error: 'Chef não encontrado' })
+            if (!chef) return res.render('cards/error', {
+                card_error: 'Chef não encontrado',
+                link: '/admin/chefs'
+            })
             return res.render('admin/chefs/edit', { chef })
                 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/chefs/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente',
+                link: '/admin/chefs'
             })
         }
     },
@@ -94,31 +101,31 @@ module.exports = {
                 }
                 await File.update( chefs_id.file_id, { name, path })
             }
-            await Chef.update(id, {
-                name,
-            })
-            return res.render(`admin/chefs/edit`, {
-                chef: req.body.id,
-                success: 'Chef atualizado com sucesso'
+            await Chef.update(id, { name })
+
+            return res.render(`cards/success`, {
+                card_success: 'Chef atualizado com sucesso',
+                link: `/admin/chefs/${id}`
             })
             
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/chefs/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente',
+                link: '/admin/chefs'
             })
        }
     },
 
     async delete(req, res) {
+        const id = req.body.id
         try {
-            const id = req.body.id
             const chef = await Chef.find(id)
 
             if (chef.total_recipes != 0) {
-                return res.render(`admin/chefs/edit`, {
-                    chef,
-                    error: 'Esse chef possui receitas e não pode ser deletado'
+                return res.render(`cards/error`, {
+                    card_error: 'Esse chef possui receitas e não pode ser deletado',
+                    link: `/admin/chefs/${id}`
                 })
             }
 
@@ -129,14 +136,16 @@ module.exports = {
             if (chef_id.path != 'public/images/chef_placeholder.png') {
                 fs.unlinkSync(chef_id.path)
             }
-            return res.render(`admin/chefs/index`, {
-                success: 'Chef deletado com sucesso'
+            return res.render(`cards/success`, {
+                card_success: 'Chef deletado com sucesso',
+                link: '/admin/chefs'
             })
            
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/chefs/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                error: 'Ocorreu um erro. Tente novamente',
+                link: `/admin/chefs/${id}`
             })
        }
     },

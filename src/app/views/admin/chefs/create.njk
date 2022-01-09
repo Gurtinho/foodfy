@@ -8,15 +8,13 @@
                     <p>Criando chef</p>
                 </div>
                 <div class="save-chef">
-                    <a href="/admin/chefs">
-                        <button type="button" class="btn-cancel-chef">Cancelar</button>
-                    </a>
+                    <button type="button" class="btn-cancel-chef" onclick="history.back()">Cancelar</button>
                     <button class="btn-save-chef" type="submit" onclick="validate.validateFields(event)">Salvar chef</button>
                 </div>
             </div>
         </section>
         
-        {% include 'templates/fields/fields-chefs.njk' %}
+        {% include 'admin/chefs/fields/fields-chefs.njk' %}
         <input type="hidden" name="id" value="id">
     </form>
 

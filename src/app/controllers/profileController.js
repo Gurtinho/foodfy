@@ -7,8 +7,8 @@ module.exports = {
             const user = await User.findOne({ where: { id } })
             return res.render('admin/admins/index', { user })
             
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
             return res.render('admin/admins/index', {
                 error: 'Ocorreu um erro. Tente novamente'
             })
@@ -21,15 +21,16 @@ module.exports = {
             const { name } = req.body
             await User.update(user.id, { name })
 
-            return res.render('admin/admins/index', {
-                user: req.body,
-                success: 'Perfil atualizado com sucesso'
+            return res.render('cards/success', {
+                card_success: 'Perfil atualizado com sucesso',
+                link: `/admin/admins/index`
             })
             
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/admins/index', {
-                error: 'Ocorreu um erro ao atualizar. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro ao atualizar. Tente novamente',
+                link: `/admin/admins/index`
             })
         }
     },

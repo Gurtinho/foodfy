@@ -16,10 +16,11 @@ module.exports = {
             : pagination.total = 1
             return res.render('admin/recipes/index', { recipes, pagination })
 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/recipes/index', {
-                error: 'Ocorreu um erro na listagem de receitas'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro na listagem de receitas',
+                link: '/admin/recipes/all'
             })
         } 
     },
@@ -34,10 +35,11 @@ module.exports = {
             : pagination.total = 1
             return res.render('admin/recipes/index', { recipes, pagination })
 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/recipes/index', {
-                error: 'Ocorreu um erro na listagem de receitas'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro na listagem de receitas',
+                link: '/admin/recipes/myrecipes'
             })
         }
     },
@@ -47,10 +49,10 @@ module.exports = {
             const chefs = await Recipe.chefFindOption()
             return res.render('admin/recipes/create', { chefs })
 
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            console.error(error)
             return res.render('admin/admins/index', {
-                error: 'Não consegui localizar a pagina de criação de receitas'
+                error: 'Não foi possível localizar a pagina de criação de receitas'
             })
         }
     },
@@ -88,14 +90,16 @@ module.exports = {
             })
             await Promise.all(filePromise)
 
-            return res.render(`admin/recipes/create`, {
-                success: 'Receita criada com sucesso'
+            return res.render(`cards/success`, {
+                card_success: 'Receita criada com sucesso',
+                link: `/admin/recipes/${recipe_id}`
             })
 
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/recipes/create', {
-                error: 'Ocorreu um erro ao criar a receita'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro ao criar a receita',
+                link: '/admin/admins/create'
             })
         }
     },
@@ -105,10 +109,11 @@ module.exports = {
             const recipe = await LoadService.load('recipe', req.params.id)
             return res.render('admin/recipes/show', { recipe })
             
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/recipes/show', {
-                error: 'Ocorreu um erro ao localizar a receita'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                error: 'Ocorreu um erro ao localizar a receita',
+                link: '/admin/recipes/myrecipes'
             })
         } 
     },
@@ -117,20 +122,19 @@ module.exports = {
         try {
             const recipe = await LoadService.load('recipe', req.params.id)
             if (!recipe) {
-                return res.render('admin/admins/myrecipes', {
-                    error: 'Ocorreu um erro'
+                return res.render('cards/error', {
+                    card_error: 'Ocorreu um erro',
+                    link: '/admin/recipes/myrecipes'
                 })
             }
             const chefs = await Recipe.chefFindOption()
-
-            console.log(recipe.files)
-            
             return res.render(`admin/recipes/edit`, { recipe, chefs })
             
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/recipes/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente',
+                link: '/admin/recipes/myrecipes'
             })
         }
     },
@@ -185,12 +189,16 @@ module.exports = {
                 information
             })
             
-            return res.redirect(`/admin/recipes/${id}`)
+            return res.render(`cards/success`, {
+                card_success: `Receita atualizada com sucesso`,
+                link: `/admin/recipes/${id}`
+            })
             
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/recipes/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente',
+                link: '/admin/recipes/myrecipes'
             })
         }
     },
@@ -208,12 +216,16 @@ module.exports = {
                 await Promise.all(recipeDeletePromise)
             }
             await Recipe.delete({ id: req.body.id })
-            return res.redirect(`/admin/recipes/myrecipes`)
+            return res.render(`cards/success`, {
+                card_success: 'Receita deletada com sucesso',
+                link: '/admin/recipes/myrecipes'
+            })
     
-        } catch (err) {
-            console.error(err)
-            return res.render('admin/recipes/index', {
-                error: 'Ocorreu um erro. Tente novamente'
+        } catch (error) {
+            console.error(error)
+            return res.render('cards/error', {
+                card_error: 'Ocorreu um erro. Tente novamente',
+                link: `/admin/recipes/${ req.body.id }`
             })
         }
     },

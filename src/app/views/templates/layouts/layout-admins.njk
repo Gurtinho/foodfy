@@ -11,11 +11,12 @@
         <link rel="stylesheet" href="/css/main-admins.css">
         <link rel="stylesheet" href="/css/messages.css">
         <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/animation.css">
     </head>
     <body>
         {% include 'templates/parts/messages.njk' %}
 
-        {% include 'templates/fields/fields-header-admin.njk' %}
+        {% include 'templates/parts/header-admin.njk' %}
         
         {% block content %}
         
@@ -24,5 +25,6 @@
         <script src="/js/script.js"></script>
         <script src="/js/paginate.js"></script>
         <script src="/js/validate.js"></script>
+        <script src="/js/confirmation.js"></script>
     </body>
 </html>

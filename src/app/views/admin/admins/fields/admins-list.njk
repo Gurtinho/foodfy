@@ -5,16 +5,15 @@
                 <p class="name">{{ user.name }}</p>
                 <p class="email">{{ user.email }}</p>
                 <div class="list-links">
-                    <form class="form-delete list-form-delete" id="form-delete" action="/admin/admins?_method=DELETE" method="POST">
-                        <a class="list-links-a" href="/admin/admins/{{ user.id }}/edit">Editar</a>
+                    <form id="form-delete" class="form-delete list-form-delete" action="/admin/admins?_method=DELETE" method="POST">
                         <input type="hidden" name="id" value="{{ user.id }}">
+                        <a class="list-links-a" href="/admin/admins/{{ user.id }}/edit">Editar</a>
                         {% if user.id != session.userId %}
-                        <button class="list-links-b" type="submit">Remover</button>
-                        {% endif %} 
+                            <button type="submit" id="button-delete" class="list-links-b">Remover</button>
+                        {% endif %}
                     </form>
                 </div>
             </div>
         {% endfor %}
     </div>
 </section>
-<script src="/js/removeColorInput.js"></script>

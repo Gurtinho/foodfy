@@ -11,9 +11,7 @@
                 <p>Receita: {{ recipe.title }}</p>
             </div>
             <div class="save-recipe-show">
-                <a href="/admin/recipes/myrecipes">
-                    <button class="btn-cancel-recipe" type="submit">Voltar</button>
-                </a>
+                <button class="btn-cancel-recipe" type="submit" onclick="history.back()">Voltar</button>
                 <a href="/admin/recipes/{{ recipe.id }}/edit">
                     <button class="btn-save-recipe" type="submit">Editar receita</button>
                 </a>

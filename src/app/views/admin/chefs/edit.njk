@@ -8,16 +8,14 @@
                     <p>Editando chef</p>
                 </div>
                 <div class="save-chef">
-                    <a href="/admin/chefs/{{ chef.id }}">
-                        <button type="button" class="btn-cancel-chef">Cancelar</button>
-                    </a>                    
+                    <button type="button" class="btn-cancel-chef" onclick="history.back()">Cancelar</button>       
                     <button class="btn-delete-chef" type="submit" form="form-delete">Deletar</button>
                     <input type="hidden" name="id" value="{{ chef.id }}">
                     <button class="btn-save-chef" type="submit" onclick="validate.validateFields(event)">Salvar chef</button>
                 </div>
             </div>
         </section>
-        {% include 'templates/fields/fields-chefs.njk' %}
+        {% include 'admin/chefs/fields/fields-chefs.njk' %}
     </form>
 
     <form class="form-delete" id="form-delete" action="/admin/chefs?_method=DELETE" method="POST">

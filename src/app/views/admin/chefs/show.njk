@@ -11,9 +11,7 @@
                 <p>Chef: {{ chef.name }}</p>
             </div>
             <div class="save-chef">
-                <a href="/admin/chefs">
-                    <button class="btn-cancel-chef" type="submit">Voltar</button>
-                </a>
+                <button class="btn-cancel-chef" type="submit" onclick="history.back()">Voltar</button>
                 <a href="/admin/chefs/{{ chef.id }}/edit">
                     <button class="btn-save-chef" type="submit">Editar chef</button>
                 </a>

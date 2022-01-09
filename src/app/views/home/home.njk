@@ -7,8 +7,8 @@
 
 {% block content %}
     <section class="container">
-        <div class="caixa">
-            <div class="textos-caixa">
+        <div class="box">
+            <div class="text-box">
                 <h1>As melhores receitas</h1>
                 <p>Aprenda a contruir os melhores pratos</br> com receitas criadas por profissionais</br> do mundo inteiro.</p>
             </div>
@@ -16,20 +16,20 @@
         </div>
     </section>
 
-    <section class="div-mais-acessadas">
-        <div class="sub-acessadas">
-            <p class="mais-acessadas">Mais acessadas</p>
+    <section class="section-more-accessed">
+        <div class="sub-accessed">
+            <p class="more-accessed">Mais acessadas</p>
         </div>
     </section>
 
-    <section class="acessadas">
+    <section class="accessed">
         <div class="acess-content">
             {% for recipe in recipes %}
-                <div class="comida">
+                <div class="food">
                     <a type="hidden" href="/recipes/food/{{ recipe.id }}">
                         <img class="img" src="{{ recipe.src }}">
-                        <h2 class="comidatitle">{{ recipe.title }}</h2>
-                        <h3 class="comidaautor">{{ recipe.chefs_name }}</h3>
+                        <h2 class="food-title">{{ recipe.title }}</h2>
+                        <h3 class="food-author">{{ recipe.chefs_name }}</h3>
                     </a>
                 </div>
             {% else %}

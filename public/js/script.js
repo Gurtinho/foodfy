@@ -1,16 +1,16 @@
 // display description on show home page
 function showDesc() {
-    const mostrar = document.querySelectorAll(".mostrar")
+    const show = document.querySelectorAll(".show")
 
     function showContentFull() {
-        this.nextElementSibling.classList.toggle('ativo')
+        this.nextElementSibling.classList.toggle('active-desc')
         if (this.innerText == 'Mostrar') {
             this.innerText = 'Esconder'
         } else {
             this.innerText = 'Mostrar'
         }
     }
-    mostrar.forEach((item) => {
+    show.forEach((item) => {
         item.addEventListener('click', showContentFull)
     })
 }

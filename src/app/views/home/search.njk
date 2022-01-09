@@ -10,14 +10,14 @@
     <div class="search-parameter">
         <p>Buscando por "{{ search }}"</p>
     </div>
-    <section class="acessadas">
+    <section class="accessed">
         <div class="acess-content">
             {% for recipe in recipes %}
-                <div class="comida">
+                <div class="food">
                     <a type="hidden" href="/recipes/food/{{ recipe.id }}">
                         <img class="img" src="{{ recipe.src }}">
-                        <h2 class="comidatitle">{{ recipe.title }}</h2>
-                        <h3 class="comidaautor">{{ recipe.chefs_name }}</h3>
+                        <h2 class="food-title">{{ recipe.title }}</h2>
+                        <h3 class="food-author">{{ recipe.chefs_name }}</h3>
                     </a>
                 </div>
             {% else %}

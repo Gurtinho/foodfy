@@ -7,7 +7,7 @@
 {% block content %}
     <section class="accessfood">
         <section>
-            <div class="food">
+            <div class="food-page">
                 <div class="">
                     {% if recipe.files[0] %}
                         <img class="food-img"
@@ -39,11 +39,11 @@
                 <h3 class="food-author-page">Por {{ recipe.chefs_name }}</h3>
             </div>
         </section>
-        <section class="descricao">
-            <div class="ingredientes">
+        <section class="desc">
+            <div class="ingredients">
                 <div class="inf">
                     <h1>Ingredientes</h1>
-                    <p class="mostrar">Mostrar</p>
+                    <p class="show">Mostrar</p>
                     <ul class="content">
                         {% for ingredient in recipe.ingredients %}
                         <li class="li">{{ ingredient + ';'}}</li>
@@ -52,10 +52,10 @@
                 </div>
             </div>
 
-            <div class="preparo">
+            <div class="preparation">
                 <div class="inf">
                     <h1>Modo de preparo</h1>
-                    <p class="mostrar">Mostrar</p>  
+                    <p class="show">Mostrar</p>  
                     <ul class="content">
                         {% for preparation in recipe.preparation %}
                         <li class="li">{{ preparation + '.'}}</li>
@@ -64,10 +64,10 @@
                 </div>
             </div>
 
-            <div class="adicionais">
+            <div class="additional">
                 <div class="inf">
                     <h1>Informações adicionais</h1>
-                    <p class="mostrar">Mostrar</p>
+                    <p class="show">Mostrar</p>
                     <ul class="content">
                         <li class="li"> 
                             {% if recipe.information != ''%}

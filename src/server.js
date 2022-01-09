@@ -7,7 +7,6 @@ const port = 3333
 
 const server = express()
 
-//middlewares
 server.use(session)
 server.use((req, res, next) => {
     res.locals.session = req.session
@@ -19,7 +18,6 @@ server.use(methodOverride('_method'))
 server.use(express.static('public'))
 server.use(routes)
 
-// html nunjucks
 server.set("view engine", "njk")
 nunjucks.configure("src/app/views", {
     express: server,
@@ -27,5 +25,4 @@ nunjucks.configure("src/app/views", {
     noCache: true
 })
 
-// listening
 server.listen(port)

@@ -183,7 +183,7 @@ body {
 
 
 /*==========SOBRE==============*/
-.sobre {
+.about {
   padding-top: 20px;
   display: flex;
   justify-content: center;
@@ -191,41 +191,41 @@ body {
   height:800px;
 }
 
-.sobre-centro {
+.about-center {
   width: 940px;
   justify-content: center;
 }
 
-.sobre-foodfy h2 {
+.about-foodfy h2 {
   font-family: 'Roboto', sans-serif;
   font-size: 24px;
 }
 
-.sobre-foodfy h3 {
+.about-foodfy h3 {
   padding-top: 20px;
   color: #444444;
   font-size: 18px;
   font-weight: normal;
 }
 
-.como-comecou h2 {
+.starting h2 {
   padding-top: 40px;
   font-size: 20px;
 }
 
-.como-comecou h3 {
+.starting h3 {
   padding-top: 20px;
   font-size: 18px;
   color:#444444;
   font-weight: normal;
 }
 
-.nossas-receitas h2 {
+.we-recipes h2 {
   padding-top:40px;
   font-size: 20px;
 }
 
-.nossas-receitas h3 {
+.we-recipes h3 {
   padding-top: 20px;
   font-size: 18px;
   font-weight: normal;
@@ -240,7 +240,7 @@ body {
   height:370px;
 }
 
-.caixa {
+.box {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -250,25 +250,25 @@ body {
   border-radius: 30px;
 }
 
-.textos-caixa {
+.text-box {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.textos-caixa h1 {
+.text-box h1 {
   font-size: 32px;
   padding-left: 73px;
   padding-bottom: 10px;
 }
 
-.textos-caixa p {
+.text-box p {
   padding-left: 73px;
   font-size: 18px;
   opacity: 70%;
 }
 
-.caixa img {
+.box img {
   display: flex;
   margin-right: 100px;
   height:300px;
@@ -278,7 +278,7 @@ body {
 
 
 /*=========== MAIS ACESSADAS =============*/
-.div-mais-acessadas {
+.section-more-accessed {
   display: flex;
   justify-content: center;
   height: 100px;
@@ -286,21 +286,21 @@ body {
   align-items: center;
 }
 
-.sub-acessadas {
+.sub-accessed {
   display: flex;
   width: 940px;
   height: 100%;
   align-items: center;
 }
 
-.mais-acessadas {
+.more-accessed {
   display: flex;
   margin-left: 0;
   font-size: 20px;
   font-weight: bold;
 }
 
-.acessadas {
+.accessed {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -318,25 +318,23 @@ body {
   grid-gap: 15px;
 }
 
-.comida {
+.food {
   width: 100%;
   margin-bottom: 20px;
   justify-content: center;
 }
 
-.comida a {
+.food a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
-  color: #111;
-}
-
-.comida p {
-  color: #777;
 }
 
 .no-recipes {
   width: 940px;
-  margin-bottom: 45px;
   color: #999;
+  margin-bottom: 20%;
 }
 
 .img {
@@ -348,17 +346,23 @@ body {
   object-fit: cover;
 }
 
-.comidatitle {
+.food-title {
+  left: 0;
+  margin-left: 0;
   cursor: pointer;
   font-size: 18px;
   margin-bottom: 10px;
+  color: #111;
 }
 
-.comidaautor {
+.food-author {
+  left: 0;
+  margin-left: 0;
   cursor: pointer;
   font-size: 14px;
   color: #777777;
   margin-bottom: 10px;
+  color: #777;
 }
 
 
@@ -379,18 +383,18 @@ body {
   border-radius: 50%;
 }
 
-.food-title {
-  font-family: "Roboto", regular;
-  font-size:36px;
-  color:#111111;
-  margin-top:25px;
+.chef-name {
+  font-size: 32px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #111;
 }
 
-.food-author {
-  font-family: "Roboto", regular;
-  font-size: 20px;
-  color:#777777;
-  margin-top:5px;
+.chef-recipes {
+  font-size: 18px;
+  color: #777777;
+  margin-bottom: 10px;
+  color: #777;
 }
 
 .fields-list {
@@ -522,7 +526,7 @@ body {
   width: 940px;
 }
 
-.food {
+.food-page {
   text-align: center;
   flex-direction: column;
   width:100%;
@@ -630,7 +634,7 @@ body {
   margin-top:5px;
 }
 
-.descricao {
+.desc {
   margin-top:40px;
   margin-bottom: 40px;
   width:940px;
@@ -643,16 +647,16 @@ body {
   margin-bottom: 30px;
 }
 
-.ingredientes h1,
-.preparo h1,
-.adicionais h1 {
+.ingredients h1,
+.preparation h1,
+.additional h1 {
   display: inline-block;
   color:#111111;
   font-size: 24px;
   font-family: "Roboto", bold;
 }
 
-.mostrar {
+.show {
   display: inline-block;
   align-items: center;
   cursor: pointer;
@@ -678,7 +682,7 @@ body {
   margin-bottom: 5px;
 }
 
-.ativo {
+.active-desc {
   display: block;
 }
 
@@ -712,7 +716,7 @@ body {
 
 
 /*==========FOOTER==========*/
-body > footer {
+footer {
   position: absolute;
   display: flex;
   align-items: center;

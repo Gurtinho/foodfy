@@ -6,14 +6,14 @@
 
 {% block content %}
     <section class="accessfood">
-        <div class="receitas-content-food">
+        <div>
             <div class="food-show">
                 <div class="food-img-show">
                     <img src="{{ chef.file.src }}">
                 </div>
-                <h2 class="food-title">{{ chef.name }}</h2>
+                <h2 class="chef-name">{{ chef.name }}</h2>
                 {% if chef.total_recipes != 0 %}
-                    <p class="food-author">
+                    <p class="chef-recipes">
                         {{ chef.total_recipes }} 
                         {% if chef.total_recipes > 1 %}
                             receitas
@@ -22,27 +22,27 @@
                         {% endif %}
                     </p>
                 {% else %}
-                    <p class="food-author">Nenhuma receita</p>
+                    <p class="chef-recipes">Nenhuma receita</p>
                 {% endif %}
             </div>
         </div>
     </section>
 
-    <section class="div-mais-acessadas">
-        <div class="sub-acessadas">
-            <p class="mais-acessadas">Receitas</p>
+    <section class="section-more-accessed">
+        <div class="sub-accessed">
+            <p class="more-accessed">Receitas</p>
         </div>
     </section>
 
     {% if chef.recipes.length != 0 %}
-        <section class="acessadas">
+        <section class="accessed">
             <div class="acess-content">
                 {% for recipe in chef.recipes %}
-                    <div class="comida">
+                    <div class="food">
                         <a type="hidden" href="/recipes/food/{{ recipe.id }}">
                             <img class="img" src="{{ recipe.src }}">
-                            <h2 class="comidatitle">{{ recipe.title }}</h2>
-                            <h3 class="comidaautor">{{ recipe.chefs_name }}</h3>
+                            <h2 class="food-title">{{ recipe.title }}</h2>
+                            <h3 class="food-author">{{ recipe.chefs_name }}</h3>
                         </a>
                     </div>
                 {% endfor %}

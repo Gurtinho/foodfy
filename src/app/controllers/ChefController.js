@@ -144,7 +144,7 @@ module.exports = {
         } catch (error) {
             console.error(error)
             return res.render('cards/error', {
-                error: 'Ocorreu um erro. Tente novamente',
+                card_error: 'Ocorreu um erro. Tente novamente',
                 link: `/admin/chefs/${id}`
             })
        }

@@ -48,17 +48,76 @@
 
 
 
+/* MODAL DELETE */
+.wallpaper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    animation: show 300ms alternate;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 .confirm {
+    display: flex;
+    flex-direction: column;
     z-index: 10000;
     position: fixed;
-    height: 40%;
-    width: 40%;
+    height: 35%;
+    width: 35%;
     margin: auto;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #DC4747;
-    border-radius: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.p-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+.divbutton {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.button-submit {
+    color: white;
+    font-size: 16px;
+    padding: 10px 50px;
+    background-color: #5042BB;
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-cancel {
+    color: white;
+    font-size: 16px;
+    padding: 10px 45px;
+    background-color: #777777;
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
 }

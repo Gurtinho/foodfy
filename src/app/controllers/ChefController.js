@@ -121,14 +121,12 @@ module.exports = {
         const id = req.body.id
         try {
             const chef = await Chef.find(id)
-
             if (chef.total_recipes != 0) {
                 return res.render(`cards/error`, {
                     card_error: 'Esse chef possui receitas e não pode ser deletado',
                     link: `/admin/chefs/${id}`
                 })
             }
-
             const results = await File.findFiles(chef.id)
             const chef_id = results.rows[0]
             await Chef.delete({ id: id })

@@ -5,13 +5,13 @@
                 <p class="name">{{ user.name }}</p>
                 <p class="email">{{ user.email }}</p>
                 <div class="list-links">
-                    <form id="form-delete" class="form-delete list-form-delete" action="/admin/admins?_method=DELETE" method="POST">
-                        <input type="hidden" name="id" value="{{ user.id }}">
+                    <section id="form-delete" class="form-delete list-form-delete">
                         <a class="list-links-a" href="/admin/admins/{{ user.id }}/edit">Editar</a>
                         {% if user.id != session.userId %}
-                            <button type="submit" id="button-delete" class="list-links-b">Remover</button>
+                            <button type="button" id="button-delete" class="list-links-b" formaction="/admin/admins?_method=DELETE">Remover</button>
                         {% endif %}
-                    </form>
+                        <input type="hidden" name="id" value="{{ user.id }}">
+                    </section>
                 </div>
             </div>
         {% endfor %}

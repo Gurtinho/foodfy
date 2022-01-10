@@ -11,19 +11,14 @@
                     <div class="save-chef">
                         <button class="btn-cancel-chef" type="button" onclick="history.back()">Cancelar</button>
                         {% if user.id != session.userId %}
-                            <button form="form-delete" class="btn-delete-chef" type="submit" onclick="validate.confirmation(event)">Deletar</button>
+                            <button id="button-delete" class="btn-delete-chef" type="button" formaction="/admin/admins?_method=DELETE">Deletar</button>
                         {% endif %}
                         <button class="btn-save-chef" type="submit" onclick="validate.validateFields(event)">Salvar</button>
+                        <input type="hidden" name="id" value="{{ user.id }}">
                     </div>
                 </div>
             </section>    
             {% include 'admin/admins/fields/admins-create.njk' %}
-
-            <input type="hidden" name="id" value="{{ user.id }}">
-        </form>
-
-        <form class="form-delete" id="form-delete" action="/admin/admins?_method=DELETE" method="POST">
-            <input type="hidden" name="id" value="{{ user.id }}">
         </form>
     </section>
 {% endblock %}

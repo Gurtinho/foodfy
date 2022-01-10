@@ -9,16 +9,12 @@
                 </div>
                 <div class="save-recipe-edit">
                     <button type="button" class="btn-cancel-recipe" onclick="history.back()">Cancelar</button>   
-                    <button class="btn-delete-recipe" type="submit" form="form-delete">Deletar</button>
-                    <input type="hidden" name="id" value="{{ recipe.id }}">
+                    <button id="button-delete" class="btn-delete-recipe" type="button" formaction="/admin/recipes?_method=DELETE">Deletar</button>
                     <button class="btn-save-recipe" type="submit" onclick="validate.validateFields(event)">Salvar receita</button>
+                    <input type="hidden" name="id" value="{{ recipe.id }}">
                 </div>
             </div>
         </section>
         {% include 'admin/recipes/fields/fields-recipes.njk' %}
-    </form>
-
-    <form class="form-delete" id="form-delete" action="/admin/recipes?_method=DELETE" method="POST">
-        <input type="hidden" name="id" value="{{ recipe.id }}">
     </form>
 {% endblock %}

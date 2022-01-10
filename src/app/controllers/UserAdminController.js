@@ -166,7 +166,8 @@ module.exports = {
 
     async delete(req, res) {
         try {
-            const { id } = req.body
+            const id = req.body.id
+            console.log(id)
             const user = await User.findOne({ where: { id } })
             if (user.id == req.session.userId) {
                 return res.render(`admin/admins/edit`, {
@@ -174,7 +175,6 @@ module.exports = {
                     error: 'Você não pode deletar sua própria conta'
                 })
             }
-            
             await User.delete({ id })
 
             return res.render('cards/success', {

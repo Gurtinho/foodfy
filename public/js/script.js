@@ -29,20 +29,3 @@ function current() {
     }
 }
 current()
-
-
-// confirm delete
-function confirmation() {
-    const form = document.querySelectorAll('#form-delete') || ''
-    if (form) {
-        form.forEach((item) => {
-            item.addEventListener('submit', (event) => {
-                const confirm = window.confirm('Deseja deletar?')
-                if (!confirm) {
-                    event.preventDefault()
-                }
-            })
-        })
-    }
-}
-confirmation()

@@ -9,16 +9,12 @@
                 </div>
                 <div class="save-chef">
                     <button type="button" class="btn-cancel-chef" onclick="history.back()">Cancelar</button>       
-                    <button class="btn-delete-chef" type="submit" form="form-delete">Deletar</button>
-                    <input type="hidden" name="id" value="{{ chef.id }}">
+                    <button id="button-delete" class="btn-delete-chef" type="button" formaction="/admin/chefs?_method=DELETE">Deletar</button>
                     <button class="btn-save-chef" type="submit" onclick="validate.validateFields(event)">Salvar chef</button>
+                    <input type="hidden" name="id" value="{{ chef.id }}">
                 </div>
             </div>
         </section>
         {% include 'admin/chefs/fields/fields-chefs.njk' %}
-    </form>
-
-    <form class="form-delete" id="form-delete" action="/admin/chefs?_method=DELETE" method="POST">
-        <input type="hidden" name="id" value="{{ chef.id }}">
     </form>
 {% endblock %}

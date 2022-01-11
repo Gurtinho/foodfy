@@ -70,28 +70,5 @@ const validate = {
             }
         }
         validate.runError(validate.items, event, 'Preencha todos os campos')
-    },
-
-    // confirmation(event) {
-    //     event.preventDefault()
-    //     const confirm = document.createElement('div')
-    //     confirm.classList.add('confirm')
-    //     confirm.innerHTML = 'Deseja deletar?'
-
-    //     const delet = document.createElement('button')
-    //     delet.setAttribute('type', 'submit')
-    //     delet.setAttribute('form', 'form-delete')
-    //     delet.innerHTML = 'Deletar'
-    //     const cancel = document.createElement('button')
-    //     cancel.setAttribute('type', 'button')
-    //     cancel.innerHTML = 'Cancelar'
-
-    //     confirm.append(delet, cancel)
-    //     document.querySelector('body').append(confirm)
-
-    //     cancel.addEventListener('click', () => {
-    //         event.preventDefault()
-    //         confirm.remove()
-    //     })
-    // }
+    }
 }
